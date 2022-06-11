@@ -11,6 +11,7 @@ const device = {
     blue: "#0984e3",
     white: "#FFFFFF",
     black: "000000",
+    BackgroundColor: "#F4F4F4"
   };
   
   const fontSizes = {

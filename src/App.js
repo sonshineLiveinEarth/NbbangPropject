@@ -1,21 +1,30 @@
 import "./App.css";
-import React from "react";
+import React, { useState, useRef } from "react";
 import styled, { ThemeProvider } from "styled-components";
+import { Route } from "react-router-dom";
+
+// import { history } from "../redux/configureStore";
+// import { ConnectedRouter } from "connected-react-router";
 // 배민한나체 폰트
 import "@kfonts/bm-hanna-pro-otf";
 
 // js파일
-import Main from "./Main";
+// import Main from "./Main";
 import Header from "./Header";
 import theme from "./theme";
+import Formpage from "./Formpage";
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
         <Header />
-        <Main />
+        {/* <ConnectedRouter history={history}> */}
+        {/* <Main /> */}
+        {/* <Route path="/" exact component={App} /> */}
+        <Formpage/>
         <Background />
+        {/* </ConnectedRouter> */}
       </div>
     </ThemeProvider>
   );
