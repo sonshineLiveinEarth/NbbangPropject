@@ -11,6 +11,7 @@ const Btn = css`
 
 export const RoundBtn = css`
   ${Btn};
+  border: none;
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -18,7 +19,10 @@ export const RoundBtn = css`
 
 export const RectangleBtn = css`
   ${Btn};
-  width: 200px;
-  height: 40px;
+
+  width: 50px;
+  height: 30px;
+  border-radius: 15%;
+  border: none;
   font-size: ${({ theme }) => theme.fontSizes.md};
 `;

@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "./theme";
-import { RoundBtn } from "./Btn";
+import { RoundBtn, RectangleBtn } from "./Btn";
 
 const Formpage = (props) => {
 
@@ -18,7 +18,7 @@ const Formpage = (props) => {
   const [content, setContent] = useState();
   const [orderTime, setOrderTime] = useState();
 
-  
+
   const addPost = () => {
     const contents = {
       category: category,
@@ -30,7 +30,7 @@ const Formpage = (props) => {
     };
     console.log(contents)
   }
-  
+
 
 
   //이미지 프리뷰
@@ -61,47 +61,49 @@ const Formpage = (props) => {
 
 
         <div>
-          <Label>카테고리 선택</Label><br/>
-          <button
-            id="1"
-            value={"전체"}
-            className="categoryAll"
-            onClick={categorySelect}
-          >
-            전체
-          </button>
-          <button
-            id="2"
-            value={"치킨"}
-            className="categoryChicken"
-            onClick={(e) => setCategory(e.target.value)}
-          >
-            치킨
-          </button>
-          <button
-            id="3"
-            value={"일식"}
-            className="categoryJapanese"
-            onClick={(e) => setCategory(e.target.value)}
-          >
-            일식
-          </button>
-          <button
-            id="4"
-            value={"중식"}
-            className="categoryChinese"
-            onClick={(e) => setCategory(e.target.value)}
-          >
-            중식
-          </button>
-          <button
-            id="5"
-            value={"한식"}
-            className="categoryKorean"
-            onClick={(e) => setCategory(e.target.value)}
-          >
-            한식
-          </button>
+          <Label>카테고리 선택</Label><br />
+          <div>
+            <Button
+              id="1"
+              value={"All"}
+              className="categoryAll"
+              onClick={categorySelect}
+            >
+              전체
+            </Button>
+            <Button
+              id="2"
+              value={"Chicken"}
+              className="categoryChicken"
+              onClick={(e) => setCategory(e.target.value)}
+            >
+              치킨
+            </Button>
+            <Button
+              id="3"
+              value={"Midnight"}
+              className="categoryMidnight"
+              onClick={(e) => setCategory(e.target.value)}
+            >
+              야식
+            </Button>
+            <Button
+              id="4"
+              value={"Chinese"}
+              className="categoryChinese"
+              onClick={(e) => setCategory(e.target.value)}
+            >
+              중식
+            </Button>
+            <Button
+              id="5"
+              value={"Korean"}
+              className="categoryKorean"
+              onClick={(e) => setCategory(e.target.value)}
+            >
+              한식
+            </Button>
+          </div>
           <br />
           <br />
         </div>
@@ -110,7 +112,7 @@ const Formpage = (props) => {
         <div className="postTitle">
           <Label>
             제목
-          </Label><br/>
+          </Label><br />
           <InputContainer
             type="text"
             placeholder="제목을 입력 해주세요!"
@@ -124,17 +126,17 @@ const Formpage = (props) => {
 
 
         <div className='Image'>
-          <Label>사진</Label><br/>
-          
+          <Label>사진</Label><br />
+
           <Imgveiw src={imagesrc} alt="" />
-          <Filebox type="file" onChange={preveiw}/>
+          <Filebox type="file" onChange={preveiw} />
         </div><br />
 
 
 
 
         <div className='Address'>
-          <Label>배달 받을 장소</Label><br/>
+          <Label>배달 받을 장소</Label><br />
           <InputContainer
 
             type="text"
@@ -149,18 +151,18 @@ const Formpage = (props) => {
 
 
         <div className='Time'>
-          <Label>주문 희망 시간</Label><br/>
+          <Label>주문 희망 시간</Label><br />
           <input type="time"
             onChange={(e) => {
               setOrderTime(e.target.value);
             }} value={orderTime}></input>
-            <button>설정완료</button>
+          
 
         </div><br />
         <div className='Content'>
           <Label>
             N빵 내용
-          </Label><br/>
+          </Label><br />
           <InputContainer
             type="text"
             placeholder="내용을 입력해주세요!"
@@ -177,7 +179,7 @@ const Formpage = (props) => {
         </div>
 
       </Container >
-      <Background/>
+      <Background />
     </ThemeProvider>
   )
 };
@@ -191,25 +193,28 @@ const Container = styled.div`
     padding: 0 30px;
     background-color: ${({ theme }) => theme.colors.BackgroundColor};
     flex-direction: column;
-      justify-content: left;
+      justify-content: center;
+      align-items: center;
+      
   
     // theme.js에서 지정한 문자열을 이용 - @media screen and (min-width: 768px) {} 와 같은 뜻이 됩니다.
     // 짧게 쓰고 유지보수성을 높이기 위해 theme으로 등록했습니다.
     ${({ theme }) => theme.device.tablet} {
-      margin-top: 60px;
+      margin-top: 0px;
       padding: 0 50px;
       background-color: ${({ theme }) => theme.colors.BackgroundColor};
+      align-items: center;
 
     }
   
     ${({ theme }) => theme.device.desktop} {
-      max-width: 1200px;
-      margin: 60px auto 0 auto;
+      max-width: 500px;
+      margin: 00px auto 0 auto;
       background-color: ${({ theme }) => theme.colors.BackgroundColor};
-
+      align-items: center;
     }
   `;
-  const Subtitle = styled.h1`
+const Subtitle = styled.h1`
   `
 const Label = styled.label`
   font-size: ${({ theme }) => theme.fontSizes.sm};
@@ -245,6 +250,14 @@ const Imgveiw = styled.img`
   background-position: center 30%;
   background-size: cover;
   `;
+
+const Button = styled.button`
+  ${RectangleBtn};
+`
+
+const Buttonbox = styled.div`
+  display: lower;
+`
 
 const SaveBtn = styled.button`
   ${RoundBtn};
