@@ -1,16 +1,24 @@
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 // 이미지파일
 import img from "./Nlogo.png";
 import LogoutImg from "./Logout.png";
 
 const Header = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <HeaderBack>
         <LogoWrap>
-          <Logo src={img} />
+          <Logo
+            src={img}
+            onClick={() => {
+              navigate("/");
+            }}
+          />
           <Region>경기도 수원시 행궁동</Region>
         </LogoWrap>
         <RightWrap>
@@ -48,6 +56,9 @@ const Logo = styled.img`
   width: 200px;
   height: auto;
   margin-right: 20px;
+  @media only screen and (max-width: 700px) {
+    display: none;
+  }
 `;
 
 const LogoWrap = styled.div`
@@ -56,7 +67,7 @@ const LogoWrap = styled.div`
   /* justify-content: space-between; */
   align-items: center;
   justify-content: center;
-  margin-left: 3vw;
+  margin-left: 5vw;
 `;
 
 const Region = styled.span`
@@ -71,7 +82,7 @@ const RightWrap = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin-right: 3vw;
+  margin-right: 5vw;
 `;
 
 const LogoutWrap = styled.div`
