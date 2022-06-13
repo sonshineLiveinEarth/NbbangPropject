@@ -4,15 +4,16 @@ import theme from "../theme";
 import { RoundBtn, RectangleBtn } from "../Btn";
 import { createPost } from "../redux/modules/post";
 import { useDispatch } from "react-redux";
-
+import underLine from "./UnderLine.png";
+import axios from "axios";
 
 const Write = (props) => {
 
- 
-  const dispatch = useDispatch();
-  
-  const [imagesrc, setImeageSrc] = useState();
- 
+
+  // const dispatch = useDispatch();
+
+  const [imagesrc, setImeageSrc] = useState("null");
+
   const reader = new FileReader();
 
 
@@ -22,18 +23,36 @@ const Write = (props) => {
   const [content, setContent] = useState();
   const [orderTime, setOrderTime] = useState();
 
-  const contents = {
-    category: category,
-    postTitle: postTitle,
-    content: content,
-    addres: addres,
-    orderTime: orderTime,
-    imagesrc: imagesrc
-  };
-  const addPost = () => {
-    dispatch(createPost(contents));
-    console.log("전송 성공!", contents)
+  // const contents = {
+  //   postCategory: category,
+  //   postTitle: postTitle,
+  //   postContent: content,
+  //   postAddress: addres,
+  //   postOrderTime: orderTime,
+  //   postImage: imagesrc
 
+  // };
+
+  // const addPost = () => {
+  //   dispatch(createPost(contents));
+  //   console.log("전송 성공!", contents)
+
+  // }
+  const addPost = (e) => {
+    axios.post("http://localhost:5001/posts", {
+    postCategory: category,
+    postTitle: postTitle,
+    postContent: content,
+    postAddress: addres,
+    postOrderTime: orderTime,
+    postImage: imagesrc
+    })
+      .then(function (response) {
+        // response  
+      }).catch(function (error) {
+        // 오류발생시 실행
+      });
+    console.log(e.id)
   }
 
 
@@ -125,7 +144,7 @@ const Write = (props) => {
           value={postTitle}
         />
 
-
+        <Line src={underLine} />
 
 
 
@@ -133,7 +152,7 @@ const Write = (props) => {
 
         <Imgveiw src={imagesrc} alt="" />
         <Filebox type="file" onChange={preveiw} />
-
+        <Line src={underLine} />
 
 
 
@@ -149,7 +168,7 @@ const Write = (props) => {
           }}
           value={addres}
         />
-
+        <Line src={underLine} />
 
 
 
@@ -158,8 +177,8 @@ const Write = (props) => {
         <Timeinput type="time"
           onChange={(e) => {
             setOrderTime(e.target.value);
-          }} value={orderTime}/>
-
+          }} value={orderTime} />
+   
 
 
 
@@ -173,7 +192,7 @@ const Write = (props) => {
             setContent(e.target.value);
           }}
           value={content}></InputContainer>
-
+        <Line src={underLine} />
 
         <SaveBtn className="saveBttn" onClick={addPost} text="저장하기">
           완료
@@ -203,7 +222,7 @@ display: flex;
     // theme.js에서 지정한 문자열을 이용 - @media screen and (min-width: 768px) {} 와 같은 뜻이 됩니다.
     // 짧게 쓰고 유지보수성을 높이기 위해 theme으로 등록했습니다.
     ${({ theme }) => theme.device.tablet} {
-      margin-top: 0px;
+      margin-top: 20px;
       padding: 0 50px;
       background-color: ${({ theme }) => theme.colors.BackgroundColor};
       align-items: flex-start;
@@ -212,7 +231,7 @@ display: flex;
   
     ${({ theme }) => theme.device.desktop} {
       max-width: 500px;
-      margin: 00px auto 0 auto;
+      margin: 20px auto 0 auto;
       background-color: ${({ theme }) => theme.colors.BackgroundColor};
       align-items: flex-start;
     }
@@ -227,13 +246,15 @@ const Label = styled.label`
   margin-bottom: 5px;
   `;
 const InputContainer = styled.input`
-  
+  &[type="text"]{
     padding: 5px 0;
     border: none;
     font-size: ${({ theme }) => theme.fontSizes.md};
     font-weight: 500;
     transition: border-color 300ms ease-in-out;
-  
+    max-width: 250px;
+    background: transparent;
+  }
     
   `;
 
@@ -241,6 +262,7 @@ const InputContainer = styled.input`
 
 
 const Filebox = styled.input`
+&[type="file"]{
 display: inline-block;
   padding: .5em .75em;
   color: #999;
@@ -249,9 +271,13 @@ display: inline-block;
   vertical-align: middle;
   background-color: #fdfdfd;
   cursor: pointer;
-  border: 1px solid #ebebeb;
+  border: none;
+  background: transparent;
   border-bottom-color: #e2e2e2;
-  border-radius: .25em;
+  border-radius: 15px;
+  max-width: 250px;
+  
+}
 `
 const Imgveiw = styled.img`
   background-position: center 30%;
@@ -274,13 +300,12 @@ const Timeinput = styled.input`
   color: #2a2c2d;
   font-size: 14px;
   font-family: helvetica;
-  width: 180px;
+  width: 110px;
   height: 34px;
   border-radius: 15px;
+  border: none;
   
   }
-  &[type="time"]
-  padding;
   
   
 `
@@ -296,6 +321,13 @@ const SaveBtn = styled.button`
 `;
 const Background = styled.div`
   background-color: ${({ theme }) => theme.colors.BackgroundColor};
+`;
+
+
+const Line = styled.img`
+  width: 100%;
+  height: auto;
+  margin: 0px 0px;
 `;
 // const Div = styled.div`
 //   width: 100%;

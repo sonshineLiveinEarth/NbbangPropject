@@ -1,6 +1,7 @@
 {
   "posts": [
     {
+      "id": 0,
       "postId": 0,
       "postCategory": "Chicken",
       "postTitle": "뿌링클 시켜드실 분?",
@@ -11,31 +12,62 @@
       "postDate": "22.06.11 19:35",
       "userNickname": "먹보",
       "authorId": "0"
+    },
+    {
+      "id": 1,
+      "postId": 1,
+      "postCategory": "Korean",
+      "postTitle": "점심으로 김치찌개 어때여",
+      "postImage": "https://agenery14.com/data/item/1611067564/thumb-6rmA7LCM_1000x1000.jpg",
+      "postAddress": "103호 경비실 앞",
+      "postOrderTime": "18:30",
+      "postContent": "5명 모이면 마감합니다. 한 명당 배달비 1천원씩 내요.글자가 길어지면 이렇게 보이지요. 5명 모이면 마감합니다. 한 명당 배달비 1천원씩 내요. 글자가 길어지면 이렇게 보이지요.",
+      "postDate": "22.06.11 19:35",
+      "userNickname": "순살이",
+      "authorId": "1"
+    },
+    {
+      "id": 2,
+      "postId": 2,
+      "postCategory": "Chinese",
+      "postTitle": "여기 맛집임",
+      "postImage": "https://www.canceranswer.co.kr/news/photo/202103/2199_3592_056.jpg",
+      "postAddress": "103호 경비실 앞",
+      "postOrderTime": "18:30",
+      "postContent": "5명 모이면 마감합니다. 한 명당 배달비 1천원씩 내요.글자가 길어지면 이렇게 보이지요. 5명 모이면 마감합니다. 한 명당 배달비 1천원씩 내요. 글자가 길어지면 이렇게 보이지요.",
+      "postDate": "22.06.11 19:35",
+      "userNickname": "옹심이",
+      "authorId": "2"
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "contents": {
+        "postCategory": "Midnight",
+        "postTitle": "asdf",
+        "postContent": "asdgfsdafg",
+        "postAddress": "asdgf",
+        "postOrderTime": "22:28",
+        "postImage": "null"
       },
-      {
-        "postId": 1,
-        "postCategory": "Korean",
-        "postTitle": "점심으로 김치찌개 어때여",
-        "postImage": "https://agenery14.com/data/item/1611067564/thumb-6rmA7LCM_1000x1000.jpg",
-        "postAddress": "103호 경비실 앞",
-        "postOrderTime": "18:30",
-        "postContent": "5명 모이면 마감합니다. 한 명당 배달비 1천원씩 내요.글자가 길어지면 이렇게 보이지요. 5명 모이면 마감합니다. 한 명당 배달비 1천원씩 내요. 글자가 길어지면 이렇게 보이지요.",
-        "postDate": "22.06.11 19:35",
-        "userNickname": "순살이",
-        "authorId": "1"
-        },
-        {
-          "postId": 2,
-          "postCategory": "Chinese",
-          "postTitle": "여기 맛집임",
-          "postImage": "https://www.canceranswer.co.kr/news/photo/202103/2199_3592_056.jpg",
-          "postAddress": "103호 경비실 앞",
-          "postOrderTime": "18:30",
-          "postContent": "5명 모이면 마감합니다. 한 명당 배달비 1천원씩 내요.글자가 길어지면 이렇게 보이지요. 5명 모이면 마감합니다. 한 명당 배달비 1천원씩 내요. 글자가 길어지면 이렇게 보이지요.",
-          "postDate": "22.06.11 19:35",
-          "userNickname": "옹심이",
-          "authorId": "2"
-          }
+      "id": 6
+    },
+    {
+      "postCategory": "Midnight",
+      "postTitle": "asdfg",
+      "postContent": "asdfsdv",
+      "postAddress": "adsvasdf",
+      "postOrderTime": "22:49",
+      "postImage": "null",
+      "id": 7
+    }
   ],
   "comments": [
     {
