@@ -2,7 +2,7 @@ import "./App.css";
 import React, { useState, useRef } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import { Route, } from "react-router-dom";
-import Sginup from "./page/Sginup";
+
 
 // import { history } from "../redux/configureStore";
 // import { ConnectedRouter } from "connected-react-router";
@@ -14,7 +14,7 @@ import "@kfonts/bm-hanna-pro-otf";
 import Header from "./Header";
 import theme from "./theme";
 import Formpage from "./page/Formpage";
-
+import Sginup from "./page/Sginup";
 function App() {
   return (
     <ThemeProvider theme={theme}>
