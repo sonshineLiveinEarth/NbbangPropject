@@ -1,12 +1,12 @@
 import "./App.css";
-import React from "react";
+import React, { useState, useRef } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import { Routes, Route } from "react-router-dom";
 // 배민한나체 폰트
 import "@kfonts/bm-hanna-pro-otf";
 
 // js파일
-import Main from "./Main";
+// import Main from "./Main";
 import Header from "./Header";
 import theme from "./theme";
 import Detail from "./Detail";
