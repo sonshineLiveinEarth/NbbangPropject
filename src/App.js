@@ -1,6 +1,7 @@
 import "./App.css";
 import React from "react";
 import styled, { ThemeProvider } from "styled-components";
+import { Routes, Route } from "react-router-dom";
 // 배민한나체 폰트
 import "@kfonts/bm-hanna-pro-otf";
 
@@ -8,23 +9,29 @@ import "@kfonts/bm-hanna-pro-otf";
 import Main from "./Main";
 import Header from "./Header";
 import theme from "./theme";
+import Detail from "./Detail";
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <div className="App">
-        <Header />
-        <Main />
-        <Background />
-      </div>
-    </ThemeProvider>
+    <div className="App">
+      <ThemeProvider theme={theme}>
+        <Background>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route path="/detail" element={<Detail />} />
+          </Routes>
+        </Background>
+      </ThemeProvider>
+    </div>
   );
 }
 
 const Background = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   background-color: ${({ theme }) => theme.colors.BackgroundColor};
+  padding-bottom: 10vh;
 `;
 
 export default App;
