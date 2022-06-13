@@ -4,13 +4,18 @@ import styled from "styled-components";
 import Card from "./Card";
 import Category from "./Category";
 import addBtn from "./addBtn.png";
+import { useNavigate } from "react-router-dom";
+
 
 const Main = () => {
+  const navigate = useNavigate();
   return (
     <>
       <Wrap>
         <Category />
-        <AddBtn>
+        <AddBtn  onClick={() => {
+              navigate("/write");
+            }}>
           <AddBtnT src={addBtn} />
         </AddBtn>
         <CardWrap>

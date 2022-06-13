@@ -10,6 +10,7 @@ import Main from "./Main";
 import Header from "./Header";
 import theme from "./theme";
 import Detail from "./Detail";
+import Write from "./page/Write";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/detail" element={<Detail />} />
+            <Route path="/wirte" element={<Detail />} />
           </Routes>
         </Background>
       </ThemeProvider>

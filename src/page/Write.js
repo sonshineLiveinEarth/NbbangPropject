@@ -6,8 +6,8 @@ import { createPost, loadPost } from "../redux/modules/post";
 import { useDispatch } from "react-redux";
 
 
-const Formpage = (props) => {
-  const post_id = props.match.params.id;
+const Write = (props) => {
+  
   const dispatch = useDispatch();
 
   const [imagesrc, setImeageSrc] = React.useState("https://www.generationsforpeace.org/en/how-we-work/publications/empty/");
@@ -61,11 +61,11 @@ const Formpage = (props) => {
 
         <Subtitle>
           N빵모임 만들기
-        </Subtitle><br />
+        </Subtitle>
 
 
-        <div>
-          <Label>카테고리 선택</Label><br />
+        <Div>
+          <Label>카테고리 선택</Label>
           <Buttonbox>
             <Button
               id="1"
@@ -108,15 +108,14 @@ const Formpage = (props) => {
               한식
             </Button>
           </Buttonbox>
-          <br />
-          <br />
-        </div>
+         
+        </Div>
 
 
-        <div className="postTitle">
+        <Div className="postTitle">
           <Label>
             제목
-          </Label><br />
+          </Label>
           <InputContainer
             type="text"
             placeholder="제목을 입력 해주세요!"
@@ -125,22 +124,22 @@ const Formpage = (props) => {
             }}
             value={postTitle}
           />
-        </div><br />
+        </Div>
 
 
 
-        <div className='Image'>
-          <Label>사진</Label><br />
+        <Div className='Image'>
+          <Label>사진</Label>
 
           <Imgveiw src={imagesrc} alt="" />
           <Filebox type="file" onChange={preveiw} />
-        </div><br />
+        </Div>
 
 
 
 
-        <div className='Address'>
-          <Label>배달 받을 장소</Label><br />
+        <Div className='Address'>
+          <Label>배달 받을 장소</Label>
           <InputContainer
 
             type="text"
@@ -150,23 +149,23 @@ const Formpage = (props) => {
             }}
             value={addres}
           />
-        </div><br />
+        </Div>
 
 
 
-        <div className='Time'>
-          <Label>주문 희망 시간</Label><br />
+        <Div className='Time'>
+          <Label>주문 희망 시간</Label>
           <input type="time"
             onChange={(e) => {
               setOrderTime(e.target.value);
             }} value={orderTime}></input>
 
 
-        </div><br />
-        <div className='Content'>
+        </Div>
+        <Div className='Content'>
           <Label>
             N빵 내용
-          </Label><br />
+          </Label>
           <InputContainer
             type="text"
             placeholder="내용을 입력해주세요!"
@@ -174,13 +173,13 @@ const Formpage = (props) => {
               setContent(e.target.value);
             }}
             value={content}></InputContainer>
-        </div><br />
-        <div>
+        </Div>
+        <Div>
           <SaveBtn className="saveBttn" onClick={addPost} text="저장하기">
             완료
           </SaveBtn>
 
-        </div>
+        </Div>
 
       </Container >
       <Background />
@@ -275,5 +274,12 @@ const SaveBtn = styled.button`
 const Background = styled.div`
   background-color: ${({ theme }) => theme.colors.BackgroundColor};
 `;
-
-export default Formpage;
+const Div = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+`;
+export default Write;
