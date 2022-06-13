@@ -1,16 +1,14 @@
-import React, {useEffect, useState, useRef } from "react";
+import React, {useEffect, useState, useRef, useSelector } from "react";
 import styled, { ThemeProvider } from "styled-components";
-import theme from "./theme";
-import { RoundBtn, RectangleBtn } from "./Btn";
-import { createPost } from "./redux/modules/post";
+import theme from "../theme";
+import { RoundBtn, RectangleBtn } from "../Btn";
+import { createPost, loadPost } from "../redux/modules/post";
 import { useDispatch } from "react-redux";
 
 
 const Formpage = (props) => {
-  
+  const post_id = props.match.params.id;
   const dispatch = useDispatch();
-
-
 
   const [imagesrc, setImeageSrc] = React.useState("https://www.generationsforpeace.org/en/how-we-work/publications/empty/");
 
@@ -34,6 +32,7 @@ const Formpage = (props) => {
   const addPost = () => {
     dispatch(createPost(contents));
     console.log("전송 성공!",contents)
+    
   }
 
 
@@ -67,7 +66,7 @@ const Formpage = (props) => {
 
         <div>
           <Label>카테고리 선택</Label><br />
-          <div>
+          <Buttonbox>
             <Button
               id="1"
               value={"All"}
@@ -108,7 +107,7 @@ const Formpage = (props) => {
             >
               한식
             </Button>
-          </div>
+          </Buttonbox>
           <br />
           <br />
         </div>
@@ -193,7 +192,7 @@ const Formpage = (props) => {
 
 
 const Container = styled.div`
-
+display: flex;
     margin-top: 40px;
     padding: 0 30px;
     background-color: ${({ theme }) => theme.colors.BackgroundColor};
@@ -222,6 +221,7 @@ const Container = styled.div`
 const Subtitle = styled.h1`
   `
 const Label = styled.label`
+
   font-size: ${({ theme }) => theme.fontSizes.sm};
   text-align: left;
   font-weight: 600;
@@ -261,7 +261,8 @@ const Button = styled.button`
 `
 
 const Buttonbox = styled.div`
-  display: lower;
+  display: center;
+
 `
 
 const SaveBtn = styled.button`

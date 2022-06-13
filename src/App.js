@@ -1,7 +1,8 @@
 import "./App.css";
 import React, { useState, useRef } from "react";
 import styled, { ThemeProvider } from "styled-components";
-import { Route } from "react-router-dom";
+import { Route, } from "react-router-dom";
+import Sginup from "./page/Sginup";
 
 // import { history } from "../redux/configureStore";
 // import { ConnectedRouter } from "connected-react-router";
@@ -12,7 +13,7 @@ import "@kfonts/bm-hanna-pro-otf";
 // import Main from "./Main";
 import Header from "./Header";
 import theme from "./theme";
-import Formpage from "./Formpage";
+import Formpage from "./page/Formpage";
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
         {/* <ConnectedRouter history={history}> */}
         {/* <Main /> */}
         {/* <Route path="/" exact component={App} /> */}
+        {/* <Route path="/signup" exact component={Sginup} /> */}
+        {/* <Sginup/> */}
         <Formpage/>
         <Background />
         {/* </ConnectedRouter> */}

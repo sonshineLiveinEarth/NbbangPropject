@@ -20,38 +20,43 @@ const LOADING = "LOADING";
 
 
 //Action Creator
-export function createPost(post){
-    console.log("포스트를 생성할거야!");
-      return {type: ADD, post: post};
-  }
+export function createPost(post) {
+    console.log("포스트를 생성할거야!", post);
+    return { type: ADD, post: post };
+}
+
+export function loadPost(post_list) {
+    console.log("포스트를 불러올거야!", post_list);
+    return { type: LOAD, post: post_list };
+}
 
 //InitialState
 const initialState = {
     list: [
         {
-        postId: 1,
-        postCategory: "All",
-        postTitle: "이거 먹을 사람",
-        postImage: null,
-        postAddress: "아파트 어딘가",
-        postOrderTime: "09:53",
-        postContent: "안올거면 말고",
-        postDate: "오늘",
-        userNickname: "String",
-        authorId: null
-      },
-      {
-        postId: 2,
-        postCategory: "Chinese",
-        postTitle: "이거 먹을 사람",
-        postImage: null,
-        postAddress: "이런 동네",
-        postOrderTime: "18:56",
-        postContent: "여기여기 모여라",
-        postDate: "오늘",
-        userNickname: "String",
-        authorId: null
-      }
+            postId: 1,
+            postCategory: "All",
+            postTitle: "이거 먹을 사람",
+            postImage: null,
+            postAddress: "아파트 어딘가",
+            postOrderTime: "09:53",
+            postContent: "안올거면 말고",
+            postDate: "오늘",
+            userNickname: "String",
+            authorId: null
+        },
+        {
+            postId: 2,
+            postCategory: "Chinese",
+            postTitle: "이거 먹을 사람",
+            postImage: null,
+            postAddress: "이런 동네",
+            postOrderTime: "18:56",
+            postContent: "여기여기 모여라",
+            postDate: "오늘",
+            userNickname: "String",
+            authorId: null
+        }
     ]
 
 };
@@ -61,17 +66,22 @@ const initialState = {
 
 export default function reducer(state = initialState, action = {}) {
     switch (action.type) {
+        case "post/LOAD": {
+            return {list: action.post_list}
+          }
+
         case "post/ADD": {
             console.log("공구가 올라갈거야!");
             const new_post_list = [...state.list, action.post];
-            return {list : new_post_list};
+            return { list: new_post_list };
         }
 
         default:
-      return state;
-      
+            return state;
+            
+
     }
-    
+   
 }
 
 

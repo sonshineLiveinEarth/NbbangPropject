@@ -2,7 +2,8 @@ import { css } from "styled-components";
 
 // RoundBtn과 RectangleBtn에서 공통적으로 사용할 스타일
 const Btn = css`
-  display: flex;
+  display: lower;
+  margin: 2px;
   justify-content: center;
   align-items: center;
   color: ${({ theme }) => theme.colors.white};
