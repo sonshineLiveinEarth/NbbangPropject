@@ -19,6 +19,7 @@ const LOADING = "LOADING";
 
 
 
+
 //Action Creator
 export function createPost(post) {
     console.log("포스트를 생성할거야!", post);

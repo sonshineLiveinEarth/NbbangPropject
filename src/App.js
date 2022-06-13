@@ -21,7 +21,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/detail" element={<Detail />} />
-            <Route path="/wirte" element={<Detail />} />
+            <Route path="/write" element={<Write />} />
           </Routes>
         </Background>
       </ThemeProvider>

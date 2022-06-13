@@ -1,25 +1,26 @@
-import React, {useEffect, useState, useRef, useSelector } from "react";
+import React, { useEffect, useState, useRef, useSelector } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "../theme";
 import { RoundBtn, RectangleBtn } from "../Btn";
-import { createPost, loadPost } from "../redux/modules/post";
+import { createPost } from "../redux/modules/post";
 import { useDispatch } from "react-redux";
 
 
 const Write = (props) => {
-  
+
+ 
   const dispatch = useDispatch();
-
-  const [imagesrc, setImeageSrc] = React.useState("https://www.generationsforpeace.org/en/how-we-work/publications/empty/");
-
+  
+  const [imagesrc, setImeageSrc] = useState();
+ 
   const reader = new FileReader();
 
 
-  const [category, setCategory] = React.useState();
-  const [postTitle, setPostTitle] = React.useState();
-  const [addres, setAddres] = React.useState();
-  const [content, setContent] = React.useState();
-  const [orderTime, setOrderTime] = React.useState();
+  const [category, setCategory] = useState();
+  const [postTitle, setPostTitle] = useState();
+  const [addres, setAddres] = useState();
+  const [content, setContent] = useState();
+  const [orderTime, setOrderTime] = useState();
 
   const contents = {
     category: category,
@@ -31,10 +32,9 @@ const Write = (props) => {
   };
   const addPost = () => {
     dispatch(createPost(contents));
-    console.log("전송 성공!",contents)
-    
-  }
+    console.log("전송 성공!", contents)
 
+  }
 
 
   //이미지 프리뷰
@@ -64,122 +64,122 @@ const Write = (props) => {
         </Subtitle>
 
 
-        <Div>
-          <Label>카테고리 선택</Label>
-          <Buttonbox>
-            <Button
-              id="1"
-              value={"All"}
-              className="categoryAll"
-              onClick={categorySelect}
-            >
-              전체
-            </Button>
-            <Button
-              id="2"
-              value={"Chicken"}
-              className="categoryChicken"
-              onClick={(e) => setCategory(e.target.value)}
-            >
-              치킨
-            </Button>
-            <Button
-              id="3"
-              value={"Midnight"}
-              className="categoryMidnight"
-              onClick={(e) => setCategory(e.target.value)}
-            >
-              야식
-            </Button>
-            <Button
-              id="4"
-              value={"Chinese"}
-              className="categoryChinese"
-              onClick={(e) => setCategory(e.target.value)}
-            >
-              중식
-            </Button>
-            <Button
-              id="5"
-              value={"Korean"}
-              className="categoryKorean"
-              onClick={(e) => setCategory(e.target.value)}
-            >
-              한식
-            </Button>
-          </Buttonbox>
-         
-        </Div>
 
-
-        <Div className="postTitle">
-          <Label>
-            제목
-          </Label>
-          <InputContainer
-            type="text"
-            placeholder="제목을 입력 해주세요!"
-            onChange={(e) => {
-              setPostTitle(e.target.value);
-            }}
-            value={postTitle}
-          />
-        </Div>
-
-
-
-        <Div className='Image'>
-          <Label>사진</Label>
-
-          <Imgveiw src={imagesrc} alt="" />
-          <Filebox type="file" onChange={preveiw} />
-        </Div>
+        <Label>카테고리 선택</Label>
+        <Buttonbox>
+          <Button
+            id="1"
+            value={"All"}
+            className="categoryAll"
+            onClick={categorySelect}
+          >
+            전체
+          </Button>
+          <Button
+            id="2"
+            value={"Chicken"}
+            className="categoryChicken"
+            onClick={(e) => setCategory(e.target.value)}
+          >
+            치킨
+          </Button>
+          <Button
+            id="3"
+            value={"Midnight"}
+            className="categoryMidnight"
+            onClick={(e) => setCategory(e.target.value)}
+          >
+            야식
+          </Button>
+          <Button
+            id="4"
+            value={"Chinese"}
+            className="categoryChinese"
+            onClick={(e) => setCategory(e.target.value)}
+          >
+            중식
+          </Button>
+          <Button
+            id="5"
+            value={"Korean"}
+            className="categoryKorean"
+            onClick={(e) => setCategory(e.target.value)}
+          >
+            한식
+          </Button>
+        </Buttonbox>
 
 
 
 
-        <Div className='Address'>
-          <Label>배달 받을 장소</Label>
-          <InputContainer
 
-            type="text"
-            placeholder="장소를 입력해주세요!"
-            onChange={(e) => {
-              setAddres(e.target.value);
-            }}
-            value={addres}
-          />
-        </Div>
-
-
-
-        <Div className='Time'>
-          <Label>주문 희망 시간</Label>
-          <input type="time"
-            onChange={(e) => {
-              setOrderTime(e.target.value);
-            }} value={orderTime}></input>
+        <Label>
+          제목
+        </Label>
+        <InputContainer
+          type="text"
+          placeholder="제목을 입력 해주세요!"
+          onChange={(e) => {
+            setPostTitle(e.target.value);
+          }}
+          value={postTitle}
+        />
 
 
-        </Div>
-        <Div className='Content'>
-          <Label>
-            N빵 내용
-          </Label>
-          <InputContainer
-            type="text"
-            placeholder="내용을 입력해주세요!"
-            onChange={(e) => {
-              setContent(e.target.value);
-            }}
-            value={content}></InputContainer>
-        </Div>
-        <Div>
-          <SaveBtn className="saveBttn" onClick={addPost} text="저장하기">
-            완료
-          </SaveBtn>
 
-        </Div>
+
+
+        <Label>사진</Label>
+
+        <Imgveiw src={imagesrc} alt="" />
+        <Filebox type="file" onChange={preveiw} />
+
+
+
+
+
+
+        <Label>배달 받을 장소</Label>
+        <InputContainer
+
+          type="text"
+          placeholder="장소를 입력해주세요!"
+          onChange={(e) => {
+            setAddres(e.target.value);
+          }}
+          value={addres}
+        />
+
+
+
+
+
+        <Label>주문 희망 시간</Label>
+        <Timeinput type="time"
+          onChange={(e) => {
+            setOrderTime(e.target.value);
+          }} value={orderTime}/>
+
+
+
+
+        <Label>
+          N빵 내용
+        </Label>
+        <InputContainer
+          type="text"
+          placeholder="내용을 입력해주세요!"
+          onChange={(e) => {
+            setContent(e.target.value);
+          }}
+          value={content}></InputContainer>
+
+
+        <SaveBtn className="saveBttn" onClick={addPost} text="저장하기">
+          완료
+        </SaveBtn>
+
+
 
       </Container >
       <Background />
@@ -196,8 +196,8 @@ display: flex;
     padding: 0 30px;
     background-color: ${({ theme }) => theme.colors.BackgroundColor};
     flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      justify-content: flex-start;
+      align-items: flex-start;
       
   
     // theme.js에서 지정한 문자열을 이용 - @media screen and (min-width: 768px) {} 와 같은 뜻이 됩니다.
@@ -206,7 +206,7 @@ display: flex;
       margin-top: 0px;
       padding: 0 50px;
       background-color: ${({ theme }) => theme.colors.BackgroundColor};
-      align-items: center;
+      align-items: flex-start;
 
     }
   
@@ -214,7 +214,7 @@ display: flex;
       max-width: 500px;
       margin: 00px auto 0 auto;
       background-color: ${({ theme }) => theme.colors.BackgroundColor};
-      align-items: center;
+      align-items: flex-start;
     }
   `;
 const Subtitle = styled.h1`
@@ -236,6 +236,9 @@ const InputContainer = styled.input`
   
     
   `;
+
+
+
 
 const Filebox = styled.input`
 display: inline-block;
@@ -264,6 +267,26 @@ const Buttonbox = styled.div`
 
 `
 
+const Timeinput = styled.input` 
+ 
+ &[type="time"]{ 
+    border: none;
+  color: #2a2c2d;
+  font-size: 14px;
+  font-family: helvetica;
+  width: 180px;
+  height: 34px;
+  border-radius: 15px;
+  
+  }
+  &[type="time"]
+  padding;
+  
+  
+`
+
+
+
 const SaveBtn = styled.button`
   ${RoundBtn};
   align-self: center;
@@ -274,12 +297,12 @@ const SaveBtn = styled.button`
 const Background = styled.div`
   background-color: ${({ theme }) => theme.colors.BackgroundColor};
 `;
-const Div = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 20px;
-`;
+// const Div = styled.div`
+//   width: 100%;
+//   display: flex;
+//   flex-direction: row;
+//   align-items: center;
+//   justify-content: space-between;
+//   margin-top: 20px;
+// `;
 export default Write;
