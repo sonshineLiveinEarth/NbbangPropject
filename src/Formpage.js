@@ -1,34 +1,39 @@
-import React, { useState, useRef } from "react";
+import React, {useEffect, useState, useRef } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import theme from "./theme";
 import { RoundBtn, RectangleBtn } from "./Btn";
+import { createPost } from "./redux/modules/post";
+import { useDispatch } from "react-redux";
+
 
 const Formpage = (props) => {
+  
+  const dispatch = useDispatch();
 
 
 
-  const [imagesrc, setImeageSrc] = useState("https://www.generationsforpeace.org/en/how-we-work/publications/empty/");
+  const [imagesrc, setImeageSrc] = React.useState("https://www.generationsforpeace.org/en/how-we-work/publications/empty/");
 
   const reader = new FileReader();
 
 
-  const [category, setCategory] = useState();
-  const [postTitle, setPostTitle] = useState();
-  const [addres, setAddres] = useState();
-  const [content, setContent] = useState();
-  const [orderTime, setOrderTime] = useState();
+  const [category, setCategory] = React.useState();
+  const [postTitle, setPostTitle] = React.useState();
+  const [addres, setAddres] = React.useState();
+  const [content, setContent] = React.useState();
+  const [orderTime, setOrderTime] = React.useState();
 
-
+  const contents = {
+    category: category,
+    postTitle: postTitle,
+    content: content,
+    addres: addres,
+    orderTime: orderTime,
+    imagesrc: imagesrc
+  };
   const addPost = () => {
-    const contents = {
-      category: category,
-      postTitle: postTitle,
-      content: content,
-      addres: addres,
-      orderTime: orderTime,
-      imagesrc: imagesrc
-    };
-    console.log(contents)
+    dispatch(createPost(contents));
+    console.log("전송 성공!",contents)
   }
 
 
@@ -156,7 +161,7 @@ const Formpage = (props) => {
             onChange={(e) => {
               setOrderTime(e.target.value);
             }} value={orderTime}></input>
-          
+
 
         </div><br />
         <div className='Content'>
