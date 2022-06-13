@@ -1,27 +1,47 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import axios from "axios";
 
 const Comment = () => {
+  const [comment_list, setComment_list] = React.useState([]);
+
+  React.useEffect(() => {
+    axios({
+      method: "get",
+      url: "http://localhost:5001/comments",
+    }).then((response) => {
+      setComment_list(response.data);
+    });
+  }, []);
+
+  console.log(comment_list);
   return (
     <>
       <Wrap>
         <CommentInputWrap>
-          <CommentInput placeholder="댓글을 남겨주세요" />
+          <CommentInput placeholder="댓글을 남겨주세요" autoFocus />
           <CommentBtn>나도 끼기</CommentBtn>
         </CommentInputWrap>
+        {comment_list.map((list, index) => {
+          return (
+            <CommentBox>
+              <ProfileImage profileImage={list.userProfileImage} />
 
-        <CommentBox>
-          <ProfileImage />
+              <CommentContentWrap>
+                <CommentProfileWrap>
+                  <div>
+                    <Nickname>{list.userNickname}</Nickname>
+                    <CommentDate>{list.commentDate}</CommentDate>
+                  </div>
+                  <DeleteBtn>삭제</DeleteBtn>
+                </CommentProfileWrap>
+                <CommentContent>{list.comment}</CommentContent>
+              </CommentContentWrap>
+            </CommentBox>
+          );
+        })}
 
-          <CommentContentWrap>
-            <CommentProfileWrap>
-              <Nickname>먹보예유</Nickname>
-              <CommentDate>22.06.11 19:35</CommentDate>
-            </CommentProfileWrap>
-            <CommentContent>저용</CommentContent>
-          </CommentContentWrap>
-        </CommentBox>
-        <CommentBox>
+        {/* <CommentBox>
           <ProfileImage />
 
           <CommentContentWrap>
@@ -31,7 +51,7 @@ const Comment = () => {
             </CommentProfileWrap>
             <CommentContent>저용 글이 길어지면 이렇게 되지요</CommentContent>
           </CommentContentWrap>
-        </CommentBox>
+        </CommentBox> */}
       </Wrap>
     </>
   );
@@ -51,7 +71,7 @@ const Wrap = styled.div`
 
 const CommentInputWrap = styled.div`
   max-width: 100%;
-  width: 95%;
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -60,7 +80,8 @@ const CommentInputWrap = styled.div`
 `;
 
 const CommentInput = styled.input`
-  width: 100%;
+  max-width: 520px;
+  width: 90%;
   height: 50px;
   background: #ffffff 0% 0% no-repeat padding-box;
   box-shadow: 5px 5px 10px #0000000f;
@@ -71,14 +92,18 @@ const CommentInput = styled.input`
     font-size: 16px;
     color: #cecece;
   }
+  &:focus {
+    outline: 2px solid #2ac1bc;
+  }
 `;
 
 const CommentBtn = styled.button`
   font-family: "배달의민족 한나체 Pro OTF", "배달의민족한나체ProOTF",
     "bm-hanna-pro-otf";
-  width: 90px;
+  width: 84px;
   height: 50px;
-  margin-left: 20px;
+  /* padding: 0px 10px 6px 10px; */
+  margin-left: 16px;
   background-color: #2ac1bc;
   color: white;
   font-size: 16px;
@@ -86,6 +111,7 @@ const CommentBtn = styled.button`
   border-radius: 15px;
   border: none;
   box-shadow: 5px 5px 10px #0000000f;
+  cursor: pointer;
 `;
 
 const CommentBox = styled.div`
@@ -103,19 +129,13 @@ const CommentBox = styled.div`
   padding: 10px;
 `;
 
-const CommentProfile = styled.div`
-  display: flex;
-  align-items: flex-start;
-  flex-direction: row;
-`;
-
 const ProfileImage = styled.div`
   width: 40px;
   height: 40px;
   background-color: #ddd;
   border-radius: 50%;
-  /* background-image: url(${(props) => props.profileImage}); */
-  background-image: url(http://image.cine21.com/resize/cine21/person/2017/0421/17_13_30__58f9bf2aaf00b[W578-].jpg);
+  background-image: url(${(props) => props.profileImage});
+  /* background-image: url(http://image.cine21.com/resize/cine21/person/2017/0421/17_13_30__58f9bf2aaf00b[W578-].jpg); */
   background-position: center 30%;
   background-size: cover;
   margin-left: 10px;
@@ -138,7 +158,15 @@ const Nickname = styled.span`
 const CommentDate = styled.span`
   font-size: 14px;
   color: #a7a7a7;
-  /* margin-top: 10px; */
+  margin-left: 10px;
+`;
+
+const DeleteBtn = styled.button`
+  font-size: 14px;
+  background-color: transparent;
+  border: none;
+  text-decoration: underline;
+  color: #a7a7a7;
 `;
 
 const CommentContentWrap = styled.div`

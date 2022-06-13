@@ -2,42 +2,64 @@ import React from "react";
 import styled from "styled-components";
 import commentIcon from "./comment.png";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Card = () => {
   const navigate = useNavigate();
+  const [card_list, setCard_list] = React.useState([]);
+
+  React.useEffect(() => {
+    axios({
+      method: "get",
+      url: "http://localhost:5001/posts",
+    }).then((response) => {
+      setCard_list(response.data);
+    });
+  }, []);
+
+  console.log(card_list);
 
   return (
     <>
-      <CardBox
-        onClick={() => {
-          navigate("/detail");
-        }}
-      >
-        {/* <PostImgFilter /> */}
-        <PostImg>
-          <ImgTop>
-            <Tag>
-              <TagName>치킨</TagName>
-            </Tag>
-            <div>
-              <TimeBox />
-              <TimeInfo>
-                주문까지 <Time>40</Time>분
-              </TimeInfo>
-            </div>
-          </ImgTop>
-        </PostImg>
-        <PostInfoWrap>
-          <PostTitle>굽네 고추바사삭 시키실 분!</PostTitle>
-          <PostInfo>
-            <Nickname>닉네임</Nickname>
-            <CommentWrap>
-              <CommentIcon src={commentIcon} />
-              <CommentNum>10</CommentNum>
-            </CommentWrap>
-          </PostInfo>
-        </PostInfoWrap>
-      </CardBox>
+      {card_list.map((list, index) => {
+        return (
+          <CardBox
+            key={index}
+            onClick={() => {
+              navigate("/detail");
+            }}
+          >
+            <PostImg postImage={list.postImage}>
+              <ImgTop>
+                <Tag>
+                  <TagName>
+                    {list.postCategory === "Chicken" && "치킨"}
+                    {list.postCategory === "Korean" && "한식"}
+                    {list.postCategory === "Midnight" && "야식"}
+                    {list.postCategory === "Chinese" && "중식"}
+                  </TagName>
+                </Tag>
+                <div>
+                  <TimeBox />
+                  <TimeInfo>
+                    주문까지 <Time>40</Time>분
+                  </TimeInfo>
+                </div>
+              </ImgTop>
+            </PostImg>
+            <PostInfoWrap>
+              <PostTitle>{list.postTitle}</PostTitle>
+              <PostInfo>
+                <Nickname>{list.userNickname}</Nickname>
+                <CommentWrap>
+                  <CommentIcon src={commentIcon} />
+                  <CommentNum>10</CommentNum>
+                </CommentWrap>
+              </PostInfo>
+            </PostInfoWrap>
+          </CardBox>
+        );
+      })}
     </>
   );
 };
@@ -51,6 +73,10 @@ const CardBox = styled.div`
   flex-direction: column;
   align-items: flex-end;
   box-shadow: 0px 5px 10px #00000020;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 0px 5px 20px #00000040;
+  }
 `;
 
 const PostImg = styled.div`
@@ -63,7 +89,7 @@ const PostImg = styled.div`
       rgba(0, 0, 0, 0.2),
       rgba(0, 0, 0, 0)
     ),
-    url(https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/202112/27/a99042fd-9510-42e9-97d6-6ae45ad666fc.jpg);
+    url(${(props) => props.postImage});
   background-position: center 30%;
   background-size: cover;
 `;

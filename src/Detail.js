@@ -36,6 +36,7 @@ const Detail = () => {
           이렇게 보이지요. 5명 모이면 마감합니다. 한 명당 배달비 1천원씩 내요.
           글자가 길어지면 이렇게 보이지요.
         </PostContent>
+        <Nickname>by 먹꼬가자</Nickname>
         <Line src={underLine} />
       </Wrap>
       <Comment />
@@ -76,6 +77,15 @@ const Div = styled.div`
   margin-top: 20px;
 `;
 
+const Nickname = styled.span`
+  color: black;
+  font-size: 16px;
+  text-align: left;
+  margin-right: 16px;
+  font-weight: bold;
+  margin-top: 10px;
+`;
+
 const PostDate = styled.span`
   font-size: 16px;
   color: #a7a7a7;
@@ -91,6 +101,7 @@ const EditBtn = styled.button`
   border: none;
   text-decoration: underline;
   color: #a7a7a7;
+  cursor: pointer;
 `;
 
 const PostTitle = styled.span`
@@ -148,7 +159,7 @@ const TimeBox = styled.div`
   background: #000000 0% 0% no-repeat padding-box;
   opacity: 0.44;
   border-radius: 6px;
-  margin: -190px 20px 0px 470px;
+  margin: -200px 20px 0px 470px;
   position: relative;
 `;
 
@@ -160,7 +171,7 @@ const TimeInfo = styled.span`
   color: white;
   font-size: 24px;
   opacity: 1;
-  bottom: 150px;
+  bottom: 160px;
   right: -140px;
   justify-content: flex-end;
   position: absolute;

@@ -1,0 +1,72 @@
+{
+  "posts": [
+    {
+      "postId": 0,
+      "postCategory": "Chicken",
+      "postTitle": "뿌링클 시켜드실 분?",
+      "postImage": "https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/202112/27/a99042fd-9510-42e9-97d6-6ae45ad666fc.jpg",
+      "postAddress": "새마을 어린이놀이터 앞",
+      "postOrderTime": "18:30",
+      "postContent": "5명 모이면 마감합니다. 한 명당 배달비 1천원씩 내요.글자가 길어지면 이렇게 보이지요. 5명 모이면 마감합니다. 한 명당 배달비 1천원씩 내요. 글자가 길어지면 이렇게 보이지요.",
+      "postDate": "22.06.11 19:35",
+      "userNickname": "먹보",
+      "authorId": "0"
+      },
+      {
+        "postId": 1,
+        "postCategory": "Korean",
+        "postTitle": "점심으로 김치찌개 어때여",
+        "postImage": "https://agenery14.com/data/item/1611067564/thumb-6rmA7LCM_1000x1000.jpg",
+        "postAddress": "103호 경비실 앞",
+        "postOrderTime": "18:30",
+        "postContent": "5명 모이면 마감합니다. 한 명당 배달비 1천원씩 내요.글자가 길어지면 이렇게 보이지요. 5명 모이면 마감합니다. 한 명당 배달비 1천원씩 내요. 글자가 길어지면 이렇게 보이지요.",
+        "postDate": "22.06.11 19:35",
+        "userNickname": "순살이",
+        "authorId": "1"
+        },
+        {
+          "postId": 2,
+          "postCategory": "Chinese",
+          "postTitle": "여기 맛집임",
+          "postImage": "https://www.canceranswer.co.kr/news/photo/202103/2199_3592_056.jpg",
+          "postAddress": "103호 경비실 앞",
+          "postOrderTime": "18:30",
+          "postContent": "5명 모이면 마감합니다. 한 명당 배달비 1천원씩 내요.글자가 길어지면 이렇게 보이지요. 5명 모이면 마감합니다. 한 명당 배달비 1천원씩 내요. 글자가 길어지면 이렇게 보이지요.",
+          "postDate": "22.06.11 19:35",
+          "userNickname": "옹심이",
+          "authorId": "2"
+          }
+  ],
+  "comments": [
+    {
+      "commentId": 0,
+      "comment": "저요",
+      "commentDate": "22.6.13 14:13",
+      "userNickname": "먹보",
+      "userProfileImage": "http://image.cine21.com/resize/cine21/person/2017/0421/17_13_30__58f9bf2aaf00b[W578-].jpg",
+      "authorId": "ObjectId",
+      "postId": 1
+    },
+    {
+      "commentId": 1,
+      "comment": "저 반마리만 먹고 싶은데 한마리 엔빵할사람",
+      "commentDate": "22.6.13 14:16",
+      "userNickname": "아이예유",
+      "userProfileImage": "https://file.mk.co.kr/meet/neds/2021/04/image_readtop_2021_330747_16177500644599916.jpg",
+      "authorId": "ObjectId",
+      "postId": 1
+    },
+    {
+      "commentId": 2,
+      "comment": "저도 껴주세요",
+      "commentDate": "22.6.13 14:13",
+      "userNickname": "창정이",
+      "userProfileImage": "https://photo.jtbc.joins.com/news/jam_photo/202111/19/b085aff1-f605-4f54-86eb-9336e1f87878.jpg",
+      "authorId": "ObjectId",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

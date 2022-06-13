@@ -15,10 +15,6 @@ const Main = () => {
         </AddBtn>
         <CardWrap>
           <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
         </CardWrap>
       </Wrap>
     </>
@@ -69,6 +65,7 @@ const AddBtn = styled.div`
     height: 70px;
     bottom: 40px;
     right: 40px;
+    cursor: pointer;
   } ;
 `;
 
