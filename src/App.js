@@ -13,9 +13,13 @@ import Header from "./Header";
 import theme from "./theme";
 import Detail from "./page/Detail";
 import Write from "./page/Write";
+
+import Sginup from "./page/Sginup";
+
 import { useDispatch } from "react-redux";
 // 미들웨어 함수
 import { loadPostsApi } from "./redux/modules/post";
+
 
 function App() {
   const card_list = useSelector((state) => state.post.list);
@@ -31,13 +35,16 @@ function App() {
         <Background>
           <Header />
           <Routes>
+
             <Route path="/" element={<Main list={card_list} />} />
+
             <Route
               path="/detail/:postId"
               element={<Detail list={card_list} />}
             />
             <Route path="/detail" element={<Detail />} />
             <Route path="/write" element={<Write />} />
+            <Route path="/sginup" element={<Sginup />} />
           </Routes>
         </Background>
       </ThemeProvider>

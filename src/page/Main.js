@@ -5,7 +5,16 @@ import { useNavigate } from "react-router-dom";
 import Card from "../Card";
 import addBtn from "../addBtn.png";
 
+
+// 미들웨어 함수
+import { loadPostsApi } from "../redux/modules/post";
+
+
+
+
 const Main = (list) => {
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [checkedInputs, setCheckedInputs] = useState("All");
 
@@ -72,11 +81,13 @@ const Main = (list) => {
             </Label>
           </Label>
         </CategoryWrap>
+
         <AddBtn
           onClick={() => {
             navigate("/write");
           }}
         >
+
           <AddBtnT src={addBtn} />
         </AddBtn>
         <CardWrap>
