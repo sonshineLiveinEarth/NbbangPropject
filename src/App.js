@@ -6,7 +6,7 @@ import { Routes, Route } from "react-router-dom";
 import "@kfonts/bm-hanna-pro-otf";
 
 // js파일
-import Main from "./Main";
+import Main from "./page/Main";
 import Header from "./Header";
 import theme from "./theme";
 import Detail from "./Detail";
