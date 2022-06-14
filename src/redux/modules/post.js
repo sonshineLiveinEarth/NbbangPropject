@@ -4,6 +4,8 @@ import { apis } from "../../shared/api";
 const LOAD = "post/LOAD";
 const LOAD_ID = "post/LOAD_ID";
 const ADD = "post/ADD";
+const DELETE = "post/DELETE";
+const EDIT = "post/EDIT";
 
 // Action Creator
 export function createPost(post) {
@@ -17,6 +19,14 @@ export function loadPosts(post) {
 
 export function loadPost_ID(post) {
   return { type: LOAD_ID, post };
+}
+
+export function deletepost(post) {
+  return { type: DELETE, post };
+}
+
+export function editpost(post) {
+  return { type: EDIT, post };
 }
 
 // initialState
