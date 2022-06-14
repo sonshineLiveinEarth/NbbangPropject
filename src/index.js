@@ -10,17 +10,10 @@ import store from "./redux/store.js";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-<<<<<<< HEAD
   <Provider store={store}>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-=======
-<Provider store={store}>
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
->>>>>>> 9fb016417b6abe30ed02f04670d5092b27485af5
   </Provider>
 );
 

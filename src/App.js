@@ -11,12 +11,8 @@ import "@kfonts/bm-hanna-pro-otf";
 import Main from "./page/Main";
 import Header from "./Header";
 import theme from "./theme";
-<<<<<<< HEAD
 import Detail from "./page/Detail";
-=======
-import Detail from "./Detail";
 import Write from "./page/Write";
->>>>>>> 9fb016417b6abe30ed02f04670d5092b27485af5
 
 function App() {
   const [card_list, setCard_list] = React.useState([]);
@@ -37,15 +33,12 @@ function App() {
           <Header />
           <Routes>
             <Route path="/" element={<Main />} />
-<<<<<<< HEAD
             <Route
               path="/detail/:postId"
               element={<Detail list={card_list} />}
             />
-=======
             <Route path="/detail" element={<Detail />} />
             <Route path="/write" element={<Write />} />
->>>>>>> 9fb016417b6abe30ed02f04670d5092b27485af5
           </Routes>
         </Background>
       </ThemeProvider>

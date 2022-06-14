@@ -12,7 +12,6 @@
     "json-server": "^0.17.0",
     "connected-react-router": "^6.9.2",
     "immer": "^9.0.14",
-    "json-server": "^0.17.0",
     "moment": "^2.29.3",
 
     "react": "^18.1.0",
@@ -25,11 +24,8 @@
     "redux-thunk": "^2.4.1",
     "redux-actions": "^2.6.5",
     "styled-components": "^5.3.5",
-<<<<<<< HEAD
     "thunk": "^0.0.1",
-=======
     "styled-dropdown-component": "^4.0.0",
->>>>>>> 9fb016417b6abe30ed02f04670d5092b27485af5
     "web-vitals": "^2.1.0"
   },
   "scripts": {
