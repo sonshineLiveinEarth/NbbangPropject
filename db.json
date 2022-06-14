@@ -9,10 +9,9 @@
       "postOrderTime": "22:30",
       "postContent": "5명 모이면 마감합니다. 한 명당 배달비 1천원씩 내요.글자가 길어지면 이렇게 보이지요. 5명 모이면 마감합니다. 한 명당 배달비 1천원씩 내요. 글자가 길어지면 이렇게 보이지요.",
       "postDate": "22.06.11",
-      "postTime" : "18:00",
+      "postTime": "18:00",
       "userNickname": "먹보",
       "authorId": "0"
-
     },
     {
       "postId": 1,
@@ -61,8 +60,8 @@
     },
     {
       "userNickname": "ㅁㄴㅇㄹ",
-      "userEmail": "ㅁㄴㅇㄹ",
-      "userPassword": "ㅁㄴㅇㄹ",
+      "userEmail": "asdf@asdf.com",
+      "userPassword": "asfdasdf",
       "regionDetail": "https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg",
       "id": 3
     },
@@ -83,8 +82,100 @@
       "userPassword": "ㅁㄴㅇㄹ",
       "regionDetail": "https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg",
       "id": 6
+    },
+    {
+      "regionDetail": "https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg",
+      "id": 7
+    },
+    {
+      "userNickname": "ㅁㄴㅇㄹ",
+      "userEmail": "ㅁㄴㅇㄹ",
+      "userPassword": "ㅁㄴㅇㄹ",
+      "userPasswordChek": "",
+      "regionDetail": "https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg",
+      "id": 8
+    },
+    {
+      "userNickname": "ㅁㄴㅇㄹ",
+      "userEmail": "ㅁㄴㅇㄹ",
+      "userPassword": "ㅁㄴㅇㄹ",
+      "userPasswordChek": "",
+      "regionDetail": "https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg",
+      "id": 9
+    },
+    {
+      "userNickname": "ㅁㄴㅇㄹ",
+      "userEmail": "ㅁㄴㅇㄹ",
+      "userPassword": "ㅁㄴㅇㄹ",
+      "userPasswordChek": "",
+      "regionDetail": "https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg",
+      "id": 10
+    },
+    {
+      "userNickname": "ㅁㄴㅇㄹ",
+      "userEmail": "ㅁㄴㅇㄹ",
+      "userPassword": "ㅁㄴㅇㄹ",
+      "userPasswordChek": "",
+      "regionDetail": "https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg",
+      "id": 11
+    },
+    {
+      "userNickname": "ㅁㄴㅇㄹ",
+      "userEmail": "ㅁㄴㅇㄹ",
+      "userPassword": "ㅁㄴㅇㄹ",
+      "userPasswordChek": "",
+      "regionDetail": "https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg",
+      "id": 12
+    },
+    {
+      "userNickname": "ㅁㄴㅇㄹ",
+      "userEmail": "ㅁㄴㅇㄹ",
+      "userPassword": "ㅁㄴㅇㄹ",
+      "userPasswordChek": "",
+      "regionDetail": "https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg",
+      "id": 13
+    },
+    {
+      "userNickname": "ㅁㄴㅇㄹ",
+      "userEmail": "ㅁㄴㅇㄹ",
+      "userPassword": "ㅁㄴㅇㄹ",
+      "userPasswordChek": "",
+      "regionDetail": "https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg",
+      "id": 14
+    },
+    {
+      "userNickname": "ㅁㄴㅇㄹ",
+      "userEmail": "ㅁㄴㅇㄹ",
+      "userPassword": "ㅁㄴㅇㄹ",
+      "userPasswordChek": "",
+      "regionDetail": "https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg",
+      "id": 15
+    },
+    {
+      "userNickname": "ㅁㄴㅇㄹ",
+      "userEmail": "ㅁㄴㅇㄹ",
+      "userPassword": "ㅁㄴㅇㄹ",
+      "userPasswordChek": "10-15",
+      "regionDetail": "https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg",
+      "id": 16
+    },
+    {
+      "userNickname": "ㅁㄴㅇㄹ",
+      "userEmail": "ㅁㄴㅇㄹ",
+      "userPassword": "ㅁㄴㅇㄹ",
+      "regionDetail": "15-20",
+      "userProfileImage": "https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg",
+      "id": 17
+    },
+    {
+      "userNickname": "ㅁㄴㅇㄹ",
+      "userEmail": "ㅁㄴㅇㄹ",
+      "userPassword": "ㅁㄴㅇㄹ",
+      "regionGu": "동대문구",
+      "regionDetail": "ㅁㄴㅇㄹ",
+      "userProfileImage": "https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg",
+      "id": 18
     }
-
   ],
   "comments": [
     {

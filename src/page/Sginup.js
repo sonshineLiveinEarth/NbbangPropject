@@ -18,26 +18,29 @@ function Sginup() {
     const dispatch = useDispatch();
 
 
-    const [nickname, setUserNickname] = useState();
-    const [email, setUserEmail] = useState();
-    const [password, setUserPassword] = useState();
-    const [passwordChek, setUserPasswordChek] = useState();
-    // const [regionGu, setRegionGu] = useState();
-    const [regiondetail, setRegionDetail] = useState();
+    const [nickname, setUserNickname] = useState("");
+    const [email, setUserEmail] = useState("");
+    const [password, setUserPassword] = useState("");
+    const [passwordChek, setUserPasswordChek] = useState("");
+    const [regionGu, setRegionGu] = useState("");
+    const [regiondetail, setRegionDetail] = useState("");
     const [ProfileImage, setImeageSrc] = useState("https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg");
     // const reader = new FileReader();
     const reader = new FileReader();
+
+
+
     // <></>
     const _sginup = () => {
         console.log("보낸다!")
-        if (nickname === '' || email === '' || password === '' || passwordChek === '') {
+        if (nickname === '' || email === '' || password === '' || passwordChek === '' || regionGu === '' || regiondetail === '') {
             alert('빈칸을 다 채워주세요.');
             return;
         } else if (password !== passwordChek) {
             alert('비밀번호와 비밀번호 확인이 서로 다릅니다. 다시 적어주세요.');
             return;
         }
-        dispatch(userActions.SginupDB(nickname, email, password, regiondetail, ProfileImage));
+        dispatch(userActions.SginupDB(nickname, email, password, regionGu, regiondetail, ProfileImage));
         console.log("보낸다!")
     };
     const preveiw = (e) => {
@@ -50,9 +53,11 @@ function Sginup() {
             console.log(e.target.files[0])
 
         });
-        
+
     };
     // console.log(users);
+
+
 
 
 
@@ -107,17 +112,22 @@ function Sginup() {
 
                 <div className="Address">
                     <div>지역입력</div><br />
-                    <select
-                        placeholder="지역을 입력해주세요."
 
-                        onChange={(e) => {
-                            setRegionDetail(e.target.value);
-                        }}
-                        value={regiondetail}>
-                        <option key="banana" value={regiondetail}>바나나</option>
+                    <select onChange={(e) => setRegionGu(e.target.value)}>
+                        <option value="">지역을 선택하세요!</option>
+                        <option value="강남구">강남구</option>
+                        <option value="강동구">강동구</option>
+                        <option value="동대문구">동대문구</option>
+                        <option value="성북구">성북구</option>
+                        <option value="송파구">송파구</option>
+                        <option value="용산구">용산구</option>
+
                     </select>
                     <input
-                        placeholder="상세지역을 입력해주세요" />
+                        placeholder="상세지역을 입력해주세요"
+                        onChange={(e) => {
+                            setRegionDetail(e.target.value);
+                        }} />
                 </div><br />
 
                 <div className="ProfileImage">
@@ -136,7 +146,12 @@ function Sginup() {
 
 
             </div>
+
         </>
     );
 }
+
+
+
+
 export default Sginup;

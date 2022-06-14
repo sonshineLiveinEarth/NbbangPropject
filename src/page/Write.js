@@ -34,7 +34,7 @@ const Write = (props) => {
   // console.log(postingID);
   // console.log(userData.image_url);
 
-  const postDate = year + "." + month + "." + date 
+  const postDate = year + "." + month + "." + date
   const postTime = hours + ":" + minutes;
   // const contents = {
   //   postCategory: category,
@@ -53,24 +53,24 @@ const Write = (props) => {
   // }
   const addPost = (e) => {
     axios.post("http://localhost:5001/posts", {
-    postCategory: category,
-    postTitle: postTitle,
-    postContent: content,
-    postAddress: addres,
-    postOrderTime: orderTime,
-    postImage: imagesrc,
-    postTime:postTime,
-    postDate:postDate
+      postCategory: category,
+      postTitle: postTitle,
+      postContent: content,
+      postAddress: addres,
+      postOrderTime: orderTime,
+      postImage: imagesrc,
+      postTime: postTime,
+      postDate: postDate
     })
       .then(function (response) {
         // response  
       }).catch(function (error) {
         // 오류발생시 실행
       });
-      console.log(addPost)
-  
+    console.log(addPost)
+
   }
-  
+
   //이미지 프리뷰
   const preveiw = (e) => {
     reader.readAsDataURL(e.target.files[0])
@@ -164,9 +164,10 @@ const Write = (props) => {
 
 
         <Label>사진</Label>
-
-        <Imgveiw src={imagesrc} alt="" />
-        <Filebox type="file" onChange={preveiw} />
+        <form method="POST" action="/upload" encType="multipart/form-data">
+          <Imgveiw src={imagesrc} alt="" />
+          <Filebox type="file" onChange={preveiw} />
+        </form>
         <Line src={underLine} />
 
 
@@ -193,7 +194,7 @@ const Write = (props) => {
           onChange={(e) => {
             setOrderTime(e.target.value);
           }} value={orderTime} />
-   
+
 
 
 
