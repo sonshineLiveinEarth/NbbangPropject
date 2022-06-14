@@ -2,7 +2,7 @@ import "./App.css";
 import React, { useState, useRef } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import { Routes, Route } from "react-router-dom";
-import axios from "axios";
+import { useSelector } from "react-redux";
 
 // 배민한나체 폰트
 import "@kfonts/bm-hanna-pro-otf";
@@ -13,18 +13,20 @@ import Header from "./Header";
 import theme from "./theme";
 import Detail from "./page/Detail";
 import Write from "./page/Write";
+
 import Sginup from "./page/Sginup";
 
+import { useDispatch } from "react-redux";
+// 미들웨어 함수
+import { loadPostsApi } from "./redux/modules/post";
+
+
 function App() {
-  const [card_list, setCard_list] = React.useState([]);
+  const card_list = useSelector((state) => state.post.list);
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
-    axios({
-      method: "get",
-      url: "http://localhost:5001/posts",
-    }).then((response) => {
-      setCard_list(response.data);
-    });
+    loadPostsApi(dispatch);
   }, []);
 
   return (
@@ -33,7 +35,9 @@ function App() {
         <Background>
           <Header />
           <Routes>
-            <Route path="/" element={<Main list ={card_list} />} />
+
+            <Route path="/" element={<Main list={card_list} />} />
+
             <Route
               path="/detail/:postId"
               element={<Detail list={card_list} />}

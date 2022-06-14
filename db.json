@@ -6,11 +6,13 @@
       "postTitle": "뿌링클 시켜드실 분?",
       "postImage": "https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/202112/27/a99042fd-9510-42e9-97d6-6ae45ad666fc.jpg",
       "postAddress": "새마을 어린이놀이터 앞",
-      "postOrderTime": "18:30",
+      "postOrderTime": "22:30",
       "postContent": "5명 모이면 마감합니다. 한 명당 배달비 1천원씩 내요.글자가 길어지면 이렇게 보이지요. 5명 모이면 마감합니다. 한 명당 배달비 1천원씩 내요. 글자가 길어지면 이렇게 보이지요.",
-      "postDate": "22.06.11 19:35",
+      "postDate": "22.06.11",
+      "postTime" : "18:00",
       "userNickname": "먹보",
       "authorId": "0"
+
     },
     {
       "postId": 1,
@@ -82,6 +84,7 @@
       "regionDetail": "https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg",
       "id": 6
     }
+
   ],
   "comments": [
     {
