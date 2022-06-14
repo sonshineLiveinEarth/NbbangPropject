@@ -23,7 +23,11 @@ const Header = () => {
         </LogoWrap>
         <RightWrap>
           <LogoutWrap>
-            <LogoutIcon src={LogoutImg} />
+            <LogoutIcon src={LogoutImg} 
+            onClick={() => {
+              navigate("/sginup");
+            }}
+            />
             <LogoutText>나가기</LogoutText>
           </LogoutWrap>
           <ProfileWrap>

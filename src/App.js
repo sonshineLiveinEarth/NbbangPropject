@@ -13,6 +13,7 @@ import Header from "./Header";
 import theme from "./theme";
 import Detail from "./page/Detail";
 import Write from "./page/Write";
+import Sginup from "./page/Sginup";
 
 function App() {
   const [card_list, setCard_list] = React.useState([]);
@@ -39,6 +40,7 @@ function App() {
             />
             <Route path="/detail" element={<Detail />} />
             <Route path="/write" element={<Write />} />
+            <Route path="/sginup" element={<Sginup />} />
           </Routes>
         </Background>
       </ThemeProvider>

@@ -23,6 +23,19 @@ const Write = (props) => {
   const [content, setContent] = useState();
   const [orderTime, setOrderTime] = useState();
 
+
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = Number(now.getMonth() + 1);
+  const date = now.getDate();
+  const hours = now.getHours();
+  const minutes = now.getMinutes();
+  // const postingID = Date.now();
+  // console.log(postingID);
+  // console.log(userData.image_url);
+
+  const postDate = year + "." + month + "." + date 
+  const postTime = hours + ":" + minutes;
   // const contents = {
   //   postCategory: category,
   //   postTitle: postTitle,
@@ -45,17 +58,19 @@ const Write = (props) => {
     postContent: content,
     postAddress: addres,
     postOrderTime: orderTime,
-    postImage: imagesrc
+    postImage: imagesrc,
+    postTime:postTime,
+    postDate:postDate
     })
       .then(function (response) {
         // response  
       }).catch(function (error) {
         // 오류발생시 실행
       });
-    console.log(e.id)
+      console.log(addPost)
+  
   }
-
-
+  
   //이미지 프리뷰
   const preveiw = (e) => {
     reader.readAsDataURL(e.target.files[0])

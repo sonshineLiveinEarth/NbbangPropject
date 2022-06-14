@@ -11,6 +11,14 @@ function Login() {
     const [userEmail, setUserEmail] = useState();
     const [userPassword, setUserPassword] = useState();
 
+    const loginUser{
+        userEmail: userEmail,
+        userPassword: userPassword,
+    };
+    
+    console.log(loginUser);
+
+
     return (
         <div className="SginupBox">
             <div className="Email">

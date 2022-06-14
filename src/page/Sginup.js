@@ -5,7 +5,9 @@ import styled, { ThemeProvider } from "styled-components";
 import theme from "../theme";
 import { RoundBtn, RectangleBtn } from "../Btn";
 import underLine from "./UnderLine.png";
-
+import axios from "axios";
+import { useDispatch } from "react-redux"
+import { actionCreators as userActions } from "../redux/modules/users"
 
 
 
@@ -13,28 +15,43 @@ import underLine from "./UnderLine.png";
 
 
 function Sginup() {
-    const [userNickname, setUserNickname] = useState();
-    const [userEmail, setUserEmail] = useState();
-    const [userPassword, setUserPassword] = useState();
-    const [userPasswordChek, setUserPasswordChek] = useState();
+    const dispatch = useDispatch();
+
+
+    const [nickname, setUserNickname] = useState();
+    const [email, setUserEmail] = useState();
+    const [password, setUserPassword] = useState();
+    const [passwordChek, setUserPasswordChek] = useState();
     // const [regionGu, setRegionGu] = useState();
-    // const [regionDetail, setRegionDetail] = useState();
-    // const [userProfileImage, setUserProfileImage] = useState("https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg");
+    const [regiondetail, setRegionDetail] = useState();
+    const [ProfileImage, setImeageSrc] = useState("https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg");
     // const reader = new FileReader();
-
+    const reader = new FileReader();
     // <></>
-    // const users = {
-    //     userNickname: userNickname,
-    //     userEmail: userEmail,
-    //     userPassword: userPassword,
-    //     regionGu: regionGu,
-    //     regionDetail: regionDetail,
-    //     userProfileImage: userProfileImage
+    const _sginup = () => {
+        console.log("보낸다!")
+        if (nickname === '' || email === '' || password === '' || passwordChek === '') {
+            alert('빈칸을 다 채워주세요.');
+            return;
+        } else if (password !== passwordChek) {
+            alert('비밀번호와 비밀번호 확인이 서로 다릅니다. 다시 적어주세요.');
+            return;
+        }
+        dispatch(userActions.SginupDB(nickname, email, password, regiondetail, ProfileImage));
+        console.log("보낸다!")
+    };
+    const preveiw = (e) => {
+        reader.readAsDataURL(e.target.files[0])
+        return new Promise((resolve) => {
+            reader.onload = () => {
+                setImeageSrc(reader.result);
+                resolve();
+            };
+            console.log(e.target.files[0])
 
-    // };
-
-
-
+        });
+        
+    };
     // console.log(users);
 
 
@@ -47,11 +64,11 @@ function Sginup() {
                     <input
                         placeholder="닉네임을 입력해주세요."
                         type="text"
-                        
+
                         onChange={(e) => {
                             setUserNickname(e.target.value);
                         }}
-                        value={userNickname}
+                        value={nickname}
                     />
                 </div><br />
 
@@ -63,7 +80,7 @@ function Sginup() {
                         onChange={(e) => {
                             setUserEmail(e.target.value);
                         }}
-                        value={userEmail}
+                        value={email}
                     />
                 </div><br />
 
@@ -75,35 +92,47 @@ function Sginup() {
                         onChange={(e) => {
                             setUserPassword(e.target.value);
                         }}
-                        value={userPassword}
-                    />
+                        value={password}
+                    /><br />
                     <input
                         placeholder="비밀번호를 다시 입력해주세요."
                         type="text"
                         onChange={(e) => {
                             setUserPasswordChek(e.target.value);
                         }}
-                        value={userPasswordChek}
+                        value={passwordChek}
                     />
                 </div><br />
 
 
                 <div className="Address">
                     <div>지역입력</div><br />
-                    <input
+                    <select
                         placeholder="지역을 입력해주세요."
-                        type="list"
-                        defaultValue='regionGu'
-                    />
+
+                        onChange={(e) => {
+                            setRegionDetail(e.target.value);
+                        }}
+                        value={regiondetail}>
+                        <option key="banana" value={regiondetail}>바나나</option>
+                    </select>
+                    <input
+                        placeholder="상세지역을 입력해주세요" />
                 </div><br />
 
                 <div className="ProfileImage">
                     <div>프로필 이미지</div><br />
                     <input
-                        type="file"
-                        defaultValue='userProfileImage' />
+                        type="file" onChange={preveiw}></input>
 
                 </div>
+
+                <button className="s" text="저장하기" border_radius="30px"
+                    onClick={
+                        _sginup
+                    }>
+                    가입하기
+                </button>
 
 
             </div>

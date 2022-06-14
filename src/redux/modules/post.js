@@ -3,13 +3,13 @@ import { apis } from "../../shared/api";
 //Action
 const LOAD = "post/LOAD";
 const LOAD_ID = "post/LOAD_ID";
-// const ADD = "post/ADD";
+const ADD = "post/ADD";
 
-//Action Creator
-// export function createPost(post) {
-//   console.log("포스트를 생성할거야!", post);
-//   return { type: ADD, post: post };
-// }
+// Action Creator
+export function createPost(post) {
+  console.log("포스트를 생성할거야!", post);
+  return { type: ADD, post: post };
+}
 
 export function loadPosts(post) {
   return { type: LOAD, post };

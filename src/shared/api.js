@@ -32,13 +32,15 @@ export const apis = {
 
   // user
   // login: (id, pw) => api.post('/user/login', { username: id, password: pw }),
-  // signup: (id, email, pw, pwcheck) =>
-  // 	api.post('/user/signup', {
-  // 		username: id,
-  // 		email: email,
-  // 		password: pw,
-  // 		repassword: pwcheck,
-  // 	}),
+  signup: (nickname, email, password, passwordChek, regionDetail, ProfileImage) =>
+  	api.post("/users", {
+  		userNickname: nickname,
+  		userEmail: email,
+  		userPassword: password,
+  		userPasswordChek: passwordChek,
+      regionDetail: regionDetail,
+      userProfileImage: ProfileImage
+  	}),
   // userInfo: () => api.get(`/myinfo`),
   // userPassword: (pw) => api.post(`/myinfo`, pw),
   // userNewPassword: (pw) => api.put(`/myinfo`, pw),
