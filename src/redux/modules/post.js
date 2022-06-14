@@ -3,6 +3,7 @@ import moment from "moment";
 import { produce } from "immer";
 
 import { createAction, handleActions } from "redux-actions";
+import { apis } from "../../shared/api";
 
 
 
@@ -17,6 +18,8 @@ const DELETE = "post/DELETE";
 
 const LOADING = "LOADING";
 
+const LOAD_ID = "post/LOAD_ID";
+
 
 
 //Action Creator
@@ -25,41 +28,47 @@ export function createPost(post) {
     return { type: ADD, post: post };
 }
 
-export function loadPost(post_list) {
-    console.log("포스트를 불러올거야!", post_list);
-    return { type: LOAD, post: post_list };
-}
+export function loadPosts(post) {
+    return { type: LOAD, post };
+  }
+  
+  export function loadPost_ID(post) {
+    return { type: LOAD_ID, post };
+  }
 
-//InitialState
+// initialState
 const initialState = {
-    list: [
-        {
-            postId: 1,
-            postCategory: "All",
-            postTitle: "이거 먹을 사람",
-            postImage: null,
-            postAddress: "아파트 어딘가",
-            postOrderTime: "09:53",
-            postContent: "안올거면 말고",
-            postDate: "오늘",
-            userNickname: "String",
-            authorId: null
-        },
-        {
-            postId: 2,
-            postCategory: "Chinese",
-            postTitle: "이거 먹을 사람",
-            postImage: null,
-            postAddress: "이런 동네",
-            postOrderTime: "18:56",
-            postContent: "여기여기 모여라",
-            postDate: "오늘",
-            userNickname: "String",
-            authorId: null
-        }
-    ]
+    
+    is_loaded: false,
+    list: [],
+  };
 
-};
+
+
+/// middlewares(서버랑 통신하는 부분)
+export const loadPostsApi = () => {
+    return async function (dispatch) {
+      try {
+        const data = await apis.loadposts();
+        dispatch(loadPosts(data.data));
+      } catch (e) {
+        console.log(`포스팅 조회 오류 발생!${e}`);
+      }
+    };
+  };
+  
+  export const loadPostApi = () => {
+    return async function (dispatch) {
+      try {
+        const data = await apis.loadpost();
+        dispatch(loadPost_ID(data.data));
+      } catch (e) {
+        console.log(`포스팅 조회 오류 발생!${e}`);
+      }
+    };
+  };
+
+
 
 //Reducer
 
@@ -67,7 +76,9 @@ const initialState = {
 export default function reducer(state = initialState, action = {}) {
     switch (action.type) {
         case "post/LOAD": {
-            return {list: action.post_list}
+            console.log("이제 값을 불러올거야");
+            console.log(action.post);
+            return { list: action.post, is_loaded: true };
           }
 
         case "post/ADD": {
@@ -83,6 +94,9 @@ export default function reducer(state = initialState, action = {}) {
     }
    
 }
+
+
+
 
 
 // handleActions(
