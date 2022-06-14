@@ -11,9 +11,8 @@ const Card = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const card_list = useSelector((state) => state.post.list);
+  // const [orderTimeCount, setOrderTimeCount] = useState(null);
   const category = props.checkedInputs;
-
-  console.log(card_list);
 
   React.useEffect(() => {
     dispatch(loadPostsApi());
@@ -22,11 +21,26 @@ const Card = (props) => {
   // category와 똑같은 값을 가지고 있는 카드만 반환!
   const filteredCategory = card_list.filter((v) => v.postCategory === category);
 
+  // 현재시간
+  const today = new Date();
+  const stringToday = today.toString().split(" ")[4];
+  const todayHour = stringToday.split(":")[0];
+  const todayMin = stringToday.split(":")[1];
+
   return (
     <>
       {/* 카테고리가 "ALL" 이면 card_list 전체를 반환하고 아니면 filteredCategory의 카드를 반환! */}
       {category === "All"
         ? card_list.map((list, postId) => {
+            // 주문희망시간
+            const orderHour = Number(list.postOrderTime.split(":")[0]);
+            const orderMin = Number(list.postOrderTime.split(":")[1]);
+
+            const leftHour = (orderHour - todayHour) * 60;
+            const leftMin = orderMin - todayMin;
+            // 주문까지 남은시간
+            const leftTime = leftHour + leftMin;
+
             return (
               <CardBox
                 key={postId}
@@ -45,10 +59,19 @@ const Card = (props) => {
                       </TagName>
                     </Tag>
                     <div>
-                      <TimeBox />
-                      <TimeInfo>
-                        주문까지 <Time>40</Time>분
-                      </TimeInfo>
+                      {leftTime > 0 ? (
+                        <>
+                          <TimeBox />
+                          <TimeInfo>
+                            주문까지 <Time>{leftTime}</Time>분
+                          </TimeInfo>
+                        </>
+                      ) : (
+                        <>
+                          <TimeOutBox />
+                          <TimeOut>마감</TimeOut>
+                        </>
+                      )}
                     </div>
                   </ImgTop>
                 </PostImg>
@@ -66,6 +89,14 @@ const Card = (props) => {
             );
           })
         : filteredCategory.map((list, postId) => {
+            // 주문희망시간
+            const orderHour = Number(list.postOrderTime.split(":")[0]);
+            const orderMin = Number(list.postOrderTime.split(":")[1]);
+
+            const leftHour = (orderHour - todayHour) * 60;
+            const leftMin = orderMin - todayMin;
+            // 주문까지 남은시간
+            const leftTime = leftHour + leftMin;
             return (
               <CardBox
                 key={postId}
@@ -84,10 +115,19 @@ const Card = (props) => {
                       </TagName>
                     </Tag>
                     <div>
-                      <TimeBox />
-                      <TimeInfo>
-                        주문까지 <Time>40</Time>분
-                      </TimeInfo>
+                      {leftTime > 0 ? (
+                        <>
+                          <TimeBox />
+                          <TimeInfo>
+                            주문까지 <Time>{leftTime}</Time>분
+                          </TimeInfo>
+                        </>
+                      ) : (
+                        <>
+                          <TimeOutBox />
+                          <TimeOut>마감</TimeOut>
+                        </>
+                      )}
                     </div>
                   </ImgTop>
                 </PostImg>
@@ -171,6 +211,16 @@ const TimeBox = styled.div`
   position: relative;
 `;
 
+const TimeOutBox = styled.div`
+  width: 60px;
+  height: 24px;
+  background: #000000 0% 0% no-repeat padding-box;
+  opacity: 0.44;
+  border-radius: 6px;
+  margin: 16px 24px 0px 0px;
+  position: relative;
+`;
+
 const TimeInfo = styled.span`
   font-family: "배달의민족 한나체 Pro OTF", "배달의민족한나체ProOTF",
     "bm-hanna-pro-otf";
@@ -179,6 +229,17 @@ const TimeInfo = styled.span`
   top: -30px;
   font-size: 14px;
   opacity: 1;
+  margin-right: 24px;
+`;
+
+const TimeOut = styled.span`
+  font-family: "배달의민족 한나체 Pro OTF", "배달의민족한나체ProOTF",
+    "bm-hanna-pro-otf";
+  color: white;
+  position: relative;
+  top: -30px;
+  font-size: 14px;
+  opacity: 0.6;
   margin-right: 24px;
 `;
 

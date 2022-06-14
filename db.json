@@ -6,9 +6,10 @@
       "postTitle": "뿌링클 시켜드실 분?",
       "postImage": "https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/202112/27/a99042fd-9510-42e9-97d6-6ae45ad666fc.jpg",
       "postAddress": "새마을 어린이놀이터 앞",
-      "postOrderTime": "18:30",
+      "postOrderTime": "22:30",
       "postContent": "5명 모이면 마감합니다. 한 명당 배달비 1천원씩 내요.글자가 길어지면 이렇게 보이지요. 5명 모이면 마감합니다. 한 명당 배달비 1천원씩 내요. 글자가 길어지면 이렇게 보이지요.",
-      "postDate": "22.06.11 19:35",
+      "postDate": "22.06.11",
+      "postTime" : "18:00",
       "userNickname": "먹보",
       "authorId": "0"
       },
@@ -20,7 +21,8 @@
         "postAddress": "103호 경비실 앞",
         "postOrderTime": "18:30",
         "postContent": "5명 모이면 마감합니다. 한 명당 배달비 1천원씩 내요.글자가 길어지면 이렇게 보이지요. 5명 모이면 마감합니다. 한 명당 배달비 1천원씩 내요. 글자가 길어지면 이렇게 보이지요.",
-        "postDate": "22.06.11 19:35",
+        "postDate": "22.06.11",
+            "postTime" : "15:35",
         "userNickname": "순살이",
         "authorId": "1"
         },
@@ -30,9 +32,10 @@
           "postTitle": "여기 맛집임",
           "postImage": "https://www.canceranswer.co.kr/news/photo/202103/2199_3592_056.jpg",
           "postAddress": "103호 경비실 앞",
-          "postOrderTime": "18:30",
+          "postOrderTime": "20:30",
           "postContent": "5명 모이면 마감합니다. 한 명당 배달비 1천원씩 내요.글자가 길어지면 이렇게 보이지요. 5명 모이면 마감합니다. 한 명당 배달비 1천원씩 내요. 글자가 길어지면 이렇게 보이지요.",
-          "postDate": "22.06.11 19:35",
+          "postDate": "22.06.11",
+            "postTime" : "19:35",
           "userNickname": "옹심이",
           "authorId": "2"
           },
@@ -42,9 +45,10 @@
             "postTitle": "야식 배달비 엔빵 고",
             "postImage": "https://cdn.011st.com/11dims/resize/600x600/quality/75/11src/pd/21/0/1/7/9/2/4/zyvwU/2281017924_B.jpg",
             "postAddress": "103호 경비실 앞",
-            "postOrderTime": "21:30",
+            "postOrderTime": "23:20",
             "postContent": "5명 모이면 마감합니다. 한 명당 배달비 1천원씩 내요.글자가 길어지면 이렇게 보이지요. 5명 모이면 마감합니다. 한 명당 배달비 1천원씩 내요. 글자가 길어지면 이렇게 보이지요.",
-            "postDate": "22.06.11 19:35",
+            "postDate": "22.06.11",
+            "postTime" : "19:20",
             "userNickname": "취해살어",
             "authorId": "3"
             }
