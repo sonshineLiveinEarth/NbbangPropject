@@ -138,7 +138,7 @@ const Write = (props) => {
         <Label>제목</Label>
         <InputContainer
           type="text"
-          placeholder="제목을 입력 해주세요!"
+          placeholder="제목을 적어주세요"
           onChange={(e) => {
             setPostTitle(e.target.value);
           }}
@@ -152,7 +152,7 @@ const Write = (props) => {
         <Label>배달 받을 장소</Label>
         <InputContainer
           type="text"
-          placeholder="장소를 입력해주세요!"
+          placeholder="배달 받을 구체적인 장소를 적어주세요"
           onChange={(e) => {
             setAddres(e.target.value);
           }}
@@ -181,7 +181,7 @@ const Write = (props) => {
         <Label>N빵 내용</Label>
         <InputContainer
           type="text"
-          placeholder="내용을 입력해주세요!"
+          placeholder="공구 내용을 구체적으로 적어주세요"
           onChange={(e) => {
             setContent(e.target.value);
           }}
@@ -222,7 +222,7 @@ const Label = styled.label`
   font-size: 16px;
   text-align: left;
   font-weight: bold;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 `;
 
 const Buttonbox = styled.div`
@@ -234,7 +234,7 @@ const Buttonbox = styled.div`
 const FormCheckText = styled.span`
   font-family: "배달의민족 한나체 Pro OTF", "배달의민족한나체ProOTF",
     "bm-hanna-pro-otf";
-  font-size: 14px;
+  font-size: 16px;
   width: 80px;
   height: 34px;
   margin-top: 10px;
@@ -280,8 +280,17 @@ const InputContainer = styled.input`
     font-size: ${({ theme }) => theme.fontSizes.md};
     font-weight: 500;
     transition: border-color 300ms ease-in-out;
-    max-width: 250px;
+    width: 100%;
     background: transparent;
+    border: none;
+    /* transform: opacity 1s 1; */
+  }
+  &::placeholder-shown {
+    color: #cecece;
+  }
+  &:focus {
+    outline: none;
+    /* transform: opacity 1s 1; */
   }
 `;
 

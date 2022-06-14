@@ -1,19 +1,6 @@
 import axios from "axios";
 
-const proxy = require("http-proxy-middleware");
-
-module.exports = (app) => {
-  app.use(
-    proxy("/api", {
-      //도메인 api로 호출
-      target: "http://3.39.226.20", //통신할 서버의 도메인주소
-      changeOrigin: true,
-    })
-  );
-};
-
 const api = axios.create({
-  baseURL: "/api",
   headers: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json,",
@@ -26,9 +13,12 @@ const api = axios.create({
 // 	return config;
 // });
 
+// 이미지 Api E따로 만들어서
+// "content-type": "multipart/form-data"
+
 export const apis = {
   // post"
-  loadposts: () => api.get("/postlist"),
+  loadposts: () => api.get("/api/postList"),
   // loadpost: () => api.get("/posts"),
   // add: (contents) => api.post('/api/articles', contents),
   // edit: (id, contents) => api.put(`api/articles/${id}`, contents),
@@ -44,22 +34,13 @@ export const apis = {
 
   // user
   // login: (id, pw) => api.post('/user/login', { username: id, password: pw }),
-  signup: (
-    nickname,
-    email,
-    password,
-    passwordChek,
-    regionDetail,
-    ProfileImage
-  ) =>
-    api.post("/users", {
-      userNickname: nickname,
-      userEmail: email,
-      userPassword: password,
-      userPasswordChek: passwordChek,
-      regionDetail: regionDetail,
-      userProfileImage: ProfileImage,
-    }),
+  // signup: (id, email, pw, pwcheck) =>
+  // 	api.post('/user/signup', {
+  // 		username: id,
+  // 		email: email,
+  // 		password: pw,
+  // 		repassword: pwcheck,
+  // 	}),
   // userInfo: () => api.get(`/myinfo`),
   // userPassword: (pw) => api.post(`/myinfo`, pw),
   // userNewPassword: (pw) => api.put(`/myinfo`, pw),

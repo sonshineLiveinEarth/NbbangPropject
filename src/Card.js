@@ -13,6 +13,7 @@ const Card = (props) => {
   const card_list = useSelector((state) => state.post.list);
   // const [orderTimeCount, setOrderTimeCount] = useState(null);
   const category = props.checkedInputs;
+  console.log(props.list.posts);
 
   React.useEffect(() => {
     dispatch(loadPostsApi());
