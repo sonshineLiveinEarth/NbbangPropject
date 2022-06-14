@@ -33,7 +33,7 @@ function App() {
         <Background>
           <Header />
           <Routes>
-            <Route path="/" element={<Main />} />
+            <Route path="/" element={<Main list ={card_list} />} />
             <Route
               path="/detail/:postId"
               element={<Detail list={card_list} />}
