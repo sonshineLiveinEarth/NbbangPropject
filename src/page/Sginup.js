@@ -17,25 +17,25 @@ function Sginup() {
     const [userEmail, setUserEmail] = useState();
     const [userPassword, setUserPassword] = useState();
     const [userPasswordChek, setUserPasswordChek] = useState();
-    const [regionGu, setRegionGu] = useState();
-    const [regionDetail, setRegionDetail] = useState();
-    const [userProfileImage, setUserProfileImage] = useState("https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg");
-    const reader = new FileReader();
+    // const [regionGu, setRegionGu] = useState();
+    // const [regionDetail, setRegionDetail] = useState();
+    // const [userProfileImage, setUserProfileImage] = useState("https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg");
+    // const reader = new FileReader();
 
-    <></>
-    const users = {
-        userNickname: userNickname,
-        userEmail: userEmail,
-        userPassword: userPassword,
-        regionGu: regionGu,
-        regionDetail: regionDetail,
-        userProfileImage: userProfileImage
+    // <></>
+    // const users = {
+    //     userNickname: userNickname,
+    //     userEmail: userEmail,
+    //     userPassword: userPassword,
+    //     regionGu: regionGu,
+    //     regionDetail: regionDetail,
+    //     userProfileImage: userProfileImage
 
-    };
+    // };
 
 
 
-    console.log(users);
+    // console.log(users);
 
 
 

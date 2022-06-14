@@ -115,4 +115,3 @@ export default function reducer(state = initialState, action = {}) {
 //     addPost
 // }
 
-console.log(initialState)

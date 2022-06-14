@@ -9,7 +9,7 @@ import "@kfonts/bm-hanna-pro-otf";
 import Main from "./page/Main";
 import Header from "./Header";
 import theme from "./theme";
-import Detail from "./Detail";
+import Detail from "./page/Detail";
 import Write from "./page/Write";
 
 function App() {

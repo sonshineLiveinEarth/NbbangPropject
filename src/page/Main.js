@@ -4,12 +4,13 @@ import { useDispatch } from "react-redux";
 
 import Card from "../Card";
 import addBtn from "../addBtn.png";
+import { useNavigate } from "react-router-dom";
 // 미들웨어 함수
 import { loadPostsApi } from "../redux/modules/post";
 
 const Main = () => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const [checkedInputs, setCheckedInputs] = useState("All");
   const [card_list, setCard_list] = React.useState([]);
 
@@ -80,7 +81,9 @@ const Main = () => {
             </Label>
           </Label>
         </CategoryWrap>
-        <AddBtn>
+        <AddBtn  onClick={() => {
+              navigate("/write");
+            }}>
           <AddBtnT src={addBtn} />
         </AddBtn>
         <CardWrap>
