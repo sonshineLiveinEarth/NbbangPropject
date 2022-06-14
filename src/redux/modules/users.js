@@ -21,10 +21,10 @@ const initialState = {
 
 //미들웨어
 // Signup
-const SginupDB = (nickname, email, password, passwordChek, regionDetail, ProfileImage) => {
+const SginupDB = (nickname, email, password, regionGu,  regionDetail, ProfileImage) => {
     return function (dispatch, getState,) {
         console.log("가랏!")
-        apis.signup(nickname, email, password, passwordChek, regionDetail, ProfileImage).then((res) => {
+        apis.signup(nickname, email, password, regionGu,  regionDetail, ProfileImage).then((res) => {
             alert(res.data.result);
             return;
             // history.replace('/login');
@@ -37,17 +37,17 @@ const SginupDB = (nickname, email, password, passwordChek, regionDetail, Profile
 
 //Login
 // 로그인
-const loginDB = (id, pwd) => {
+const loginDB = (email, password) => {
     return function (dispatch, getState, { history }) {
-        apis.login(id, pwd).then((res) => {
+        apis.login(email, password).then((res) => {
             console.log(res);
             if (res.data.ok === false) {
                 alert('없는 회원정보 입니다! 회원가입을 해주세요!');
                 return;
             }
-            localStorage.setItem('login-token', res.data.token);
-            alert(`안녕하세요! ${id}님`);
-            dispatch(setUser({ userId: id }));
+            
+            alert(`안녕하세요! ${email}님`);
+            dispatch(setUser({ userEmail: email }));
             history.replace('/');
         });
     };
@@ -63,6 +63,8 @@ export default handleActions(
                 console.log(draft.user.userId);
                 draft.uploading = false;
             }),
+
+
     },
     initialState
 )

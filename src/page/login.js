@@ -4,14 +4,23 @@ import styled, { ThemeProvider } from "styled-components";
 import theme from "../theme";
 import { RoundBtn, RectangleBtn } from "../Btn";
 import underLine from "./UnderLine.png";
+import { useDispatch } from "react-redux"
 
 
 function Login() {
+    const dispatch = useDispatch();
 
-    const [userEmail, setUserEmail] = useState();
-    const [userPassword, setUserPassword] = useState();
 
-    const loginUser{
+    const [userEmail, setUserEmail] = useState("");
+    const [userPassword, setUserPassword] = useState("");
+
+    const _loginUser = () => {
+        console.log("로그인 시도!")
+        if (email === '' || password === '') {
+            alert('빈칸을 다 채워주세요.');
+            return;
+        }
+
         userEmail: userEmail,
         userPassword: userPassword,
     };

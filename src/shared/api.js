@@ -31,13 +31,17 @@ export const apis = {
   // 	api.put(`/api/articles/${id}/comments/${coId}`, { content }),
 
   // user
-  // login: (id, pw) => api.post('/user/login', { username: id, password: pw }),
-  signup: (nickname, email, password, passwordChek, regionDetail, ProfileImage) =>
+  login: (email, password) => 
+  api.post('/user', { 
+    userEmail: email, 
+    passPassword: password 
+  }),
+  signup: (nickname, email, password, regionGu, regionDetail, ProfileImage) =>
   	api.post("/users", {
   		userNickname: nickname,
   		userEmail: email,
   		userPassword: password,
-  		userPasswordChek: passwordChek,
+      regionGu: regionGu,
       regionDetail: regionDetail,
       userProfileImage: ProfileImage
   	}),
