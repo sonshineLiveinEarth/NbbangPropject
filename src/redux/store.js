@@ -1,6 +1,7 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import post from "./modules/post";
+
 // import comment from "./modules/comment";
 
 // root 리듀서를 만들어줍니다.

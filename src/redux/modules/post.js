@@ -1,52 +1,35 @@
-
-import moment from "moment";
-import { produce } from "immer";
-
-import { createAction, handleActions } from "redux-actions";
 import { apis } from "../../shared/api";
-
-
 
 //Action
 const LOAD = "post/LOAD";
-
-const ADD = "post/ADD";
-
-const EDIT = "post/EDIT";
-
-const DELETE = "post/DELETE";
-
-const LOADING = "LOADING";
-
 const LOAD_ID = "post/LOAD_ID";
-
-
+// const ADD = "post/ADD";
 
 //Action Creator
-export function createPost(post) {
-    console.log("포스트를 생성할거야!", post);
-    return { type: ADD, post: post };
-}
+// export function createPost(post) {
+//   console.log("포스트를 생성할거야!", post);
+//   return { type: ADD, post: post };
+// }
 
 export function loadPosts(post) {
-    return { type: LOAD, post };
-  }
-  
-  export function loadPost_ID(post) {
-    return { type: LOAD_ID, post };
-  }
+  return { type: LOAD, post };
+}
+
+export function loadPost_ID(post) {
+  return { type: LOAD_ID, post };
+}
 
 // initialState
 const initialState = {
-    
-    is_loaded: false,
-    list: [],
-  };
+  is_loaded: false,
+  list: [],
+};
 
 
 
 /// middlewares(서버랑 통신하는 부분)
 export const loadPostsApi = () => {
+
     return async function (dispatch) {
       try {
         console.log("야!")
@@ -92,27 +75,10 @@ export default function reducer(state = initialState, action = {}) {
             return state;
             
 
+
     }
-   
-}
+  };
 
 
 
-
-
-// handleActions(
-//     {
-//         [ADD]: (state, action) =>
-//             produce(state, (draft) => {
-//                 draft.post.unshift(action.payload.post);
-//                 console.log(state, draft);
-//             })
-
-//     },
-// initialState
-// );
-
-// const actionCreators = {
-//     addPost
-// }
 

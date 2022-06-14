@@ -2,6 +2,8 @@ import "./App.css";
 import React, { useState, useRef } from "react";
 import styled, { ThemeProvider } from "styled-components";
 import { Routes, Route } from "react-router-dom";
+import axios from "axios";
+
 // 배민한나체 폰트
 import "@kfonts/bm-hanna-pro-otf";
 
@@ -13,6 +15,17 @@ import Detail from "./page/Detail";
 import Write from "./page/Write";
 
 function App() {
+  const [card_list, setCard_list] = React.useState([]);
+
+  React.useEffect(() => {
+    axios({
+      method: "get",
+      url: "http://localhost:5001/posts",
+    }).then((response) => {
+      setCard_list(response.data);
+    });
+  }, []);
+
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
@@ -20,6 +33,10 @@ function App() {
           <Header />
           <Routes>
             <Route path="/" element={<Main />} />
+            <Route
+              path="/detail/:postId"
+              element={<Detail list={card_list} />}
+            />
             <Route path="/detail" element={<Detail />} />
             <Route path="/write" element={<Write />} />
           </Routes>
