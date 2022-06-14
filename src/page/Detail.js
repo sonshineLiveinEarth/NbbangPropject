@@ -1,26 +1,43 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-//이미지
-import commentIcon from "./comment.png";
-import underLine from "./UnderLine.png";
-//  js파일
-import Comment from "./Comment";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { loadPostsApi } from "../redux/modules/post";
 
-const Detail = () => {
+//이미지
+import commentIcon from "../comment.png";
+import underLine from "../UnderLine.png";
+//  js파일
+import Comment from "../Comment";
+
+const Detail = (list) => {
+  const postId = useParams();
+  const dispatch = useDispatch();
+
+  const card = useSelector((state) => state.post.list);
+  const posting = card[postId.postId];
+
+  React.useEffect(() => {
+    dispatch(loadPostsApi());
+  }, []);
+
+  console.log(card[postId.postId]);
+
   return (
     <>
       <Wrap>
         <Div>
-          <PostDate>22.06.11 19:35</PostDate>
+          <PostDate>{posting.postDate}</PostDate>
           <EditBtn>수정</EditBtn>
         </Div>
 
-        <PostTitle>뿌링클 시켜먹을 사람!</PostTitle>
+        <PostTitle>{posting.postTitle}</PostTitle>
         <CommentInfo>
           <CommentIcon src={commentIcon} />
           <CommentNum>10</CommentNum>
         </CommentInfo>
-        <PostImage />
+        <PostImage postImage={posting.postImage} />
         <TimeWrap>
           <TimeBox />
           <TimeInfo>
@@ -30,13 +47,9 @@ const Detail = () => {
             </Time>
           </TimeInfo>
         </TimeWrap>
-        <PostAdress>효창동 놀이터 앞에서 모여요</PostAdress>
-        <PostContent>
-          5명 모이면 마감합니다. 한 명당 배달비 1천원씩 내요. 글자가 길어지면
-          이렇게 보이지요. 5명 모이면 마감합니다. 한 명당 배달비 1천원씩 내요.
-          글자가 길어지면 이렇게 보이지요.
-        </PostContent>
-        <Nickname>by 먹꼬가자</Nickname>
+        <PostAdress>{posting.postAddress}에서 모여요</PostAdress>
+        <PostContent>{posting.postContent}</PostContent>
+        <Nickname>by {posting.userNickname}</Nickname>
         <Line src={underLine} />
       </Wrap>
       <Comment />
@@ -87,7 +100,7 @@ const Nickname = styled.span`
 `;
 
 const PostDate = styled.span`
-  font-size: 16px;
+  font-size: 14px;
   color: #a7a7a7;
   position: relative;
   top: 6px;
@@ -136,7 +149,7 @@ const PostImage = styled.div`
   margin-top: 20px;
   background-color: #ddd;
   border-radius: 20px;
-  background-image: url(https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/202112/27/a99042fd-9510-42e9-97d6-6ae45ad666fc.jpg);
+  background-image: url(${(props) => props.postImage});
   background-position: center 30%;
   background-size: cover;
   /* position: relative; */

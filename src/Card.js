@@ -1,65 +1,109 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import commentIcon from "./comment.png";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
-const Card = () => {
+import { loadPostsApi } from "./redux/modules/post";
+
+const Card = (props) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [card_list, setCard_list] = React.useState([]);
-
-  React.useEffect(() => {
-    axios({
-      method: "get",
-      url: "http://localhost:5001/posts",
-    }).then((response) => {
-      setCard_list(response.data);
-    });
-  }, []);
+  const card_list = useSelector((state) => state.post.list);
+  const category = props.checkedInputs;
 
   console.log(card_list);
 
+  React.useEffect(() => {
+    dispatch(loadPostsApi());
+  }, []);
+
+  // category와 똑같은 값을 가지고 있는 카드만 반환!
+  const filteredCategory = card_list.filter((v) => v.postCategory === category);
+
   return (
     <>
-      {card_list.map((list, index) => {
-        return (
-          <CardBox
-            key={index}
-            onClick={() => {
-              navigate("/detail");
-            }}
-          >
-            <PostImg postImage={list.postImage}>
-              <ImgTop>
-                <Tag>
-                  <TagName>
-                    {list.postCategory === "Chicken" && "치킨"}
-                    {list.postCategory === "Korean" && "한식"}
-                    {list.postCategory === "Midnight" && "야식"}
-                    {list.postCategory === "Chinese" && "중식"}
-                  </TagName>
-                </Tag>
-                <div>
-                  <TimeBox />
-                  <TimeInfo>
-                    주문까지 <Time>40</Time>분
-                  </TimeInfo>
-                </div>
-              </ImgTop>
-            </PostImg>
-            <PostInfoWrap>
-              <PostTitle>{list.postTitle}</PostTitle>
-              <PostInfo>
-                <Nickname>{list.userNickname}</Nickname>
-                <CommentWrap>
-                  <CommentIcon src={commentIcon} />
-                  <CommentNum>10</CommentNum>
-                </CommentWrap>
-              </PostInfo>
-            </PostInfoWrap>
-          </CardBox>
-        );
-      })}
+      {/* 카테고리가 "ALL" 이면 card_list 전체를 반환하고 아니면 filteredCategory의 카드를 반환! */}
+      {category === "All"
+        ? card_list.map((list, postId) => {
+            return (
+              <CardBox
+                key={postId}
+                onClick={() => {
+                  navigate(`/detail/${postId}`);
+                }}
+              >
+                <PostImg postImage={list.postImage}>
+                  <ImgTop>
+                    <Tag>
+                      <TagName>
+                        {list.postCategory === "Chicken" && "치킨"}
+                        {list.postCategory === "Korean" && "한식"}
+                        {list.postCategory === "Midnight" && "야식"}
+                        {list.postCategory === "Chinese" && "중식"}
+                      </TagName>
+                    </Tag>
+                    <div>
+                      <TimeBox />
+                      <TimeInfo>
+                        주문까지 <Time>40</Time>분
+                      </TimeInfo>
+                    </div>
+                  </ImgTop>
+                </PostImg>
+                <PostInfoWrap>
+                  <PostTitle>{list.postTitle}</PostTitle>
+                  <PostInfo>
+                    <Nickname>{list.userNickname}</Nickname>
+                    <CommentWrap>
+                      <CommentIcon src={commentIcon} />
+                      <CommentNum>10</CommentNum>
+                    </CommentWrap>
+                  </PostInfo>
+                </PostInfoWrap>
+              </CardBox>
+            );
+          })
+        : filteredCategory.map((list, postId) => {
+            return (
+              <CardBox
+                key={postId}
+                onClick={() => {
+                  navigate(`/detail/${list.postId}`);
+                }}
+              >
+                <PostImg postImage={list.postImage}>
+                  <ImgTop>
+                    <Tag>
+                      <TagName>
+                        {list.postCategory === "Chicken" && "치킨"}
+                        {list.postCategory === "Korean" && "한식"}
+                        {list.postCategory === "Midnight" && "야식"}
+                        {list.postCategory === "Chinese" && "중식"}
+                      </TagName>
+                    </Tag>
+                    <div>
+                      <TimeBox />
+                      <TimeInfo>
+                        주문까지 <Time>40</Time>분
+                      </TimeInfo>
+                    </div>
+                  </ImgTop>
+                </PostImg>
+                <PostInfoWrap>
+                  <PostTitle>{list.postTitle}</PostTitle>
+                  <PostInfo>
+                    <Nickname>{list.userNickname}</Nickname>
+                    <CommentWrap>
+                      <CommentIcon src={commentIcon} />
+                      <CommentNum>10</CommentNum>
+                    </CommentWrap>
+                  </PostInfo>
+                </PostInfoWrap>
+              </CardBox>
+            );
+          })}
     </>
   );
 };
