@@ -17,7 +17,7 @@ const api = axios.create({
 export const apis = {
   // post"
   loadposts: () => api.get("/posts"),
-  loadpost: () => api.get("/posts"),
+  // loadpost: () => api.get("/posts"),
   // add: (contents) => api.post('/api/articles', contents),
   // edit: (id, contents) => api.put(`api/articles/${id}`, contents),
   // del: (id) => api.delete(`api/articles/${id}`),
