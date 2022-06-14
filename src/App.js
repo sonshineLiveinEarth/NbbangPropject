@@ -8,11 +8,7 @@ import axios from "axios";
 import "@kfonts/bm-hanna-pro-otf";
 
 // js파일
-<<<<<<< HEAD
 import Main from "./page/Main";
-=======
-// import Main from "./Main";
->>>>>>> 54a83e4419d365cdd2cf3e893aa8a6e81aaad7b7
 import Header from "./Header";
 import theme from "./theme";
 import Detail from "./page/Detail";
