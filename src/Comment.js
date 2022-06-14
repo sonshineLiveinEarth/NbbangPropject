@@ -3,7 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 
 const Comment = () => {
-  const [comment_list, setComment_list] = React.useState([]);
+  const [comment_list, setComment_list] = useState([]);
 
   React.useEffect(() => {
     axios({
@@ -24,7 +24,7 @@ const Comment = () => {
         </CommentInputWrap>
         {comment_list.map((list, index) => {
           return (
-            <CommentBox>
+            <CommentBox key={index}>
               <ProfileImage profileImage={list.userProfileImage} />
 
               <CommentContentWrap>
@@ -112,6 +112,9 @@ const CommentBtn = styled.button`
   border: none;
   box-shadow: 5px 5px 10px #0000000f;
   cursor: pointer;
+  &:hover {
+    box-shadow: 5px 5px 10px #00000020;
+  }
 `;
 
 const CommentBox = styled.div`

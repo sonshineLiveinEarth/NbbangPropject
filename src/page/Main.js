@@ -1,28 +1,20 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import Card from "../Card";
 import addBtn from "../addBtn.png";
-// 미들웨어 함수
-import { loadPostsApi } from "../redux/modules/post";
 
-const Main = () => {
-  const dispatch = useDispatch();
-
+const Main = (list) => {
+  const navigate = useNavigate();
   const [checkedInputs, setCheckedInputs] = useState("All");
-  const [card_list, setCard_list] = React.useState([]);
-
-  React.useEffect(() => {
-    loadPostsApi(dispatch);
-  }, []);
 
   const changeRadio = (e) => {
     if (e.target.checked) {
       setCheckedInputs(e.target.id);
     }
   };
-  console.log(checkedInputs);
+  console.log(list.list);
 
   return (
     <>
@@ -80,11 +72,15 @@ const Main = () => {
             </Label>
           </Label>
         </CategoryWrap>
-        <AddBtn>
+        <AddBtn
+          onClick={() => {
+            navigate("/write");
+          }}
+        >
           <AddBtnT src={addBtn} />
         </AddBtn>
         <CardWrap>
-          <Card checkedInputs={checkedInputs} />
+          <Card checkedInputs={checkedInputs} list={list.list} />
         </CardWrap>
       </Wrap>
     </>
