@@ -49,6 +49,7 @@ const initialState = {
 export const loadPostsApi = () => {
     return async function (dispatch) {
       try {
+        console.log("야!")
         const data = await apis.loadposts();
         dispatch(loadPosts(data.data));
       } catch (e) {
