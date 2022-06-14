@@ -69,6 +69,16 @@
       "id": 7
     }
   ],
+
+
+"user": [
+{
+  "id":0
+}
+],
+
+
+
   "comments": [
     {
       "commentId": 0,
@@ -101,4 +111,6 @@
   "profile": {
     "name": "typicode"
   }
+
+
 }
