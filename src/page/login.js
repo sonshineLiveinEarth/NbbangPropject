@@ -5,6 +5,7 @@ import theme from "../theme";
 import { RoundBtn, RectangleBtn } from "../Btn";
 import underLine from "./UnderLine.png";
 import { useDispatch } from "react-redux"
+import { actionCreators as userActions } from "../redux/modules/users";
 
 
 function Login() {
@@ -16,16 +17,14 @@ function Login() {
 
     const _loginUser = () => {
         console.log("로그인 시도!")
-        if (email === '' || password === '') {
+        if (userEmail === '' || userPassword === '') {
             alert('빈칸을 다 채워주세요.');
             return;
         }
-
-        userEmail: userEmail,
-        userPassword: userPassword,
+        dispatch(userActions.loginDB(userEmail, userPassword));
     };
     
-    console.log(loginUser);
+    console.log(_loginUser);
 
 
     return (
@@ -52,7 +51,14 @@ function Login() {
                     }}
                     value={userPassword}
                 />
+
             </div>
+            <button className="s" text="로그인하기" border_radius="30px"
+                    onClick={
+                        _loginUser
+                    }>
+                    로그인하기
+                </button>
         </div>
     )
 }
