@@ -32,6 +32,7 @@ const Header = () => {
           </ProfileWrap>
         </RightWrap>
       </HeaderBack>
+      <Background/>
     </>
   );
 };
@@ -125,6 +126,10 @@ const ProfileImage = styled.div`
 
 const Nickname = styled.span`
   font-size: ${({ theme }) => theme.fontSizes.sm};
+`;
+const Background = styled.div`
+
+  background-color: ${({ theme }) => theme.colors.BackgroundColor};
 `;
 
 export default Header;

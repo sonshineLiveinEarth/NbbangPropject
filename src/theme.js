@@ -1,3 +1,4 @@
+
 const theme = {
   device: {
     tablet: `@media screen and (min-width: 768px)`,
@@ -10,6 +11,7 @@ const theme = {
     secondary: "green",
   },
   fontSizes: {
+
     xs: "12px",
     sm: "14px",
     md: "16px",
@@ -19,3 +21,4 @@ const theme = {
 };
 
 export default theme;
+

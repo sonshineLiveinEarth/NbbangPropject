@@ -14,7 +14,7 @@ export function loadPost_ID(post) {
 }
 
 // Reducer
-export default function reducer(state = initalState, action = {}) {
+export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case "post/LOAD": {
       console.log("이제 값을 불러올거야");
@@ -27,7 +27,7 @@ export default function reducer(state = initalState, action = {}) {
   }
 }
 // initialState
-const initalState = {
+const initialState = {
   is_loaded: false,
   list: [],
 };
