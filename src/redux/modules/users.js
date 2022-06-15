@@ -29,13 +29,35 @@ const navigate = useNavigate
 //미들웨어
 // Signup
 
-const SignupDB = (nickname, email, password, regionGu, regionDetail, ProfileImage) => {
+const SignupDB = (
+    nickname, 
+    email, 
+    password, 
+    regionGu, 
+    regionDetail, 
+    ProfileImage
+    ) => {
+        console.log(nickname, 
+            email, 
+            password, 
+            regionGu, 
+            regionDetail, 
+            ProfileImage);
     return function (dispatch, getState,) {
         console.log("가랏!")
-        apis.signup(nickname, email, password, regionGu, regionDetail, ProfileImage).then((res) => {
+        apis.signup(
+            nickname, 
+            email, 
+            password, 
+            regionGu, 
+            regionDetail, 
+            ProfileImage
+            ).then((res) => {
+            console.log(res)
             alert(res.data.result);
+            console.log(res)
             navigate.replace('/login');
-            
+
         }).catch((err) => {
             window.alert('이미 존재하는 아이디 또는 이메일입니다.');
             console.log("가랏!")
@@ -57,31 +79,35 @@ const SignupDB = (nickname, email, password, regionGu, regionDetail, ProfileImag
 // 	};
 // };
 
-const loginDB = (userEmail,userPassword) => {
-    console.log(userEmail,userPassword);
+const loginDB = (userEmail, userPassword) => {
+    console.log(userEmail, userPassword);
     return function (dispatch, getState,) {
-       
-        apis.login(userEmail, userPassword)
-        
-        .then((res) => {
-            console.log(res);
-            alert(res.data.success);
-            console.log(res.data);
-            // dispatch(
-            //     setUser({
-            //         userEmail: res.data.userEmail,
-            //         userPassword: res.data.userPassword,
-            //     })
-            //   );
-            const _auth = res.headers.authorization;
-            const _cookie = _auth.split(" ")[1];
 
-            // setCookie = (name, value, exp)
-            setCookie("token", _cookie, 7);
-            localStorage.setItem("email", userEmail);
-            localStorage.setItem("token", _cookie);
-           console.log("토큰을 받았어!", userEmail, _cookie)
-        })
+        apis.login(userEmail, userPassword)
+
+            .then((res) => {
+                console.log(res);
+                //     alert(res.data.success,"로그인 완료");
+                console.log(res.data.token);
+                //     // dispatch(
+                //     //     setUser({
+                //     //         userEmail: res.data.userEmail,
+                //     //         userPassword: res.data.userPassword,
+                //     //     })
+                //     //   );
+                //   
+
+                //     // setCookie = (name, value, exp)
+                const cookie = (res.data.token);
+                //     setCookie("token", _cookie, 7);
+
+                localStorage.setItem("email", userEmail);
+                localStorage.setItem("token", cookie);
+                // console.log(setItem);
+                console.log(localStorage);
+                //    console.log("토큰을 받았어!", userEmail, _cookie)
+
+            })
 
             .catch((error) => {
                 console.log(error);
@@ -99,7 +125,7 @@ const logoutDB = () => {
         localStorage.removeItem("email");
         localStorage.removeItem("token");
         navigate.replace("/");
-        
+
     };
 };
 //reducer

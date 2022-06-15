@@ -44,15 +44,17 @@ export const apis = {
   //     passPassword: userPassword,
   //   }
   //   ),
-  signup: (nickname, email, password, regionGu, regionDetail, ProfileImage) =>
-    api.post("/api/signup", {
-      userNickname: nickname,
+  signup: (nick, email, pwd, regGu, regDetail, ProfImage) =>
+    api.post('/api/signup', {
+      userNickname: nick,
       userEmail: email,
-      userPassword: password,
-      regionGu: regionGu,
-      regionDetail: regionDetail,
-      userProfileImage: ProfileImage,
+      userPassword: pwd,
+      regionGu: regGu,
+      regionDetail: regDetail,
+      userProfileImage: ProfImage,
     }),
+
+
   logout: () => api.post("/"),
   // userInfo: () => api.get(`/myinfo`),
   // userPassword: (pw) => api.post(`/myinfo`, pw),

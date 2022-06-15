@@ -5,15 +5,20 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { loadPostApi } from "../redux/modules/post";
 
+
 //이미지
 import commentIcon from "../comment.png";
 import underLine from "../UnderLine.png";
 //  js파일
 import Comment from "../Comment";
+import Cookies from "universal-cookie";
+
 
 const Detail = (list) => {
   const postId = useParams();
   const dispatch = useDispatch();
+
+
 
   const card = useSelector((state) => state.post.list);
   console.log(card.length);

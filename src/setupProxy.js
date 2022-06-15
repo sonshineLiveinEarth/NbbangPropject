@@ -14,6 +14,7 @@ module.exports = (app) => {
       changeOrigin: true,
     })
   );
+  
   app.use(
     createProxyMiddleware("/api/login", {
       target: "http://3.39.226.20",

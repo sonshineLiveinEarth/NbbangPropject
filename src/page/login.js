@@ -7,6 +7,8 @@ import underLine from "./UnderLine.png";
 import { useDispatch } from "react-redux"
 import { actionCreators as userActions } from "../redux/modules/users";
 import Signup from "./Signup";
+import Cookies from "universal-cookie";
+
 
 
 function Login() {
@@ -23,9 +25,12 @@ function Login() {
             return;
         }
         dispatch(userActions.loginDB(userEmail, userPassword));
+
+        const cookies = new Cookies();
+        console.log(cookies);
+        console.log(_loginUser);
     };
-    
-    console.log(_loginUser);
+   
 
 
     return (
@@ -55,11 +60,11 @@ function Login() {
 
             </div>
             <button className="s" text="로그인하기" border_radius="30px"
-                    onClick={
-                        _loginUser
-                    }>
-                    로그인하기
-                </button>
+                onClick={
+                    _loginUser
+                }>
+                로그인하기
+            </button>
         </SignupBox>
     )
 }

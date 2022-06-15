@@ -40,7 +40,7 @@ function Signup() {
             alert('비밀번호와 비밀번호 확인이 서로 다릅니다. 다시 적어주세요.');
             return;
         }
-        dispatch(userActions.SignDB(nickname, email, password, regionGu, regiondetail, ProfileImage));
+        dispatch(userActions.SignupDB(nickname, email, password, regionGu, regiondetail, ProfileImage));
         console.log("보낸다!")
     };
     const preveiw = (e) => {
@@ -146,8 +146,8 @@ function Signup() {
 
 
             </Container>
-            </ThemeProvider>
-        
+        </ThemeProvider>
+
     );
 }
 
