@@ -1,7 +1,6 @@
-
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
-import { apis } from '../../shared/api';
+import { apis } from "../../shared/api";
 
 // actions
 const LOG_OUT = "LOG_OUT";
@@ -15,12 +14,13 @@ const setUser = createAction(SET_USER, (user) => ({ user }));
 
 // initialState
 const initialState = {
-    user: null,
-    is_login: false,
+  user: null,
+  is_login: false,
 };
 
 //미들웨어
 // Signup
+
 const SginupDB = (nickname, email, password, regionGu, regionDetail, ProfileImage) => {
     return function (dispatch, getState,) {
         console.log("가랏!")
@@ -37,6 +37,7 @@ const SginupDB = (nickname, email, password, regionGu, regionDetail, ProfileImag
 
 //Login
 // 로그인
+
 const loginDB = (email, password) => {
     return function (dispatch, getState,) {
         apis.login(email, password).then((res) => {
@@ -52,6 +53,7 @@ const loginDB = (email, password) => {
             });
         dispatch(setUser({ userEmail: email }));
     };
+
 };
 
 
@@ -63,6 +65,7 @@ const logoutDB = () => {
 };
 //reducer
 export default handleActions(
+
     {
         [SET_USER]: (state, action) =>
             produce(state, (draft) => {
@@ -80,5 +83,6 @@ const actionCreators = {
     SginupDB,
     loginDB,
     logoutDB
+
 };
 export { actionCreators };

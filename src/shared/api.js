@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:5001",
   headers: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json,",
@@ -14,9 +13,12 @@ const api = axios.create({
 // 	return config;
 // });
 
+// 이미지 Api E따로 만들어서
+// "content-type": "multipart/form-data"
+
 export const apis = {
   // post"
-  loadposts: () => api.get("/posts"),
+  loadposts: () => api.get("/api/postList"),
   // loadpost: () => api.get("/posts"),
   addPost: (category, postTitle, content, addres, orderTime, imagesrc, postTime, postDate) =>
     api.post('/postlist', {
@@ -52,6 +54,7 @@ export const apis = {
   // 	api.put(`/api/articles/${id}/comments/${coId}`, { content }),
 
   // user
+
   login: (email, password) =>
     api.post('/user', {
       userEmail: email,
@@ -66,6 +69,7 @@ export const apis = {
       regionDetail: regionDetail,
       userProfileImage: ProfileImage
     }),
+
   // userInfo: () => api.get(`/myinfo`),
   // userPassword: (pw) => api.post(`/myinfo`, pw),
   // userNewPassword: (pw) => api.put(`/myinfo`, pw),
