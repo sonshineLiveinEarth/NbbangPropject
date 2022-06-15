@@ -20,69 +20,69 @@ const initialState = {
 
 //미들웨어
 // Signup
-const SginupDB = (
-  nickname,
-  email,
-  password,
-  passwordChek,
-  regionDetail,
-  ProfileImage
-) => {
-  return function (dispatch, getState) {
-    console.log("가랏!");
-    apis
-      .signup(
-        nickname,
-        email,
-        password,
-        passwordChek,
-        regionDetail,
-        ProfileImage
-      )
-      .then((res) => {
-        alert(res.data.result);
-        return;
-        // history.replace('/login');
-      })
-      .catch((err) => {
-        window.alert("이미 존재하는 아이디 또는 이메일입니다.");
-        console.log("가랏!");
-      });
-  };
+
+const SginupDB = (nickname, email, password, regionGu, regionDetail, ProfileImage) => {
+    return function (dispatch, getState,) {
+        console.log("가랏!")
+        apis.signup(nickname, email, password, regionGu, regionDetail, ProfileImage).then((res) => {
+            alert(res.data.result);
+            return;
+            // history.replace('/login');
+        }).catch((err) => {
+            window.alert('이미 존재하는 아이디 또는 이메일입니다.');
+            console.log("가랏!")
+        });
+    };
 };
 
 //Login
 // 로그인
-const loginDB = (id, pwd) => {
-  return function (dispatch, getState, { history }) {
-    apis.login(id, pwd).then((res) => {
-      console.log(res);
-      if (res.data.ok === false) {
-        alert("없는 회원정보 입니다! 회원가입을 해주세요!");
-        return;
-      }
-      localStorage.setItem("login-token", res.data.token);
-      alert(`안녕하세요! ${id}님`);
-      dispatch(setUser({ userId: id }));
-      history.replace("/");
-    });
-  };
+
+const loginDB = (email, password) => {
+    return function (dispatch, getState,) {
+        apis.login(email, password).then((res) => {
+            console.log(res);
+            alert(res.data.success);
+            
+            return;
+        })
+
+            .catch((error) => {
+                console.log(error);
+                alert('없는 회원정보 입니다! 회원가입을 해주세요!');
+            });
+        dispatch(setUser({ userEmail: email }));
+    };
+
 };
 
+
+const logoutDB = () => {
+    return function (dispatch, getState, { history }) {
+        dispatch(logOut());
+        history.replace("/");
+    };
+};
 //reducer
 export default handleActions(
-  {
-    [SET_USER]: (state, action) =>
-      produce(state, (draft) => {
-        draft.user = action.payload.user;
-        draft.is_login = true;
-        console.log(draft.user.userId);
-        draft.uploading = false;
-      }),
-  },
-  initialState
-);
+
+    {
+        [SET_USER]: (state, action) =>
+            produce(state, (draft) => {
+                draft.user = action.payload.user;
+                draft.is_login = true;
+                console.log(draft.user.userEmail);
+                draft.uploading = false;
+            }),
+        [GET_USER]: (state, action) => produce(state, (draft) => { }),
+
+    },
+    initialState
+)
 const actionCreators = {
-  SginupDB,
+    SginupDB,
+    loginDB,
+    logoutDB
+
 };
 export { actionCreators };

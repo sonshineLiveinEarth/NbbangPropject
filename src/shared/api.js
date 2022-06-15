@@ -20,8 +20,10 @@ export const apis = {
   // post"
   loadposts: () => api.get("/api/postList"),
   // loadpost: () => api.get("/posts"),
+
   addpost: (post) => api.post("/api/postList", post),
   // edit: (id, contents) => api.put(`api/articles/${id}`, contents),
+
   // del: (id) => api.delete(`api/articles/${id}`),
 
   // comment
@@ -33,14 +35,22 @@ export const apis = {
   // 	api.put(`/api/articles/${id}/comments/${coId}`, { content }),
 
   // user
-  // login: (id, pw) => api.post('/user/login', { username: id, password: pw }),
-  // signup: (id, email, pw, pwcheck) =>
-  // 	api.post('/user/signup', {
-  // 		username: id,
-  // 		email: email,
-  // 		password: pw,
-  // 		repassword: pwcheck,
-  // 	}),
+
+  login: (email, password) =>
+    api.post("/user", {
+      userEmail: email,
+      passPassword: password,
+    }),
+  signup: (nickname, email, password, regionGu, regionDetail, ProfileImage) =>
+    api.post("/users", {
+      userNickname: nickname,
+      userEmail: email,
+      userPassword: password,
+      regionGu: regionGu,
+      regionDetail: regionDetail,
+      userProfileImage: ProfileImage,
+    }),
+
   // userInfo: () => api.get(`/myinfo`),
   // userPassword: (pw) => api.post(`/myinfo`, pw),
   // userNewPassword: (pw) => api.put(`/myinfo`, pw),

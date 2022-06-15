@@ -4,6 +4,8 @@ import { apis } from "../../shared/api";
 const LOAD = "post/LOAD";
 const LOAD_ID = "post/LOAD_ID";
 const ADD = "post/ADD";
+const DELETE = "post/DELETE";
+const EDIT = "post/EDIT";
 
 // Action Creator
 export function loadPosts(post) {
@@ -14,9 +16,18 @@ export function loadPost_ID(post) {
   return { type: LOAD_ID, post };
 }
 
+<<<<<<< HEAD
 export function createPost(post) {
   console.log("포스트를 생성할거야!", post);
   return { type: ADD, post: post };
+=======
+export function deletepost(post) {
+  return { type: DELETE, post };
+}
+
+export function editpost(post) {
+  return { type: EDIT, post };
+>>>>>>> 11996473ceac684c2b2b8e15a86bc93b592b2ee0
 }
 
 // initialState

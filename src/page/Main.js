@@ -7,6 +7,9 @@ import addBtn from "../addBtn.png";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
+import { useDispatch } from "react-redux"
+
+
 // 미들웨어 함수
 import { loadPostsApi } from "../redux/modules/post";
 

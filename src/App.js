@@ -13,7 +13,7 @@ import Header from "./Header";
 import theme from "./theme";
 import Detail from "./page/Detail";
 import Write from "./page/Write";
-
+import Login from "./page/login";
 import Sginup from "./page/Sginup";
 
 import { useDispatch } from "react-redux";
@@ -38,6 +38,7 @@ function App() {
             <Route path="/detail/:postId" element={<Detail />} />
             <Route path="/detail" element={<Detail />} />
             <Route path="/write" element={<Write />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/sginup" element={<Sginup />} />
           </Routes>
         </Background>
