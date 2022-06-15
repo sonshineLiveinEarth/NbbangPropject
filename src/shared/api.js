@@ -20,8 +20,29 @@ export const apis = {
   // post"
   loadposts: () => api.get("/api/postList"),
   // loadpost: () => api.get("/posts"),
-  // add: (contents) => api.post('/api/articles', contents),
-  // edit: (id, contents) => api.put(`api/articles/${id}`, contents),
+  addPost: (category, postTitle, content, addres, orderTime, imagesrc, postTime, postDate) =>
+    api.post('/postlist', {
+      postCategory: category,
+      postTitle: postTitle,
+      postContent: content,
+      postAddress: addres,
+      postOrderTime: orderTime,
+      postImage: imagesrc,
+      postTime: postTime,
+      postDate: postDate
+    }),
+  // const addPost = (e) => {
+  //   axios.post("http://localhost:5001/posts", {
+  //     postCategory: category,
+  //     postTitle: postTitle,
+  //     postContent: content,
+  //     postAddress: addres,
+  //     postOrderTime: orderTime,
+  //     postImage: imagesrc,
+  //     postTime: postTime,
+  //     postDate: postDate
+  //   })
+  edit: (id, contents) => api.put(`/postlist/${id}`, contents),
   // del: (id) => api.delete(`api/articles/${id}`),
 
   // comment
@@ -33,14 +54,22 @@ export const apis = {
   // 	api.put(`/api/articles/${id}/comments/${coId}`, { content }),
 
   // user
-  // login: (id, pw) => api.post('/user/login', { username: id, password: pw }),
-  // signup: (id, email, pw, pwcheck) =>
-  // 	api.post('/user/signup', {
-  // 		username: id,
-  // 		email: email,
-  // 		password: pw,
-  // 		repassword: pwcheck,
-  // 	}),
+
+  login: (email, password) =>
+    api.post('/user', {
+      userEmail: email,
+      passPassword: password
+    }),
+  signup: (nickname, email, password, regionGu, regionDetail, ProfileImage) =>
+    api.post("/users", {
+      userNickname: nickname,
+      userEmail: email,
+      userPassword: password,
+      regionGu: regionGu,
+      regionDetail: regionDetail,
+      userProfileImage: ProfileImage
+    }),
+
   // userInfo: () => api.get(`/myinfo`),
   // userPassword: (pw) => api.post(`/myinfo`, pw),
   // userNewPassword: (pw) => api.put(`/myinfo`, pw),

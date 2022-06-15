@@ -38,11 +38,14 @@ const Write = (props) => {
   const hours = now.getHours();
   const minutes = now.getMinutes();
 
+
   const postDate = year + "." + month + "." + date;
+
   const postTime = hours + ":" + minutes;
   console.log(category);
 
   const addPost = (e) => {
+
     axios
       .post("http://localhost:5001/posts", {
         postCategory: category,
@@ -54,14 +57,17 @@ const Write = (props) => {
         postTime: postTime,
         postDate: postDate,
       })
+
       .then(function (response) {
         // response
       })
       .catch(function (error) {
         // 오류발생시 실행
       });
+
     console.log(addPost);
   };
+
 
   //이미지 프리뷰
   const preveiw = (e) => {
@@ -146,8 +152,10 @@ const Write = (props) => {
         />
         <Line src={underLine} />
         <Label>사진</Label>
+
         <Imgveiw src={imagesrc} alt="" />
         <Filebox type="file" onChange={preveiw} />
+
         <Line src={underLine} />
         <Label>배달 받을 장소</Label>
         <InputContainer
@@ -161,6 +169,7 @@ const Write = (props) => {
         <Line src={underLine} />
 
         <Label>주문 희망 시간</Label>
+
         <DateWrap>
           <SDatePicker
             selected={startDate}
@@ -179,6 +188,7 @@ const Write = (props) => {
         </DateWrap>
 
         <Label>N빵 내용</Label>
+
         <InputContainer
           type="text"
           placeholder="공구 내용을 구체적으로 적어주세요"
