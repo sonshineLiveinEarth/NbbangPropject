@@ -7,11 +7,13 @@ const api = axios.create({
   },
 });
 
-// api.interceptors.request.use(function (config) {
-// 	const accessToken = document.cookie.split('=')[1];
-// 	config.headers.common['X-AUTH-TOKEN'] = `${accessToken}`;
-// 	return config;
-// });
+api.interceptors.request.use(function (config) {
+  const Token = document.cookie.split("=")[1];
+  config.headers.common["X-AUTH-TOKEN"] = `${Token}`;
+  return config;
+});
+
+// axios.get('https://api.github.com/user', { headers: { 'Authorization': `token ${access_token}` } })
 
 // 이미지 Api E따로 만들어서
 // "content-type": "multipart/form-data"
@@ -24,10 +26,10 @@ export const apis = {
   addpost: (post) => api.post("/api/write", post),
   // edit: (id, contents) => api.put(`api/articles/${id}`, contents),
 
-  // del: (id) => api.delete(`api/articles/${id}`),
+  delpost: (id) => api.put(`api/edit/${id}`),
 
   // comment
-  // loadcomments: (id) => api.get(`/comments`),
+  loadcomments: (id) => api.get(`/api/detail/${id}`),
   // addComment: (id, content) =>
   // 	api.post(`/api/articles/${id}/comments`, { content }),
   // delComment: (id, coId) => api.delete(`/api/articles/${id}/comments/${coId}`),
@@ -44,7 +46,7 @@ export const apis = {
   //   }
   //   ),
   signup: (nick, email, pwd, regGu, regDetail, ProfImage) =>
-    api.post('/api/signup', {
+    api.post("/api/signup", {
       userNickname: nick,
       userEmail: email,
       userPassword: pwd,
@@ -52,7 +54,6 @@ export const apis = {
       regionDetail: regDetail,
       userProfileImage: ProfImage,
     }),
-
 
   logout: () => api.post("/"),
   // userInfo: () => api.get(`/myinfo`),

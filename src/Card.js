@@ -49,7 +49,7 @@ const Card = (props) => {
               <CardBox
                 key={postId}
                 onClick={() => {
-                  navigate(`/detail/${list.postId}.${postId}`);
+                  navigate(`/detail/${list.postId}`);
                 }}
               >
                 <PostImg postImage={list.postImage}>

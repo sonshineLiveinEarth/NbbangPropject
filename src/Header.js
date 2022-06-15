@@ -22,15 +22,14 @@ const Header = () => {
           <Region>경기도 수원시 행궁동</Region>
         </LogoWrap>
         <RightWrap>
-          <LogoutWrap onClick={() => {
-                navigate("/signup");
-              }}>
-            <LogoutIcon
-              src={LogoutImg}
-              
-            />
-            <LogoutText>나가기</LogoutText>
-          </LogoutWrap>
+          <LoginWrap
+            onClick={() => {
+              navigate("/login");
+            }}
+          >
+            <LogoutIcon src={LogoutImg} />
+            <LogoutText>시작하기</LogoutText>
+          </LoginWrap>
           <ProfileWrap>
             <ProfileImage />
             <Nickname>먹보님</Nickname>
@@ -94,12 +93,13 @@ const RightWrap = styled.div`
   margin-right: 5vw;
 `;
 
-const LogoutWrap = styled.div`
+const LoginWrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin-right: 3vw;
+  cursor: pointer;
 `;
 
 const LogoutIcon = styled.img`
