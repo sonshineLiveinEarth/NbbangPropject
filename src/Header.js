@@ -11,64 +11,38 @@ import LogoutImg from "./Logout.png";
 const Header = () => {
   const navigate = useNavigate();
 
-  // const dispatch = useDispatch();
-  // const user = useSelector((state) => state.user);
-  // const is_login = useSelector((state) => state.user.is_login);
-  // console.log("Header", user, is_login);
 
-  // React.useEffect(() => {
-  //   dispatch(userActions.loginCheck)
-  // }, );
+  return (
+    <>
+      <HeaderBack>
+        <LogoWrap>
+          <Logo
+            src={img}
+            onClick={() => {
+              navigate("/");
+            }}
+          />
+          <Region>경기도 수원시 행궁동</Region>
+        </LogoWrap>
+        <RightWrap>
+          <LoginWrap
+            onClick={() => {
+              navigate("/login");
+            }}
+          >
+            <LogoutIcon src={LogoutImg} />
+            <LogoutText>시작하기</LogoutText>
+          </LoginWrap>
+          <ProfileWrap>
+            <ProfileImage />
+            <Nickname>먹보님</Nickname>
+          </ProfileWrap>
+        </RightWrap>
+      </HeaderBack>
+      <Background />
+    </>
+  );
 
-  // if (user.is_login) {
-  //   return (
-  //     <div margin="100px 0px" padding="16px" center>
-  //       <div size="32px" bold>
-  //         앗! 잠깐!
-  //       </div>
-  //       <div size="16px">로그인 후에만 글을 쓸 수 있어요!</div>
-  //       <button
-  //         onClick={() => {
-  //           navigate("/login");
-  //         }}
-  //       >
-  //         로그인 하러가기
-  //       </button>
-  //     </div>
-  //   );
-  // } 
-    return (
-      <>
-        <HeaderBack>
-          <LogoWrap>
-            <Logo
-              src={img}
-              onClick={() => {
-                navigate("/");
-              }}
-            />
-            <Region>경기도 수원시 행궁동</Region>
-          </LogoWrap>
-          <RightWrap>
-            <LogoutWrap onClick={() => {
-              navigate("/signup");
-            }}>
-              <LogoutIcon
-                src={LogoutImg}
-
-              />
-              <LogoutText>나가기</LogoutText>
-            </LogoutWrap>
-            <ProfileWrap>
-              <ProfileImage />
-              <Nickname>먹보님</Nickname>
-            </ProfileWrap>
-          </RightWrap>
-        </HeaderBack>
-        <Background />
-      </>
-    );
-  
 };
 
 const HeaderBack = styled.div`
@@ -123,12 +97,13 @@ const RightWrap = styled.div`
   margin-right: 5vw;
 `;
 
-const LogoutWrap = styled.div`
+const LoginWrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin-right: 3vw;
+  cursor: pointer;
 `;
 
 const LogoutIcon = styled.img`

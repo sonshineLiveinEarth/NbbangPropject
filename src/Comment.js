@@ -1,19 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import axios from "axios";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { loadCommentApi } from "./redux/modules/comment";
 
 const Comment = () => {
-  const [comment_list, setComment_list] = useState([]);
-
-  React.useEffect(() => {
-    axios({
-      method: "get",
-      url: "http://localhost:5001/comments",
-    }).then((response) => {
-      setComment_list(response.data);
-    });
-  }, []);
-
+  const dispatch = useDispatch();
+  const comment_list = useSelector((state) => state.comment.list);
+  const card = comment_list?.data.existingComment;
   console.log(comment_list);
   return (
     <>
@@ -22,7 +16,7 @@ const Comment = () => {
           <CommentInput placeholder="댓글을 남겨주세요" autoFocus />
           <CommentBtn>나도 끼기</CommentBtn>
         </CommentInputWrap>
-        {comment_list.map((list, index) => {
+        {card.map((list, index) => {
           return (
             <CommentBox key={index}>
               <ProfileImage profileImage={list.userProfileImage} />

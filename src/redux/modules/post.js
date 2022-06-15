@@ -5,6 +5,7 @@ import { localStorageGet } from "../../shared/localStorage";
 const LOAD = "post/LOAD";
 const LOAD_ID = "post/LOAD_ID";
 const ADD = "post/ADD";
+const DELETE = "post/DELETE";
 
 // Action Creator
 export function loadPosts(post) {
@@ -18,6 +19,11 @@ export function loadPost_ID(post) {
 export function createPost(post) {
   console.log("포스트를 생성할거야!", post);
   return { type: ADD, post: post };
+}
+
+export function deletePost(post_index) {
+  console.log("지울 인덱스", post_index);
+  return { type: DELETE, post_index };
 }
 
 // initialState
@@ -40,17 +46,36 @@ export const loadPostsApi = () => {
   };
 };
 // 포스팅 하나 불러오기
-export const loadPostApi = (id) => {
-  
-  return async function (dispatch) {
+
+// export const loadPostApi = (id) => {
+//   return async function (dispatch) {
+//     try {
+//       console.log(id);
+//       const data = await apis.loadpost(id);
+//       console.log(data.data.detail);
+//       dispatch(loadPost_ID(data.data.detail));
+//     } catch (e) {
+//       console.log(`포스팅 조회 오류 발생!${e}`);
+//     }
+//   };
+// };
+
+export const loadPostApi = (id) => async (dispatch) => {
+  try {
+    const { data } = await apis.loadpost(id);
+    dispatch(loadPost_ID(data));
+  } catch (e) {
+    // console.log(`개별 아티클 조회 오류 발생!${e}`);
+  }
+};
+
+//포스팅 삭제하기
+export const delPostApi = (id) => {
+  return async function (dispatch, getState) {
+
     try {
-      console.log(id);
-      const data = await apis.loadpost(id);
-      console.log(data);
-      dispatch(loadPost_ID(data));
-    } catch (e) {
-      console.log(`포스팅 조회 오류 발생!${e}`);
-    }
+      await apis.del(id);
+    } catch (e) {}
   };
 };
 
@@ -92,6 +117,11 @@ export default function reducer(state = initialState, action = {}) {
       console.log("공구가 올라갈거야!");
       const new_post_list = [...state.list, action.post];
       return { list: new_post_list };
+    }
+
+    case "post/DELETE": {
+      console.log("포스팅 삭제할거야");
+      return { ...state };
     }
 
     default:

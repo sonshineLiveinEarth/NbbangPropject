@@ -43,8 +43,6 @@ const userEmail = cookies.get("userEmail");
     }
   };
 
-  const reader = new FileReader();
-
   //포스팅 작성한 시간 커스텀하기
   const now = new Date();
   const Day = now.getDate();
@@ -77,6 +75,8 @@ const userEmail = cookies.get("userEmail");
   };
 
   //이미지 프리뷰
+
+  const reader = new FileReader();
   const preview = (e) => {
     reader.readAsDataURL(e.target.files[0]);
     return new Promise((resolve) => {
@@ -86,6 +86,8 @@ const userEmail = cookies.get("userEmail");
       };
     });
   };
+
+  console.log(PostingImage);
 
   const list = {
     postCategory: category,
@@ -98,8 +100,6 @@ const userEmail = cookies.get("userEmail");
     postTime: postTime,
     postDate: todayYM,
   };
-
-  console.log(list);
 
   //컨테이너
 
@@ -122,7 +122,7 @@ const userEmail = cookies.get("userEmail");
   } else {
   return (
     <ThemeProvider theme={theme}>
-      <Container>
+      <Container enctype="multipart/form-data">
         <Subtitle>N빵모임 만들기</Subtitle>
         <Label>카테고리</Label>
         <Buttonbox>
@@ -270,7 +270,7 @@ const userEmail = cookies.get("userEmail");
 };
 };
 
-const Container = styled.div`
+const Container = styled.form`
   max-width: 650px;
   width: 90%;
   height: 100%;
