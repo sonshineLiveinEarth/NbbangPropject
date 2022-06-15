@@ -1,20 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 import Card from "../Card";
 import addBtn from "../addBtn.png";
-import { useDispatch } from "react-redux"
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 // 미들웨어 함수
 import { loadPostsApi } from "../redux/modules/post";
 
-
-
-
 const Main = (list) => {
-
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [checkedInputs, setCheckedInputs] = useState("All");
 
@@ -24,6 +20,18 @@ const Main = (list) => {
     }
   };
   console.log(list.list);
+
+  // const { card_list, loading, error } = useSelector((state) => state.post.list);
+
+  // 컴포넌트 마운트 후 포스트 목록 요청
+  // useEffect(() => {
+  //   // if (card_list) return;
+  //   dispatch(loadPostsApi());
+  // }, [card_list, dispatch]);
+
+  // if (loading) return <div>로딩중...</div>;
+  // if (error) return <div>에러 발생!</div>;
+  // if (!card_list) return null;
 
   return (
     <>
@@ -87,11 +95,11 @@ const Main = (list) => {
             navigate("/write");
           }}
         >
-
           <AddBtnT src={addBtn} />
         </AddBtn>
         <CardWrap>
-          <Card checkedInputs={checkedInputs} list={list.list} />
+          <Card checkedInputs={checkedInputs} />
+          <Card checkedInputs={checkedInputs} />
         </CardWrap>
       </Wrap>
     </>
@@ -102,7 +110,7 @@ const Wrap = styled.div`
   width: 100vw;
   max-width: 1920px;
   height: 90vh;
-  background-color: transparent;
+  background-color: #f4f4f4;
 
   display: grid;
   grid-auto-rows: auto;
@@ -126,37 +134,19 @@ const Wrap = styled.div`
   } ; */
 `;
 
-const AddBtn = styled.div`
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  border: 2px solid black;
-  position: fixed;
-  bottom: 60px;
-  right: 60px;
-  z-index: 10;
-  box-shadow: 0px 3px 20px #00000029;
-  background-color: ${({ theme }) => theme.colors.mainColor};
-  @media only screen and (max-width: 800px) {
-    width: 70px;
-    height: 70px;
-    bottom: 40px;
-    right: 40px;
-    cursor: pointer;
-  } ;
-`;
-
 const CategoryWrap = styled.div`
+  /* position: fixed; */
   grid-column: 2 / 3;
   grid-row: 1 / 2;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  margin: 40px auto auto auto;
+  margin: 100px auto auto auto;
   padding: 50px 0px;
   background-color: ${({ theme }) => theme.colors.BackgroundColor};
   @media only screen and (max-width: 1200px) {
+    position: fixed;
     grid-column: 1 / 2;
     margin-left: 10px;
   }
@@ -199,6 +189,29 @@ const FormCheckLeft = styled.input.attrs({ type: "radio" })`
 
 const Label = styled.label``;
 
+const AddBtn = styled.div`
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px solid black;
+  position: fixed;
+  bottom: 60px;
+  right: 60px;
+  z-index: 10;
+  box-shadow: 0px 3px 20px #00000029;
+  background-color: ${({ theme }) => theme.colors.mainColor};
+  &:hover {
+    box-shadow: 0px 3px 20px #00000050;
+  }
+  @media only screen and (max-width: 800px) {
+    width: 70px;
+    height: 70px;
+    bottom: 40px;
+    right: 40px;
+    cursor: pointer;
+  } ;
+`;
+
 const AddBtnT = styled.img`
   width: 80px;
   height: 80px;
@@ -212,7 +225,7 @@ const AddBtnT = styled.img`
 const CardWrap = styled.div`
   width: 90%;
   max-width: 1200px;
-  margin: 40px auto auto 40px;
+  margin: 100px auto auto 40px;
   grid-column: 3 / 4;
   grid-row: 1 / 2;
 

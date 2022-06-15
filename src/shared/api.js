@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:5001",
   headers: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json,",
@@ -14,37 +13,21 @@ const api = axios.create({
 // 	return config;
 // });
 
+// 이미지 Api E따로 만들어서
+// "content-type": "multipart/form-data"
+
 export const apis = {
   // post"
-  loadposts: () => api.get("/posts"),
-  // loadpost: () => api.get("/posts"),
-  addPost: (category, postTitle, content, addres, orderTime, imagesrc, postTime, postDate) =>
-    api.post('/postlist', {
-      postCategory: category,
-      postTitle: postTitle,
-      postContent: content,
-      postAddress: addres,
-      postOrderTime: orderTime,
-      postImage: imagesrc,
-      postTime: postTime,
-      postDate: postDate
-    }),
-  // const addPost = (e) => {
-  //   axios.post("http://localhost:5001/posts", {
-  //     postCategory: category,
-  //     postTitle: postTitle,
-  //     postContent: content,
-  //     postAddress: addres,
-  //     postOrderTime: orderTime,
-  //     postImage: imagesrc,
-  //     postTime: postTime,
-  //     postDate: postDate
-  //   })
-  edit: (id, contents) => api.put(`/postlist/${id}`, contents),
+  loadposts: () => api.get("/api/postList"),
+  loadpost: (id) => api.get(`/api/postList/${id}`),
+
+  addpost: (post) => api.post("/api/write", post),
+  // edit: (id, contents) => api.put(`api/articles/${id}`, contents),
+
   // del: (id) => api.delete(`api/articles/${id}`),
 
   // comment
-  loadcomments: (id) => api.get(`/comments`),
+  // loadcomments: (id) => api.get(`/comments`),
   // addComment: (id, content) =>
   // 	api.post(`/api/articles/${id}/comments`, { content }),
   // delComment: (id, coId) => api.delete(`/api/articles/${id}/comments/${coId}`),
@@ -52,20 +35,22 @@ export const apis = {
   // 	api.put(`/api/articles/${id}/comments/${coId}`, { content }),
 
   // user
+
   login: (email, password) =>
-    api.post('/user', {
+    api.post("/login", {
       userEmail: email,
-      passPassword: password
+      passPassword: password,
     }),
   signup: (nickname, email, password, regionGu, regionDetail, ProfileImage) =>
-    api.post("/users", {
+    api.post("/sginup", {
       userNickname: nickname,
       userEmail: email,
       userPassword: password,
       regionGu: regionGu,
       regionDetail: regionDetail,
-      userProfileImage: ProfileImage
+      userProfileImage: ProfileImage,
     }),
+  logout: () => api.post("/"),
   // userInfo: () => api.get(`/myinfo`),
   // userPassword: (pw) => api.post(`/myinfo`, pw),
   // userNewPassword: (pw) => api.put(`/myinfo`, pw),

@@ -23,10 +23,11 @@ const Header = () => {
         </LogoWrap>
         <RightWrap>
           <LogoutWrap>
-            <LogoutIcon src={LogoutImg} 
-            onClick={() => {
-              navigate("/sginup");
-            }}
+            <LogoutIcon
+              src={LogoutImg}
+              onClick={() => {
+                navigate("/sginup");
+              }}
             />
             <LogoutText>나가기</LogoutText>
           </LogoutWrap>
@@ -36,7 +37,7 @@ const Header = () => {
           </ProfileWrap>
         </RightWrap>
       </HeaderBack>
-      <Background/>
+      <Background />
     </>
   );
 };
@@ -54,6 +55,10 @@ const HeaderBack = styled.div`
   align-items: center;
   border-radius: 0px 0px 28px 28px;
   box-shadow: 0px 3px 20px #0000002f;
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  right: 0;
 `;
 
 const Logo = styled.img`
@@ -132,7 +137,6 @@ const Nickname = styled.span`
   font-size: ${({ theme }) => theme.fontSizes.sm};
 `;
 const Background = styled.div`
-
   background-color: ${({ theme }) => theme.colors.BackgroundColor};
 `;
 
