@@ -39,11 +39,13 @@ export const loadPostsApi = () => {
   };
 };
 // 포스팅 하나 불러오기
-export const loadPostApi = () => {
+export const loadPostApi = (id) => {
   return async function (dispatch) {
     try {
-      const data = await apis.loadpost();
-      dispatch(loadPost_ID(data.data));
+      console.log(id);
+      const data = await apis.loadpost(id);
+      console.log(data);
+      dispatch(loadPost_ID(data));
     } catch (e) {
       console.log(`포스팅 조회 오류 발생!${e}`);
     }
@@ -55,9 +57,10 @@ export const createPostApi = (post) => {
   return async function (dispatch) {
     try {
       console.log("api에 데이터를 추가할거여");
-      const docRef = await apis.addpost();
+      const docRef = await apis.addpost(post);
       const data = { id: docRef.id, ...post };
-      dispatch(loadPosts(data.data));
+      console.log(data);
+      dispatch(createPost(data.data));
     } catch (e) {
       console.log(`포스팅 추가 오류 발생!${e}`);
     }
