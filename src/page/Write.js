@@ -18,16 +18,15 @@ const Write = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const [postTitle, setPostTitle] = useState("");
   const [category, setCategory] = useState("All");
-  const [postTitle, setPostTitle] = useState();
-  const [addres, setAddres] = useState();
-  const [content, setContent] = useState();
+  const [addres, setAddres] = useState("");
+  const [content, setContent] = useState("");
   const [orderTime, setOrderTime] = useState("");
-  const [PostingImage, setPostingImage] = useState();
+  const [PostingImage, setPostingImage] = useState("");
   const [orderDate, setOrderDate] = useState(new Date());
 
-  const Datee = orderDate.toString().split(" ");
-  console.log(Datee);
+  const title = React.useRef(null);
 
   // 카테고리 선택
   const changeRadio = (e) => {
@@ -38,34 +37,36 @@ const Write = (props) => {
 
   const reader = new FileReader();
 
+  //포스팅 작성한 시간 커스텀하기
+  const now = new Date();
+  const Day = now.getDate();
+  const month = Number(now.getMonth() + 1);
+  const hours = now.getHours();
+  const minutes = now.getMinutes();
+  const postTime = hours + ":" + minutes;
 
-  // const addPost = () => {
-  //   //포스팅 작성한 시간 커스텀하기
-  //   const now = new Date();
-  //   const year = now.getFullYear();
-  //   const month = Number(now.getMonth() + 1);
-  //   const date = now.getDate();
-  //   const hours = now.getHours();
-  //   const minutes = now.getMinutes();
+  const DateS = orderDate.toString().split(" ");
+  const postYM = DateS[3].split("0")[1] + "." + month + "." + DateS[2];
+  const todayYM = DateS[3].split("0")[1] + "." + month + "." + Day;
+  console.log(postYM);
+  console.log(todayYM);
 
-  //   const postDate = year + "." + month + "." + date;
-  //   const postTime = hours + ":" + minutes;
-  //   // 파이어베이스에 데이터 추가하기!
-  //   dispatch(
-  //     createPostApi({
-  //       postCategory: category,
-  //       postTitle: postTitle,
-  //       postContent: content,
-  //       postAddress: addres,
-  //       postOrderTime: orderTime,
-  // postOrderDate: postOrderDate,
-  //       postImage: PostingImage.url,
-  //       postTime: postTime,
-  //       postDate: postDate,
-  //     })
-  //   );
-  // };
-
+  const addPost = () => {
+    // api에 데이터 추가하기!
+    dispatch(
+      createPostApi({
+        postCategory: category,
+        postTitle: postTitle,
+        postContent: content,
+        postAddress: addres,
+        postOrderTime: orderTime,
+        postOrderDate: postYM,
+        postImage: PostingImage?.url,
+        postTime: postTime,
+        postDate: todayYM,
+      })
+    );
+  };
 
   //이미지 프리뷰
   const preview = (e) => {
@@ -77,6 +78,20 @@ const Write = (props) => {
       };
     });
   };
+
+  const list = {
+    postCategory: category,
+    postTitle: postTitle,
+    postContent: content,
+    postAddress: addres,
+    postOrderTime: orderTime,
+    postOrderDate: postYM,
+    postImage: PostingImage?.url,
+    postTime: postTime,
+    postDate: todayYM,
+  };
+
+  console.log(list);
 
   //컨테이너
   return (
@@ -217,7 +232,8 @@ const Write = (props) => {
         <Line src={underLine} />
         <AddBtn
           onClick={() => {
-            navigate("/");
+            addPost();
+            // navigate("/");
           }}
         >
           <AddBtnT src={DoneBtn} />
@@ -300,9 +316,7 @@ const FormCheckLeft = styled.input.attrs({ type: "radio" })`
 `;
 
 const CategoryLabel = styled.label`
-
   margin-right: 10px;
-
 `;
 
 const InputContainer = styled.input`

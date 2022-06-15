@@ -19,15 +19,15 @@ const api = axios.create({
 export const apis = {
   // post"
   loadposts: () => api.get("/api/postList"),
-  // loadpost: () => api.get("/posts"),
+  loadpost: (id) => api.get(`/api/postList/${id}`),
 
-  addpost: (post) => api.post("/api/postList", post),
+  addpost: (post) => api.post("/api/write", post),
   // edit: (id, contents) => api.put(`api/articles/${id}`, contents),
 
   // del: (id) => api.delete(`api/articles/${id}`),
 
   // comment
-  loadcomments: (id) => api.get(`/comments`),
+  // loadcomments: (id) => api.get(`/comments`),
   // addComment: (id, content) =>
   // 	api.post(`/api/articles/${id}/comments`, { content }),
   // delComment: (id, coId) => api.delete(`/api/articles/${id}/comments/${coId}`),
@@ -44,7 +44,6 @@ export const apis = {
   //     passPassword: userPassword,
   //   }
   //   ),
-
   signup: (nickname, email, password, regionGu, regionDetail, ProfileImage) =>
     api.post("/api/signup", {
       userNickname: nickname,
@@ -54,8 +53,7 @@ export const apis = {
       regionDetail: regionDetail,
       userProfileImage: ProfileImage,
     }),
-logout: () =>
-api.post("/")
+  logout: () => api.post("/"),
   // userInfo: () => api.get(`/myinfo`),
   // userPassword: (pw) => api.post(`/myinfo`, pw),
   // userNewPassword: (pw) => api.put(`/myinfo`, pw),

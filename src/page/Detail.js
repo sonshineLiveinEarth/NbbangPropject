@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { loadPostsApi } from "../redux/modules/post";
+import { loadPostApi } from "../redux/modules/post";
 
 //이미지
 import commentIcon from "../comment.png";
@@ -20,9 +20,10 @@ const Detail = (list) => {
 
   const posting = card.posts[postId.postId];
   console.log(card.posts[postId.postId]);
+  console.log(postId.postId);
 
   React.useEffect(() => {
-    if (card.length !== 0) dispatch(loadPostsApi());
+    dispatch(loadPostApi(postId.postId));
   }, []);
 
   // 현재시간

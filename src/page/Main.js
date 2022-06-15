@@ -110,7 +110,7 @@ const Wrap = styled.div`
   width: 100vw;
   max-width: 1920px;
   height: 90vh;
-  background-color: transparent;
+  background-color: #f4f4f4;
 
   display: grid;
   grid-auto-rows: auto;
