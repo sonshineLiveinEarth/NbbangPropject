@@ -4,8 +4,10 @@ import { produce } from "immer";
 import { apis } from "../../shared/api";
 import { useNavigate } from "react-router-dom";
 
+
 import Cookies from "universal-cookie";
 import jwt_decode from "jwt-decode";
+import { localStorageGet, localStorageSet } from "../../shared/localStorage";
 // actions
 const LOG_OUT = "LOG_OUT";
 const GET_USER = "GET_USER";
@@ -34,29 +36,23 @@ const navigate = useNavigate
 // Signup
 
 const SignupDB = (
-    nickname, 
-    email, 
-    password, 
-    regionGu, 
-    regionDetail, 
+    nickname,
+    email,
+    password,
+    regionGu,
+    regionDetail,
     ProfileImage
-    ) => {
-        console.log(nickname, 
-            email, 
-            password, 
-            regionGu, 
-            regionDetail, 
-            ProfileImage);
+) => {
     return function (dispatch, getState,) {
         console.log("가랏!")
         apis.signup(
-            nickname, 
-            email, 
-            password, 
-            regionGu, 
-            regionDetail, 
+            nickname,
+            email,
+            password,
+            regionGu,
+            regionDetail,
             ProfileImage
-            ).then((res) => {
+        ).then((res) => {
             console.log(res)
             alert(res.data.result);
             console.log(res)
@@ -91,25 +87,26 @@ const loginDB = (userEmail, userPassword) => {
 
             .then((res) => {
                 console.log(res);
-                //     alert(res.data.success,"로그인 완료");
                 console.log(res.data.token);
-                //     // dispatch(
-                //     //     setUser({
-                //     //         userEmail: res.data.userEmail,
-                //     //         userPassword: res.data.userPassword,
-                //     //     })
-                //     //   );
-                //   
-
-                //     // setCookie = (name, value, exp)
                 const cookie = (res.data.token);
                 //     setCookie("token", _cookie, 7);
+                const DecodedToken = jwt_decode(cookie)
+                console.log(DecodedToken);
+                localStorage.setItem("jwtToken", cookie)
+                dispatch(
+                    setUser({
+                        is_login: true,
+                        userEmail: userEmail,
+                        nickname: DecodedToken.nickname
+                    })
 
+                );
+                console.log("야!야!야!")
                 localStorage.setItem("email", userEmail);
-                localStorage.setItem("token", cookie);
+                localStorageSet("token", cookie);
                 // console.log(setItem);
                 console.log(localStorage);
-                
+
                 //    console.log("토큰을 받았어!", userEmail, _cookie)
                 cookies.set("userEmail", userEmail, { path: "/" });
                 cookies.set("token", cookie, `${cookie}`);
@@ -124,6 +121,21 @@ const loginDB = (userEmail, userPassword) => {
 
 };
 
+
+const loginCheck = () => {
+    return function (dispatch, getState,) {
+        const userEmail = localStorageGet("useremail");
+        const tokenCheck = document.cookie;
+        if (tokenCheck) {
+            dispatch(
+                setUser({
+                    userEmail: userEmail,
+                })
+            );
+
+        }
+    }
+}
 
 const logoutDB = () => {
     return function (dispatch, getState, { navigate }) {
@@ -154,7 +166,7 @@ export default handleActions(
 const actionCreators = {
     SignupDB,
     loginDB,
-    logoutDB
-
+    logoutDB,
+    loginCheck
 };
 export { actionCreators };

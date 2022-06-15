@@ -1,5 +1,6 @@
 import axios from "axios";
-
+import { localStorageGet } from "./localStorage";
+const token = localStorageGet('token');
 const api = axios.create({
   headers: {
     "content-type": "application/json;charset=UTF-8",
@@ -21,8 +22,16 @@ export const apis = {
   loadposts: () => api.get("/api/postList"),
   loadpost: (id) => api.get(`/api/detail/${id}`),
 
-  addpost: (post) => api.post("/api/write", post),
-  // edit: (id, contents) => api.put(`api/articles/${id}`, contents),
+  addpost: (post) => api.post("/api/write", post,{
+    headers: {
+      "Authorization": `Bearer ${token}`
+    }
+  }),
+  edit: (id, post) => api.put(`api/edit/${id}`, post,{
+    headers: {
+      "Authorization": `Bearer ${token}`,
+    }
+  }  ),
 
   // del: (id) => api.delete(`api/articles/${id}`),
 
@@ -30,7 +39,11 @@ export const apis = {
   // loadcomments: (id) => api.get(`/comments`),
   // addComment: (id, content) =>
   // 	api.post(`/api/articles/${id}/comments`, { content }),
-  // delComment: (id, coId) => api.delete(`/api/articles/${id}/comments/${coId}`),
+  // delComment: (id, coId) => api.delete(`/api/articles/${id}/comments/${coId}`,{
+  //   headers: {
+  //     "Authorization": `Bearer ${token}`,
+  //   }
+  // }),
   // editComment: (id, coId, content) =>
   // 	api.put(`/api/articles/${id}/comments/${coId}`, { content }),
 

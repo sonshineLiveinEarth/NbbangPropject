@@ -1,4 +1,5 @@
 import { apis } from "../../shared/api";
+import { localStorageGet } from "../../shared/localStorage";
 
 //Action
 const LOAD = "post/LOAD";
@@ -40,6 +41,7 @@ export const loadPostsApi = () => {
 };
 // 포스팅 하나 불러오기
 export const loadPostApi = (id) => {
+  
   return async function (dispatch) {
     try {
       console.log(id);
@@ -53,8 +55,17 @@ export const loadPostApi = (id) => {
 };
 
 //포스팅 생성하기
-export const createPostApi = (post) => {
-  return async function (dispatch) {
+export const createPostApi = (post,userEmail) => {
+  const token = localStorageGet('token');
+  console.log("토큰",token)
+  return async function (dispatch, getState) {
+    const user = getState().users.user;
+    console.log("정보",getState().users.user)
+    const body = {
+      users : user,
+      userEmail:userEmail
+    }
+      console.log(body)
     try {
       console.log("api에 데이터를 추가할거여");
       const docRef = await apis.addpost(post);

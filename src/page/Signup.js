@@ -24,7 +24,7 @@ function Signup() {
     const [passwordChek, setUserPasswordChek] = useState("");
     const [regionGu, setRegionGu] = useState("");
     const [regiondetail, setRegionDetail] = useState("");
-    const [ProfileImage, setImeageSrc] = useState("https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg");
+    const [ProfileImage, setImeageSrc] = useState("");
     // const reader = new FileReader();
     const reader = new FileReader();
 

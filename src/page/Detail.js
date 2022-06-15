@@ -22,7 +22,7 @@ const Detail = (list) => {
 
   const is_login = cookies.get("token");
   const userEmail = cookies.get("userEmail");
-
+  
   const card = useSelector((state) => state.post.list);
 
   console.log(card.posts);
@@ -54,7 +54,7 @@ const Detail = (list) => {
 
   if (!is_login && !userEmail) {
     return (
-      <Wrap margin="100px 0px" padding="16px" center>
+      <Div margin="100px 0px" padding="16px" center>
         <Div size="32px" bold>
           앗! 잠깐!
         </Div>
@@ -66,7 +66,7 @@ const Detail = (list) => {
         >
           로그인 하러가기
         </button>
-      </Wrap>
+      </Div>
     );
   } else {
     return (
@@ -133,7 +133,7 @@ const Detail = (list) => {
         <Comment />
       </>
     );
-  }
+  };
 }
 
 

@@ -4,8 +4,11 @@ import theme from "../theme";
 import { createPostApi } from "../redux/modules/post";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Cookies from "universal-cookie";
 
 import DoneBtn from "../DoneBtn.png";
+
+
 
 // 날짜 선택 라이브러리
 import DatePicker from "react-datepicker";
@@ -17,6 +20,10 @@ import underLine from "./UnderLine.png";
 const Write = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const cookies = new Cookies();
+//cookie
+const is_login = cookies.get("token");
+const userEmail = cookies.get("userEmail");
 
   const [postTitle, setPostTitle] = useState("");
   const [category, setCategory] = useState("All");
@@ -26,6 +33,7 @@ const Write = (props) => {
   const [PostingImage, setPostingImage] = useState("");
   const [orderDate, setOrderDate] = useState(new Date());
 
+  
   const title = React.useRef(null);
 
   // 카테고리 선택
@@ -94,6 +102,24 @@ const Write = (props) => {
   console.log(list);
 
   //컨테이너
+
+  if (!is_login && !userEmail) {
+    return (
+      <Container margin="100px 0px" padding="16px" center>
+        <Subtitle size="32px" bold>
+          앗! 잠깐!
+        </Subtitle>
+        <Label size="16px">로그인 후에만 글을 쓸 수 있어요!</Label>
+        <button
+          onClick={() => {
+            navigate("/login");
+          }}
+        >
+          로그인 하러가기
+        </button>
+      </Container>
+    );
+  } else {
   return (
     <ThemeProvider theme={theme}>
       <Container>
@@ -241,6 +267,7 @@ const Write = (props) => {
       </Container>
     </ThemeProvider>
   );
+};
 };
 
 const Container = styled.div`
