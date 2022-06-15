@@ -47,7 +47,7 @@ const Write = (props) => {
   const addPost = (e) => {
 
     axios
-      .post("http://localhost:5001/posts", {
+      .post("http://3.39.226.20", {
         postCategory: category,
         postTitle: postTitle,
         postContent: content,
@@ -281,7 +281,8 @@ const FormCheckLeft = styled.input.attrs({ type: "radio" })`
 `;
 
 const CategoryLabel = styled.label`
-margin-right 10px;`;
+margin-right: 5px
+`;
 
 const InputContainer = styled.input`
   &[type="text"] {
