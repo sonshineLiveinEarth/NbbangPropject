@@ -6,6 +6,7 @@ import { RoundBtn, RectangleBtn } from "../Btn";
 import underLine from "./UnderLine.png";
 import { useDispatch } from "react-redux"
 import { actionCreators as userActions } from "../redux/modules/users";
+import Sginup from "./Signup";
 
 
 function Login() {
@@ -28,8 +29,8 @@ function Login() {
 
 
     return (
-        <div className="SginupBox">
-            <div className="Email">
+        <SginupBox className="SginupBox">
+            <EmailBox className="Email">
                 <div>아이디</div><br />
                 <input
                     placeholder="아이디를 입력해주세요."
@@ -39,7 +40,7 @@ function Login() {
                     }}
                     value={userEmail}
                 />
-            </div><br />
+            </EmailBox><br />
 
             <div className="Password">
                 <div>비밀번호</div><br />
@@ -59,9 +60,26 @@ function Login() {
                     }>
                     로그인하기
                 </button>
-        </div>
+        </SginupBox>
     )
 }
 
+
+const SginupBox = styled.div`
+max-width: 650px;
+  width: 90%;
+  height: 100%;
+  background-color: transparent;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin: auto;
+`
+
+const EmailBox = styled.div`
+    margin-top: 100px;
+`
 
 export default Login; 

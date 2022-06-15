@@ -29,8 +29,8 @@ const navigate = useNavigate
 //미들웨어
 // Signup
 
-const SginupDB = (nickname, email, password, regionGu, regionDetail, ProfileImage) => {
-    return function (dispatch, getState,{ navigate }) {
+const SignupDB = (nickname, email, password, regionGu, regionDetail, ProfileImage) => {
+    return function (dispatch, getState,) {
         console.log("가랏!")
         apis.signup(nickname, email, password, regionGu, regionDetail, ProfileImage).then((res) => {
             alert(res.data.result);
@@ -47,7 +47,7 @@ const SginupDB = (nickname, email, password, regionGu, regionDetail, ProfileImag
 // 로그인
 
 const loginDB = (email, password) => {
-    return function (dispatch, getState,{ navigate }) {
+    return function (dispatch, getState,) {
         apis.login(email, password).then((res) => {
             console.log(res);
             alert(res.data.success);
@@ -58,7 +58,7 @@ const loginDB = (email, password) => {
             setCookie("token", _cookie, 7);
             localStorage.setItem("email", email);
             localStorage.setItem("token", _cookie);
-            navigate.replace('/login');
+           console.log("토큰을 받았어!", email, _cookie)
         })
 
             .catch((error) => {
@@ -96,7 +96,7 @@ export default handleActions(
     initialState
 )
 const actionCreators = {
-    SginupDB,
+    SignupDB,
     loginDB,
     logoutDB
 

@@ -14,7 +14,7 @@ import theme from "./theme";
 import Detail from "./page/Detail";
 import Write from "./page/Write";
 import Login from "./page/login";
-import Sginup from "./page/Sginup";
+import Signup from "./page/Signup";
 
 import { useDispatch } from "react-redux";
 // 미들웨어 함수
@@ -39,7 +39,7 @@ function App() {
             <Route path="/detail" element={<Detail />} />
             <Route path="/write" element={<Write />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/sginup" element={<Sginup />} />
+            <Route path="/Signup" element={<Signup />} />
           </Routes>
         </Background>
       </ThemeProvider>

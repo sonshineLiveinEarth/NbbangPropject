@@ -14,7 +14,7 @@ import { actionCreators as userActions } from "../redux/modules/users"
 
 
 
-function Sginup() {
+function Signup() {
     const dispatch = useDispatch();
 
 
@@ -31,7 +31,7 @@ function Sginup() {
 
 
     // <></>
-    const _sginup = () => {
+    const _signup = () => {
         console.log("보낸다!")
         if (nickname === '' || email === '' || password === '' || passwordChek === '' || regionGu === '' || regiondetail === '') {
             alert('빈칸을 다 채워주세요.');
@@ -40,7 +40,7 @@ function Sginup() {
             alert('비밀번호와 비밀번호 확인이 서로 다릅니다. 다시 적어주세요.');
             return;
         }
-        dispatch(userActions.SginupDB(nickname, email, password, regionGu, regiondetail, ProfileImage));
+        dispatch(userActions.SignDB(nickname, email, password, regionGu, regiondetail, ProfileImage));
         console.log("보낸다!")
     };
     const preveiw = (e) => {
@@ -62,9 +62,9 @@ function Sginup() {
 
 
     return (
-        <>
-            <div className="SginupBox">
-                <div className="Title">
+        <ThemeProvider theme={theme}>
+            <Container className="SignupBox">
+                <Title className="Title">
                     <div >닉네임</div><br />
                     <input
                         placeholder="닉네임을 입력해주세요."
@@ -75,7 +75,7 @@ function Sginup() {
                         }}
                         value={nickname}
                     />
-                </div><br />
+                </Title><br />
 
                 <div className="Email">
                     <div>아이디</div><br />
@@ -139,19 +139,35 @@ function Sginup() {
 
                 <button className="s" text="저장하기" border_radius="30px"
                     onClick={
-                        _sginup
+                        _signup
                     }>
                     가입하기
                 </button>
 
 
-            </div>
-
-        </>
+            </Container>
+            </ThemeProvider>
+        
     );
 }
 
+const Container = styled.div`
+  max-width: 650px;
+  width: 90%;
+  height: 100%;
+  background-color: transparent;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin: auto;
+ 
+`;
+
+const Title = styled.div`
+margin-top: 100px;
+`
 
 
-
-export default Sginup;
+export default Signup;

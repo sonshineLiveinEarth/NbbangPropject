@@ -22,12 +22,12 @@ const Header = () => {
           <Region>경기도 수원시 행궁동</Region>
         </LogoWrap>
         <RightWrap>
-          <LogoutWrap>
+          <LogoutWrap onClick={() => {
+                navigate("/Signup");
+              }}>
             <LogoutIcon
               src={LogoutImg}
-              onClick={() => {
-                navigate("/sginup");
-              }}
+              
             />
             <LogoutText>나가기</LogoutText>
           </LogoutWrap>

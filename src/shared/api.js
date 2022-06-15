@@ -44,7 +44,7 @@ export const apis = {
       passPassword: password,
     }),
   signup: (nickname, email, password, regionGu, regionDetail, ProfileImage) =>
-    api.post("/sginup", {
+    api.post("/signup", {
       userNickname: nickname,
       userEmail: email,
       userPassword: password,
