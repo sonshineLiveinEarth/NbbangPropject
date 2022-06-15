@@ -20,14 +20,13 @@ import { useDispatch } from "react-redux";
 // 미들웨어 함수
 import { loadPostsApi } from "./redux/modules/post";
 
-
 function App() {
-  const card_list = useSelector((state) => state.post.list);
+  // const card_list = useSelector((state) => state.post.list);
   const dispatch = useDispatch();
 
-  React.useEffect(() => {
-    loadPostsApi(dispatch);
-  }, []);
+  // React.useEffect(() => {
+  //   loadPostsApi(dispatch);
+  // }, []);
 
   return (
     <div className="App">
@@ -35,13 +34,8 @@ function App() {
         <Background>
           <Header />
           <Routes>
-
-            <Route path="/" element={<Main list={card_list} />} />
-
-            <Route
-              path="/detail/:postId"
-              element={<Detail list={card_list} />}
-            />
+            <Route path="/" element={<Main />} />
+            <Route path="/detail/:postId" element={<Detail />} />
             <Route path="/detail" element={<Detail />} />
             <Route path="/write" element={<Write />} />
             <Route path="/sginup" element={<Sginup />} />

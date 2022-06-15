@@ -20,7 +20,7 @@ export const apis = {
   // post"
   loadposts: () => api.get("/api/postList"),
   // loadpost: () => api.get("/posts"),
-  // add: (contents) => api.post('/api/articles', contents),
+  addpost: (post) => api.post("/api/postList", post),
   // edit: (id, contents) => api.put(`api/articles/${id}`, contents),
   // del: (id) => api.delete(`api/articles/${id}`),
 

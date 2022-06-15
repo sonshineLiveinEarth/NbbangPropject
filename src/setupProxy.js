@@ -7,4 +7,5 @@ module.exports = (app) => {
       changeOrigin: true,
     })
   );
+  // 여기 아래에 경로 추가
 };
