@@ -1,6 +1,10 @@
 import { createAction, handleActions } from "redux-actions";
+import { setCookie, deleteCookie } from "../../shared/Cookie";
 import { produce } from "immer";
 import { apis } from "../../shared/api";
+import { useNavigate } from "react-router-dom";
+
+
 
 // actions
 const LOG_OUT = "LOG_OUT";
@@ -14,20 +18,24 @@ const setUser = createAction(SET_USER, (user) => ({ user }));
 
 // initialState
 const initialState = {
-  user: null,
-  is_login: false,
+    user: null,
+    is_login: false,
 };
+
+//navigate
+const navigate = useNavigate
+
 
 //미들웨어
 // Signup
 
 const SginupDB = (nickname, email, password, regionGu, regionDetail, ProfileImage) => {
-    return function (dispatch, getState,) {
+    return function (dispatch, getState,{ navigate }) {
         console.log("가랏!")
         apis.signup(nickname, email, password, regionGu, regionDetail, ProfileImage).then((res) => {
             alert(res.data.result);
-            return;
-            // history.replace('/login');
+            navigate.replace('/login');
+            
         }).catch((err) => {
             window.alert('이미 존재하는 아이디 또는 이메일입니다.');
             console.log("가랏!")
@@ -39,12 +47,18 @@ const SginupDB = (nickname, email, password, regionGu, regionDetail, ProfileImag
 // 로그인
 
 const loginDB = (email, password) => {
-    return function (dispatch, getState,) {
+    return function (dispatch, getState,{ navigate }) {
         apis.login(email, password).then((res) => {
             console.log(res);
             alert(res.data.success);
-            
-            return;
+            const _auth = res.headers.authorization;
+            const _cookie = _auth.split(" ")[1];
+
+            // setCookie = (name, value, exp)
+            setCookie("token", _cookie, 7);
+            localStorage.setItem("email", email);
+            localStorage.setItem("token", _cookie);
+            navigate.replace('/login');
         })
 
             .catch((error) => {
@@ -58,9 +72,11 @@ const loginDB = (email, password) => {
 
 
 const logoutDB = () => {
-    return function (dispatch, getState, { history }) {
+    return function (dispatch, getState, { navigate }) {
         dispatch(logOut());
-        history.replace("/");
+        localStorage.removeItem("email");
+        localStorage.removeItem("token");
+        navigate.replace("/");
     };
 };
 //reducer
