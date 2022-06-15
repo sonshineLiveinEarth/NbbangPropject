@@ -38,6 +38,7 @@ const Write = (props) => {
 
   const reader = new FileReader();
 
+
   // const addPost = () => {
   //   //포스팅 작성한 시간 커스텀하기
   //   const now = new Date();
@@ -64,6 +65,7 @@ const Write = (props) => {
   //     })
   //   );
   // };
+
 
   //이미지 프리뷰
   const preview = (e) => {
@@ -298,7 +300,9 @@ const FormCheckLeft = styled.input.attrs({ type: "radio" })`
 `;
 
 const CategoryLabel = styled.label`
+
   margin-right: 10px;
+
 `;
 
 const InputContainer = styled.input`
