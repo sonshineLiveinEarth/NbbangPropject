@@ -38,7 +38,6 @@ const Write = (props) => {
 
   const reader = new FileReader();
 
-<<<<<<< HEAD
   // const addPost = () => {
   //   //포스팅 작성한 시간 커스텀하기
   //   const now = new Date();
@@ -65,51 +64,6 @@ const Write = (props) => {
   //     })
   //   );
   // };
-=======
-  const [category, setCategory] = useState("All");
-  const [postTitle, setPostTitle] = useState();
-  const [addres, setAddres] = useState();
-  const [content, setContent] = useState();
-  const [orderTime, setOrderTime] = useState();
-
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = Number(now.getMonth() + 1);
-  const date = now.getDate();
-  const hours = now.getHours();
-  const minutes = now.getMinutes();
-
-
-  const postDate = year + "." + month + "." + date;
-
-  const postTime = hours + ":" + minutes;
-  console.log(category);
-
-  const addPost = (e) => {
-
-    axios
-      .post("http://localhost:5001/posts", {
-        postCategory: category,
-        postTitle: postTitle,
-        postContent: content,
-        postAddress: addres,
-        postOrderTime: orderTime,
-        postImage: imagesrc,
-        postTime: postTime,
-        postDate: postDate,
-      })
-
-      .then(function (response) {
-        // response
-      })
-      .catch(function (error) {
-        // 오류발생시 실행
-      });
-
-    console.log(addPost);
-  };
->>>>>>> 11996473ceac684c2b2b8e15a86bc93b592b2ee0
-
 
   //이미지 프리뷰
   const preview = (e) => {
@@ -194,7 +148,6 @@ const Write = (props) => {
         <Line src={underLine} />
         <Label>사진</Label>
 
-<<<<<<< HEAD
         <Div3>
           <ImageFeild>
             {PostingImage && (
@@ -216,12 +169,6 @@ const Write = (props) => {
           <InputFile onChange={preview} type="file" id="postImage" />
         </Div3>
 
-=======
-        <Imgveiw src={imagesrc} alt="" />
-        <Filebox type="file" onChange={preveiw} />
-
-        <Line src={underLine} />
->>>>>>> 11996473ceac684c2b2b8e15a86bc93b592b2ee0
         <Label>배달 받을 장소</Label>
         <InputContainer
           type="text"
