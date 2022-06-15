@@ -35,8 +35,7 @@ function App() {
           <Header />
           <Routes>
             <Route path="/" element={<Main />} />
-            <Route path="/detail/:postId" element={<Detail />} />
-            <Route path="/detail" element={<Detail />} />
+            <Route path="/detail/:id" element={<Detail />} />
             <Route path="/write" element={<Write />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />

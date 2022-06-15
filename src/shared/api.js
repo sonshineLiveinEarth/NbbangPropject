@@ -19,7 +19,7 @@ const api = axios.create({
 export const apis = {
   // post"
   loadposts: () => api.get("/api/postList"),
-  loadpost: (id) => api.get(`/api/postList/${id}`),
+  loadpost: (id) => api.get(`/api/detail/${id}`),
 
   addpost: (post) => api.post("/api/write", post),
   // edit: (id, contents) => api.put(`api/articles/${id}`, contents),
@@ -35,9 +35,8 @@ export const apis = {
   // 	api.put(`/api/articles/${id}/comments/${coId}`, { content }),
 
   // user
-  login: (id, pw) => 
-  api.post('/api/login', 
-  { userEmail: id, userPassword: pw }),
+  login: (id, pw) =>
+    api.post("/api/login", { userEmail: id, userPassword: pw }),
   // login: (userEmail, userPassword) =>
   //   api.post("/api/login", {
   //     userEmail: userEmail,

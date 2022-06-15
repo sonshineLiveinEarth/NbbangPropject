@@ -99,7 +99,6 @@ const Main = (list) => {
         </AddBtn>
         <CardWrap>
           <Card checkedInputs={checkedInputs} />
-          <Card checkedInputs={checkedInputs} />
         </CardWrap>
       </Wrap>
     </>

@@ -12,17 +12,20 @@ import underLine from "../UnderLine.png";
 import Comment from "../Comment";
 
 const Detail = (list) => {
-  const postId = useParams();
+  const params = useParams();
   const dispatch = useDispatch();
 
   const card = useSelector((state) => state.post.list);
-  console.log(card.length);
 
-  const posting = card.posts[postId.postId];
-  console.log(card.posts[postId.postId]);
+  console.log(card.posts);
+  console.log(params.id.split("."));
+  const index = params.id.split(".")[1];
+  const postIdnum = Number(params.id.split(".")[0]);
+  const posting = card.posts[index];
+  console.log(posting.postId);
 
   React.useEffect(() => {
-    dispatch(loadPostApi(postId.postId));
+    dispatch(loadPostApi(postIdnum));
   }, []);
 
   // 현재시간
@@ -31,28 +34,25 @@ const Detail = (list) => {
   const todayHour = stringToday.split(":")[0];
   const todayMin = stringToday.split(":")[1];
   // 주문희망시간
-  const orderHour = Number(
-    card.posts[postId.postId].postOrderTime.split(":")[0]
-  );
-  const orderMin = Number(
-    card.posts[postId.postId].postOrderTime.split(":")[1]
-  );
+  const orderHour = Number(card.posts[index].postOrderTime.split(":")[0]);
+  const orderMin = Number(card.posts[index].postOrderTime.split(":")[1]);
 
   const leftHour = (orderHour - todayHour) * 60;
   const leftMin = orderMin - todayMin;
   // 주문까지 남은시간
   const leftTime = leftHour + leftMin;
 
+  const TimeLabel = posting.postOrderTime.split(":");
+
   return (
     <>
-      {card.length !== 0 ? (
+      {card.length !== 0 && posting.postId === postIdnum ? (
         <>
           <Wrap>
             <Div>
               <PostDate>{posting.postDate}</PostDate>
               <EditBtn>수정</EditBtn>
             </Div>
-
             <PostTitle>{posting.postTitle}</PostTitle>
             <CommentInfo>
               <CommentIcon src={commentIcon} />
@@ -64,7 +64,7 @@ const Detail = (list) => {
                 <>
                   <TimeBox />
                   <TimeInfo>
-                    주문까지{" "}
+                    주문까지
                     <Time>
                       {leftTime}
                       <TimeLabel>분</TimeLabel>
@@ -87,12 +87,19 @@ const Detail = (list) => {
               </TimeInfo> */}
             </TimeWrap>
             <PostAdress>{posting.postAddress}에서 모여요</PostAdress>
-            <PostContentT>
-              주문 예정 시간 :{" "}
-              {posting.postOrderDate + " " + posting.postOrderTime}
-            </PostContentT>
+            <div>
+              <PostContent>주문 예정일 </PostContent>
+              <PostContentT>{posting.postOrderDate} </PostContentT>
+            </div>
+            <div>
+              <PostContent>주문 예정 시간 </PostContent>
+              <PostContentT>
+                {TimeLabel[0]}시 {TimeLabel[1]}분
+              </PostContentT>
+            </div>
+
             <PostContent>{posting.postContent}</PostContent>
-            <Nickname>by {posting.userNickname}</Nickname>
+            <Nickname>글쓴이 {posting.userNickname}</Nickname>
             <Line src={underLine} />
           </Wrap>
         </>
@@ -136,11 +143,12 @@ const Div = styled.div`
 `;
 
 const Nickname = styled.span`
+  font-family: "배달의민족 한나체 Pro OTF", "배달의민족한나체ProOTF",
+    "bm-hanna-pro-otf";
   color: black;
   font-size: 16px;
   text-align: left;
   margin-right: 16px;
-  font-weight: bold;
   margin-top: 10px;
 `;
 
@@ -290,20 +298,12 @@ const TimeOut = styled.span`
   position: absolute;
 `;
 
-const TimeLabel = styled.span`
-  font-family: "배달의민족 한나체 Pro OTF", "배달의민족한나체ProOTF",
-    "bm-hanna-pro-otf";
-  color: #ffcf00;
-  font-size: 24px;
-  color: white;
-  position: absolute;
-`;
-
 const PostAdress = styled.span`
   font-family: "배달의민족 한나체 Pro OTF", "배달의민족한나체ProOTF",
     "bm-hanna-pro-otf";
   font-size: 26px;
   margin-top: 20px;
+  margin-bottom: 10px;
 `;
 
 const PostContent = styled.span`
@@ -314,13 +314,14 @@ const PostContent = styled.span`
 `;
 
 const PostContentT = styled.span`
-  font-family: "배달의민족 한나체 Pro OTF", "배달의민족한나체ProOTF",
-    "bm-hanna-pro-otf";
+  /* font-family: "배달의민족 한나체 Pro OTF", "배달의민족한나체ProOTF",
+    "bm-hanna-pro-otf"; */
   font-size: 16px;
   margin-top: 20px;
   white-space: pre-line;
   text-align: left;
-  /* font-weight: bold; */
+  font-weight: bold;
+  color: black;
 `;
 
 const Line = styled.img`
