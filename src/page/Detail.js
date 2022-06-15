@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { loadPostApi } from "../redux/modules/post";
-
+import { useNavigate } from "react-router-dom";
 
 //이미지
 import commentIcon from "../comment.png";
@@ -17,8 +17,11 @@ import Cookies from "universal-cookie";
 const Detail = (list) => {
   const params = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const cookies = new Cookies();
 
-
+  const is_login = cookies.get("token");
+  const userEmail = cookies.get("userEmail");
 
   const card = useSelector((state) => state.post.list);
 
@@ -49,40 +52,57 @@ const Detail = (list) => {
 
   const TimeLabel = posting.postOrderTime.split(":");
 
-  return (
-    <>
-      {card.length !== 0 && posting.postId === postIdnum ? (
-        <>
-          <Wrap>
-            <Div>
-              <PostDate>{posting.postDate}</PostDate>
-              <EditBtn>수정</EditBtn>
-            </Div>
-            <PostTitle>{posting.postTitle}</PostTitle>
-            <CommentInfo>
-              <CommentIcon src={commentIcon} />
-              <CommentNum>10</CommentNum>
-            </CommentInfo>
-            <PostImage postImage={posting.postImage} />
-            <TimeWrap>
-              {leftTime > 0 ? (
-                <>
-                  <TimeBox />
-                  <TimeInfo>
-                    주문까지
-                    <Time>
-                      {leftTime}
-                      <TimeLabel>분</TimeLabel>
-                    </Time>
-                  </TimeInfo>
-                </>
-              ) : (
-                <>
-                  <TimeOutBox />
-                  <TimeOut>마감</TimeOut>
-                </>
-              )}
-              {/* <TimeBox />
+  if (!is_login && !userEmail) {
+    return (
+      <Wrap margin="100px 0px" padding="16px" center>
+        <Div size="32px" bold>
+          앗! 잠깐!
+        </Div>
+        <Div size="16px">로그인 후에만 글을 쓸 수 있어요!</Div>
+        <button
+          onClick={() => {
+            navigate("/login");
+          }}
+        >
+          로그인 하러가기
+        </button>
+      </Wrap>
+    );
+  } else {
+    return (
+      <>
+        {card.length !== 0 && posting.postId === postIdnum ? (
+          <>
+            <Wrap>
+              <Div>
+                <PostDate>{posting.postDate}</PostDate>
+                <EditBtn>수정</EditBtn>
+              </Div>
+              <PostTitle>{posting.postTitle}</PostTitle>
+              <CommentInfo>
+                <CommentIcon src={commentIcon} />
+                <CommentNum>10</CommentNum>
+              </CommentInfo>
+              <PostImage postImage={posting.postImage} />
+              <TimeWrap>
+                {leftTime > 0 ? (
+                  <>
+                    <TimeBox />
+                    <TimeInfo>
+                      주문까지
+                      <Time>
+                        {leftTime}
+                        <TimeLabel>분</TimeLabel>
+                      </Time>
+                    </TimeInfo>
+                  </>
+                ) : (
+                  <>
+                    <TimeOutBox />
+                    <TimeOut>마감</TimeOut>
+                  </>
+                )}
+                {/* <TimeBox />
               <TimeInfo>
                 주문까지
                 <Time>
@@ -90,30 +110,34 @@ const Detail = (list) => {
                   <TimeLabel>분</TimeLabel>
                 </Time>
               </TimeInfo> */}
-            </TimeWrap>
-            <PostAdress>{posting.postAddress}에서 모여요</PostAdress>
-            <div>
-              <PostContent>주문 예정일 </PostContent>
-              <PostContentT>{posting.postOrderDate} </PostContentT>
-            </div>
-            <div>
-              <PostContent>주문 예정 시간 </PostContent>
-              <PostContentT>
-                {TimeLabel[0]}시 {TimeLabel[1]}분
-              </PostContentT>
-            </div>
+              </TimeWrap>
+              <PostAdress>{posting.postAddress}에서 모여요</PostAdress>
+              <div>
+                <PostContent>주문 예정일 </PostContent>
+                <PostContentT>{posting.postOrderDate} </PostContentT>
+              </div>
+              <div>
+                <PostContent>주문 예정 시간 </PostContent>
+                <PostContentT>
+                  {TimeLabel[0]}시 {TimeLabel[1]}분
+                </PostContentT>
+              </div>
 
-            <PostContent>{posting.postContent}</PostContent>
-            <Nickname>글쓴이 {posting.userNickname}</Nickname>
-            <Line src={underLine} />
-          </Wrap>
-        </>
-      ) : null}
+              <PostContent>{posting.postContent}</PostContent>
+              <Nickname>글쓴이 {posting.userNickname}</Nickname>
+              <Line src={underLine} />
+            </Wrap>
+          </>
+        ) : null}
 
-      <Comment />
-    </>
-  );
-};
+        <Comment />
+      </>
+    );
+  }
+}
+
+
+
 
 const Wrap = styled.div`
   max-width: 650px;
@@ -334,5 +358,6 @@ const Line = styled.img`
   height: auto;
   margin: 36px 0px;
 `;
+
 
 export default Detail;

@@ -4,8 +4,8 @@ import { produce } from "immer";
 import { apis } from "../../shared/api";
 import { useNavigate } from "react-router-dom";
 
-
-
+import Cookies from "universal-cookie";
+import jwt_decode from "jwt-decode";
 // actions
 const LOG_OUT = "LOG_OUT";
 const GET_USER = "GET_USER";
@@ -21,6 +21,10 @@ const initialState = {
     user: null,
     is_login: false,
 };
+
+//cookie
+
+const cookies = new Cookies();
 
 //navigate
 const navigate = useNavigate
@@ -105,8 +109,10 @@ const loginDB = (userEmail, userPassword) => {
                 localStorage.setItem("token", cookie);
                 // console.log(setItem);
                 console.log(localStorage);
+                
                 //    console.log("토큰을 받았어!", userEmail, _cookie)
-
+                cookies.set("userEmail", userEmail, { path: "/" });
+                cookies.set("token", cookie, `${cookie}`);
             })
 
             .catch((error) => {
