@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { loadCommentApi } from "../redux/modules/comment";
 import { loadPostApi } from "../redux/modules/post";
-
+import Cookies from "universal-cookie";
 import { useNavigate } from "react-router-dom";
 
 //이미지
@@ -37,8 +37,8 @@ const Detail = (props) => {
   console.log(card.posts);
   console.log(params.id.split("."));
   const index = params.id.split(".")[1];
-  const postIdnum = Number(params.id.split(".")[0]);
-  const posting = card.posts[index];
+  // const postIdnum = Number(params.id.split(".")[0]);
+  // const posting = card.posts[index];
   console.log(posting.postId);
 
 
