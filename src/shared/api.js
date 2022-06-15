@@ -57,12 +57,12 @@ export const apis = {
   // user
 
   login: (email, password) =>
-    api.post('/user', {
+    api.post('/login', {
       userEmail: email,
       passPassword: password
     }),
   signup: (nickname, email, password, regionGu, regionDetail, ProfileImage) =>
-    api.post("/users", {
+    api.post("/sginup", {
       userNickname: nickname,
       userEmail: email,
       userPassword: password,
@@ -70,7 +70,8 @@ export const apis = {
       regionDetail: regionDetail,
       userProfileImage: ProfileImage
     }),
-
+logout: () =>
+api.post("/")
   // userInfo: () => api.get(`/myinfo`),
   // userPassword: (pw) => api.post(`/myinfo`, pw),
   // userNewPassword: (pw) => api.put(`/myinfo`, pw),
