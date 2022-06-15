@@ -20,29 +20,10 @@ export const apis = {
   // post"
   loadposts: () => api.get("/api/postList"),
   // loadpost: () => api.get("/posts"),
-  addPost: (category, postTitle, content, addres, orderTime, imagesrc, postTime, postDate) =>
-    api.post('/postlist', {
-      postCategory: category,
-      postTitle: postTitle,
-      postContent: content,
-      postAddress: addres,
-      postOrderTime: orderTime,
-      postImage: imagesrc,
-      postTime: postTime,
-      postDate: postDate
-    }),
-  // const addPost = (e) => {
-  //   axios.post("http://localhost:5001/posts", {
-  //     postCategory: category,
-  //     postTitle: postTitle,
-  //     postContent: content,
-  //     postAddress: addres,
-  //     postOrderTime: orderTime,
-  //     postImage: imagesrc,
-  //     postTime: postTime,
-  //     postDate: postDate
-  //   })
-  edit: (id, contents) => api.put(`/postlist/${id}`, contents),
+
+  addpost: (post) => api.post("/api/postList", post),
+  // edit: (id, contents) => api.put(`api/articles/${id}`, contents),
+
   // del: (id) => api.delete(`api/articles/${id}`),
 
   // comment
@@ -56,9 +37,11 @@ export const apis = {
   // user
 
   login: (email, password) =>
+
     api.post('/login', {
+
       userEmail: email,
-      passPassword: password
+      passPassword: password,
     }),
   signup: (nickname, email, password, regionGu, regionDetail, ProfileImage) =>
     api.post("/sginup", {
@@ -67,7 +50,7 @@ export const apis = {
       userPassword: password,
       regionGu: regionGu,
       regionDetail: regionDetail,
-      userProfileImage: ProfileImage
+      userProfileImage: ProfileImage,
     }),
 logout: () =>
 api.post("/")

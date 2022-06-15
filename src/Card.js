@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import commentIcon from "./comment.png";
 import { useNavigate } from "react-router-dom";
@@ -13,14 +13,16 @@ const Card = (props) => {
   const card_list = useSelector((state) => state.post.list);
   // const [orderTimeCount, setOrderTimeCount] = useState(null);
   const category = props.checkedInputs;
-  console.log(props.list.posts);
+  const Cards = card_list.posts;
+  console.log(Cards);
 
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(loadPostsApi());
-  }, []);
+  }, [dispatch]);
 
   // category와 똑같은 값을 가지고 있는 카드만 반환!
-  const filteredCategory = card_list.filter((v) => v.postCategory === category);
+  const filteredCategory =
+    Cards !== undefined && Cards.filter((v) => v.postCategory === category);
 
   // 현재시간
   const today = new Date();
@@ -30,9 +32,10 @@ const Card = (props) => {
 
   return (
     <>
-      {/* 카테고리가 "ALL" 이면 card_list 전체를 반환하고 아니면 filteredCategory의 카드를 반환! */}
-      {category === "All"
-        ? card_list.map((list, postId) => {
+      {/* 카테고리가 "ALL" 이면 card_list 전체를 반환하고 아니면 filteredCategory의
+      카드를 반환! */}
+      {Cards !== undefined && category === "All"
+        ? Cards.map((list, postId) => {
             // 주문희망시간
             const orderHour = Number(list.postOrderTime.split(":")[0]);
             const orderMin = Number(list.postOrderTime.split(":")[1]);
@@ -89,7 +92,8 @@ const Card = (props) => {
               </CardBox>
             );
           })
-        : filteredCategory.map((list, postId) => {
+        : Cards !== undefined &&
+          filteredCategory.map((list, postId) => {
             // 주문희망시간
             const orderHour = Number(list.postOrderTime.split(":")[0]);
             const orderMin = Number(list.postOrderTime.split(":")[1]);

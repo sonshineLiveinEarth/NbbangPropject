@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -16,42 +16,84 @@ const Detail = (list) => {
   const dispatch = useDispatch();
 
   const card = useSelector((state) => state.post.list);
-  const posting = card[postId.postId];
+  console.log(card.length);
+
+  const posting = card.posts[postId.postId];
+  console.log(card.posts[postId.postId]);
 
   React.useEffect(() => {
-    dispatch(loadPostsApi());
+    if (card.length !== 0) dispatch(loadPostsApi());
   }, []);
 
-  console.log(card[postId.postId]);
+  // 현재시간
+  const today = new Date();
+  const stringToday = today.toString().split(" ")[4];
+  const todayHour = stringToday.split(":")[0];
+  const todayMin = stringToday.split(":")[1];
+  // 주문희망시간
+  const orderHour = Number(
+    card.posts[postId.postId].postOrderTime.split(":")[0]
+  );
+  const orderMin = Number(
+    card.posts[postId.postId].postOrderTime.split(":")[1]
+  );
+
+  const leftHour = (orderHour - todayHour) * 60;
+  const leftMin = orderMin - todayMin;
+  // 주문까지 남은시간
+  const leftTime = leftHour + leftMin;
 
   return (
     <>
-      <Wrap>
-        <Div>
-          <PostDate>{posting.postDate}</PostDate>
-          <EditBtn>수정</EditBtn>
-        </Div>
+      {card.length !== 0 ? (
+        <>
+          <Wrap>
+            <Div>
+              <PostDate>{posting.postDate}</PostDate>
+              <EditBtn>수정</EditBtn>
+            </Div>
 
-        <PostTitle>{posting.postTitle}</PostTitle>
-        <CommentInfo>
-          <CommentIcon src={commentIcon} />
-          <CommentNum>10</CommentNum>
-        </CommentInfo>
-        <PostImage postImage={posting.postImage} />
-        <TimeWrap>
-          <TimeBox />
-          <TimeInfo>
-            주문까지
-            <Time>
-              40<TimeLabel>분</TimeLabel>
-            </Time>
-          </TimeInfo>
-        </TimeWrap>
-        <PostAdress>{posting.postAddress}에서 모여요</PostAdress>
-        <PostContent>{posting.postContent}</PostContent>
-        <Nickname>by {posting.userNickname}</Nickname>
-        <Line src={underLine} />
-      </Wrap>
+            <PostTitle>{posting.postTitle}</PostTitle>
+            <CommentInfo>
+              <CommentIcon src={commentIcon} />
+              <CommentNum>10</CommentNum>
+            </CommentInfo>
+            <PostImage postImage={posting.postImage} />
+            <TimeWrap>
+              {leftTime > 0 ? (
+                <>
+                  <TimeBox />
+                  <TimeInfo>
+                    주문까지{" "}
+                    <Time>
+                      {leftTime}
+                      <TimeLabel>분</TimeLabel>
+                    </Time>
+                  </TimeInfo>
+                </>
+              ) : (
+                <>
+                  <TimeOutBox />
+                  <TimeOut>마감</TimeOut>
+                </>
+              )}
+              {/* <TimeBox />
+              <TimeInfo>
+                주문까지
+                <Time>
+                  {leftTime}
+                  <TimeLabel>분</TimeLabel>
+                </Time>
+              </TimeInfo> */}
+            </TimeWrap>
+            <PostAdress>{posting.postAddress}에서 모여요</PostAdress>
+            <PostContent>{posting.postContent}</PostContent>
+            <Nickname>by {posting.userNickname}</Nickname>
+            <Line src={underLine} />
+          </Wrap>
+        </>
+      ) : null}
+
       <Comment />
     </>
   );
@@ -68,7 +110,6 @@ const Wrap = styled.div`
   align-items: flex-start;
   justify-content: center;
   margin: auto;
-  margin-top: 34px;
 
   /* @media only screen and (max-width: 1200px) {
     grid-template-columns: 1fr 4fr;
@@ -87,7 +128,7 @@ const Div = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: 120px;
 `;
 
 const Nickname = styled.span`
@@ -166,14 +207,21 @@ const TimeWrap = styled.div`
 `;
 
 const TimeBox = styled.div`
-  max-width: 160px;
+  max-width: 170px;
   width: 95%;
   height: 40px;
   background: #000000 0% 0% no-repeat padding-box;
   opacity: 0.44;
   border-radius: 6px;
-  margin: -200px 20px 0px 470px;
+  margin: -150px 20px 0px 450px;
   position: relative;
+  @media only screen and (max-width: 600px) {
+    margin: -200px 20px 0px 350px;
+  }
+
+  @media only screen and (max-width: 500px) {
+    margin: -200px 20px 0px 280px;
+  }
 `;
 
 const TimeInfo = styled.span`
@@ -184,7 +232,7 @@ const TimeInfo = styled.span`
   color: white;
   font-size: 24px;
   opacity: 1;
-  bottom: 160px;
+  bottom: 108px;
   right: -140px;
   justify-content: flex-end;
   position: absolute;
@@ -198,6 +246,44 @@ const Time = styled.span`
   opacity: 1;
   position: absolute;
   margin-left: 8px;
+`;
+
+const TimeOutBox = styled.div`
+  max-width: 100px;
+  width: 95%;
+  height: 40px;
+  background: #000000 0% 0% no-repeat padding-box;
+  opacity: 0.44;
+  border-radius: 6px;
+  margin: -150px 20px 0px 500px;
+  position: relative;
+
+  @media only screen and (max-width: 640px) {
+    margin: -200px 20px 0px 430px;
+  }
+
+  @media only screen and (max-width: 500px) {
+    margin: -200px 20px 0px 350px;
+  }
+`;
+
+const TimeOut = styled.span`
+  /* font-family: "배달의민족 한나체 Pro OTF", "배달의민족한나체ProOTF",
+    "bm-hanna-pro-otf";
+  color: white;
+  position: relative;
+  top: -30px;
+  font-size: 14px;
+  margin-right: 24px; */
+  bottom: 108px;
+  right: -50px;
+  opacity: 0.7;
+  font-family: "배달의민족 한나체 Pro OTF", "배달의민족한나체ProOTF",
+    "bm-hanna-pro-otf";
+  color: #ffcf00;
+  font-size: 24px;
+  color: white;
+  position: absolute;
 `;
 
 const TimeLabel = styled.span`
