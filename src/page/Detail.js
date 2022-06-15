@@ -20,7 +20,6 @@ const Detail = (list) => {
 
   const posting = card.posts[postId.postId];
   console.log(card.posts[postId.postId]);
-  console.log(postId.postId);
 
   React.useEffect(() => {
     dispatch(loadPostApi(postId.postId));
@@ -88,6 +87,10 @@ const Detail = (list) => {
               </TimeInfo> */}
             </TimeWrap>
             <PostAdress>{posting.postAddress}에서 모여요</PostAdress>
+            <PostContentT>
+              주문 예정 시간 :{" "}
+              {posting.postOrderDate + " " + posting.postOrderTime}
+            </PostContentT>
             <PostContent>{posting.postContent}</PostContent>
             <Nickname>by {posting.userNickname}</Nickname>
             <Line src={underLine} />
@@ -308,6 +311,16 @@ const PostContent = styled.span`
   margin-top: 20px;
   white-space: pre-line;
   text-align: left;
+`;
+
+const PostContentT = styled.span`
+  font-family: "배달의민족 한나체 Pro OTF", "배달의민족한나체ProOTF",
+    "bm-hanna-pro-otf";
+  font-size: 16px;
+  margin-top: 20px;
+  white-space: pre-line;
+  text-align: left;
+  /* font-weight: bold; */
 `;
 
 const Line = styled.img`
