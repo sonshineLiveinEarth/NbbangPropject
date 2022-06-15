@@ -6,7 +6,7 @@ import { RoundBtn, RectangleBtn } from "../Btn";
 import underLine from "./UnderLine.png";
 import { useDispatch } from "react-redux"
 import { actionCreators as userActions } from "../redux/modules/users";
-import Sginup from "./Signup";
+import Signup from "./Signup";
 
 
 function Login() {
@@ -29,7 +29,7 @@ function Login() {
 
 
     return (
-        <SginupBox className="SginupBox">
+        <SignupBox className="SignupBox">
             <EmailBox className="Email">
                 <div>아이디</div><br />
                 <input
@@ -60,12 +60,12 @@ function Login() {
                     }>
                     로그인하기
                 </button>
-        </SginupBox>
+        </SignupBox>
     )
 }
 
 
-const SginupBox = styled.div`
+const SignupBox = styled.div`
 max-width: 650px;
   width: 90%;
   height: 100%;

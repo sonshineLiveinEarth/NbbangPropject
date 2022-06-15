@@ -23,7 +23,7 @@ const Header = () => {
         </LogoWrap>
         <RightWrap>
           <LogoutWrap onClick={() => {
-                navigate("/Signup");
+                navigate("/signup");
               }}>
             <LogoutIcon
               src={LogoutImg}

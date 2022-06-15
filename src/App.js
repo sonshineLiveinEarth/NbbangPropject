@@ -39,7 +39,7 @@ function App() {
             <Route path="/detail" element={<Detail />} />
             <Route path="/write" element={<Write />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/Signup" element={<Signup />} />
+            <Route path="/signup" element={<Signup />} />
           </Routes>
         </Background>
       </ThemeProvider>

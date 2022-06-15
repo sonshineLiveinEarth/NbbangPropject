@@ -35,16 +35,18 @@ export const apis = {
   // 	api.put(`/api/articles/${id}/comments/${coId}`, { content }),
 
   // user
+  login: (id, pw) => 
+  api.post('/api/login', 
+  { userEmail: id, userPassword: pw }),
+  // login: (userEmail, userPassword) =>
+  //   api.post("/api/login", {
+  //     userEmail: userEmail,
+  //     passPassword: userPassword,
+  //   }
+  //   ),
 
-  login: (email, password) =>
-
-    api.post('/login', {
-
-      userEmail: email,
-      passPassword: password,
-    }),
   signup: (nickname, email, password, regionGu, regionDetail, ProfileImage) =>
-    api.post("/signup", {
+    api.post("/api/signup", {
       userNickname: nickname,
       userEmail: email,
       userPassword: password,

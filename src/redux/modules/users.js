@@ -45,27 +45,49 @@ const SignupDB = (nickname, email, password, regionGu, regionDetail, ProfileImag
 
 //Login
 // 로그인
+// const loginDB = () => {
+// 	return function (dispatch, getState, { history }) {
+// 		const userId = localStorage.getItem('username');
+// 		const tokenCheck = document.cookie;
+// 		if (tokenCheck) {
+// 			dispatch(setLogin({ id: userId }));
+// 		} else {
+// 			dispatch(logOut());
+// 		}
+// 	};
+// };
 
-const loginDB = (email, password) => {
+const loginDB = (userEmail,userPassword) => {
+    console.log(userEmail,userPassword);
     return function (dispatch, getState,) {
-        apis.login(email, password).then((res) => {
+       
+        apis.login(userEmail, userPassword)
+        
+        .then((res) => {
             console.log(res);
             alert(res.data.success);
+            console.log(res.data);
+            // dispatch(
+            //     setUser({
+            //         userEmail: res.data.userEmail,
+            //         userPassword: res.data.userPassword,
+            //     })
+            //   );
             const _auth = res.headers.authorization;
             const _cookie = _auth.split(" ")[1];
 
             // setCookie = (name, value, exp)
             setCookie("token", _cookie, 7);
-            localStorage.setItem("email", email);
+            localStorage.setItem("email", userEmail);
             localStorage.setItem("token", _cookie);
-           console.log("토큰을 받았어!", email, _cookie)
+           console.log("토큰을 받았어!", userEmail, _cookie)
         })
 
             .catch((error) => {
                 console.log(error);
                 alert('없는 회원정보 입니다! 회원가입을 해주세요!');
             });
-        dispatch(setUser({ userEmail: email }));
+        dispatch(setUser({ userEmail: userEmail }));
     };
 
 };
@@ -77,6 +99,7 @@ const logoutDB = () => {
         localStorage.removeItem("email");
         localStorage.removeItem("token");
         navigate.replace("/");
+        
     };
 };
 //reducer
@@ -89,6 +112,7 @@ export default handleActions(
                 draft.is_login = true;
                 console.log(draft.user.userEmail);
                 draft.uploading = false;
+                console.log("리듀서로 적용 완료", state, action.payload);
             }),
         [GET_USER]: (state, action) => produce(state, (draft) => { }),
 
