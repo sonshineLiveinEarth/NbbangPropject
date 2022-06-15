@@ -5,6 +5,9 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { loadCommentApi } from "../redux/modules/comment";
 import { loadPostApi } from "../redux/modules/post";
+
+import { useNavigate } from "react-router-dom";
+
 //이미지
 import commentIcon from "../comment.png";
 import underLine from "../UnderLine.png";
@@ -14,6 +17,9 @@ import Comment from "../Comment";
 const Detail = (props) => {
   const params = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const cookies = new Cookies();
+
 
   // console.log(params.id.split("."));
   // const index = params.id.split(".")[1];
@@ -22,6 +28,19 @@ const Detail = (props) => {
 
   const comment_list = useSelector((state) => state.comment.list);
   const card_list = useSelector((state) => state.post.list);
+
+  const is_login = cookies.get("token");
+  const userEmail = cookies.get("userEmail");
+  
+  const card = useSelector((state) => state.post.list);
+
+  console.log(card.posts);
+  console.log(params.id.split("."));
+  const index = params.id.split(".")[1];
+  const postIdnum = Number(params.id.split(".")[0]);
+  const posting = card.posts[index];
+  console.log(posting.postId);
+
 
   React.useEffect(() => {
     dispatch(loadPostApi(postIdnum));
@@ -51,6 +70,23 @@ const Detail = (props) => {
 
   // const TimeLabel = posting.postOrderTime.split(":");
 
+  if (!is_login && !userEmail) {
+    return (
+      <Div margin="100px 0px" padding="16px" center>
+        <Div size="32px" bold>
+          앗! 잠깐!
+        </Div>
+        <Div size="16px">로그인 후에만 글을 쓸 수 있어요!</Div>
+        <button
+          onClick={() => {
+            navigate("/login");
+          }}
+        >
+          로그인 하러가기
+        </button>
+      </Div>
+    );
+  } else {
   return (
     <>
       {posting !== undefined ? (
@@ -124,7 +160,10 @@ const Detail = (props) => {
       </WrapC>
     </>
   );
+}
 };
+
+
 
 const Wrap = styled.div`
   max-width: 650px;
@@ -357,6 +396,7 @@ const Line = styled.img`
   margin: 36px 0px;
 `;
 
+
 const WrapC = styled.div`
   max-width: 650px;
   width: 95%;
@@ -485,5 +525,6 @@ const CommentContent = styled.span`
   text-align: left;
   white-space: pre-line;
 `;
+
 
 export default Detail;
