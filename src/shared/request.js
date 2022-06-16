@@ -11,6 +11,11 @@ if (token) {
   instance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 }
 
+// axios.get('https://api.github.com/user', { 
+//     headers: { 
+//         'Authorization': `token ${access_token}` 
+// } })
+
 // localStorage.setItem("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTEwY2Q0OTE4NWU0YTg5NTBiMTQzMzciLCJuaWNrbmFtZSI6IkxFTyIsImlhdCI6MTYyOTcwOTM1OCwiZXhwIjoxNjI5Nzk1NzU4fQ.GwrocxkCxYMrEyAuImqjpBz_B8GFL19xXwih0HHyeJk")
 
 export default instance;

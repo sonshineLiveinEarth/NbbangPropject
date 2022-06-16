@@ -1,14 +1,38 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  actionCreators as userActions,
+  userInfoDB,
+  logoutDB,
+} from "./redux/modules/users";
+import Cookies from "universal-cookie";
 
 // 이미지파일
 import img from "./Nlogo.png";
 import LogoutImg from "./Logout.png";
+import { replace } from "connected-react-router";
 
 const Header = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.users.list);
+  console.log(user);
+  const cookies = new Cookies();
 
+  useEffect(() => {
+    dispatch(userInfoDB());
+  }, [dispatch]);
+
+  const is_login = localStorage.getItem("jwtToken");
+  const userEmail = localStorage.getItem("userEmail");
+const logout =(e)=>{
+  localStorage.removeItem("jwtToken");
+  localStorage.removeItem("email");
+  localStorage.removeItem("token");
+  navigate("/")
+}
   return (
     <>
       <HeaderBack>
@@ -21,21 +45,40 @@ const Header = () => {
           />
           <Region>경기도 수원시 행궁동</Region>
         </LogoWrap>
-        <RightWrap>
-          <LogoutWrap onClick={() => {
-                navigate("/signup");
-              }}>
-            <LogoutIcon
-              src={LogoutImg}
+        {is_login ? (
+          <RightWrap>
+            <LoginWrap
+            onClick={() => {
+              dispatch(logout());
+            }}
               
-            />
-            <LogoutText>나가기</LogoutText>
-          </LogoutWrap>
-          <ProfileWrap>
-            <ProfileImage />
-            <Nickname>먹보님</Nickname>
-          </ProfileWrap>
-        </RightWrap>
+            >
+              <LogoutIcon src={LogoutImg} />
+              <LogoutText
+                onClick={() => {
+                  dispatch(logoutDB());
+                }}
+              >
+                나가기
+              </LogoutText>
+            </LoginWrap>
+            <ProfileWrap>
+              <ProfileImage />
+              <Nickname>먹보님</Nickname>
+            </ProfileWrap>
+          </RightWrap>
+        ) : (
+          <RightWrap>
+            <LoginWrap
+              onClick={() => {
+                navigate("/login");
+              }}
+            >
+              <LogoutIcon src={LogoutImg} />
+              <LogoutText>시작하기</LogoutText>
+            </LoginWrap>
+          </RightWrap>
+        )}
       </HeaderBack>
       <Background />
     </>
@@ -94,12 +137,13 @@ const RightWrap = styled.div`
   margin-right: 5vw;
 `;
 
-const LogoutWrap = styled.div`
+const LoginWrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   margin-right: 3vw;
+  cursor: pointer;
 `;
 
 const LogoutIcon = styled.img`
