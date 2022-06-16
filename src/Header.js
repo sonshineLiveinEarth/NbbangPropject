@@ -2,7 +2,10 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { actionCreators as userActions } from "./redux/modules/users";
+import {
+  actionCreators as userActions,
+  userInfoDB,
+} from "./redux/modules/users";
 
 // 이미지파일
 import img from "./Nlogo.png";
@@ -10,7 +13,12 @@ import LogoutImg from "./Logout.png";
 
 const Header = () => {
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.users.list);
+  console.log(user);
+  useEffect(() => {
+    dispatch(userInfoDB());
+  }, [dispatch]);
 
   return (
     <>
@@ -42,7 +50,6 @@ const Header = () => {
       <Background />
     </>
   );
-
 };
 
 const HeaderBack = styled.div`

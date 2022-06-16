@@ -8,8 +8,6 @@ import Cookies from "universal-cookie";
 
 import DoneBtn from "../DoneBtn.png";
 
-
-
 // 날짜 선택 라이브러리
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -21,9 +19,9 @@ const Write = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cookies = new Cookies();
-//cookie
-const is_login = cookies.get("token");
-const userEmail = cookies.get("userEmail");
+  //cookie
+  const is_login = cookies.get("token");
+  const userEmail = cookies.get("userEmail");
 
   const [postTitle, setPostTitle] = useState("");
   const [category, setCategory] = useState("All");
@@ -33,7 +31,6 @@ const userEmail = cookies.get("userEmail");
   const [PostingImage, setPostingImage] = useState("");
   const [orderDate, setOrderDate] = useState(new Date());
 
-  
   const title = React.useRef(null);
 
   // 카테고리 선택
@@ -102,7 +99,6 @@ const userEmail = cookies.get("userEmail");
   };
 
   //컨테이너
-
   if (!is_login && !userEmail) {
     return (
       <Container margin="100px 0px" padding="16px" center>
@@ -120,154 +116,154 @@ const userEmail = cookies.get("userEmail");
       </Container>
     );
   } else {
-  return (
-    <ThemeProvider theme={theme}>
-      <Container enctype="multipart/form-data">
-        <Subtitle>N빵모임 만들기</Subtitle>
-        <Label>카테고리</Label>
-        <Buttonbox>
-          <CategoryLabel>
-            <FormCheckLeft
-              type="radio"
-              id="All"
-              name="radioButton"
-              onChange={changeRadio}
-              value={category}
-              defaultChecked
-            />
-            <FormCheckText>전체</FormCheckText>
-          </CategoryLabel>
-          <CategoryLabel>
-            <FormCheckLeft
-              type="radio"
-              id="Chicken"
-              name="radioButton"
-              onChange={changeRadio}
-              value={category}
-            />
-            <FormCheckText>치킨</FormCheckText>
-          </CategoryLabel>
-          <CategoryLabel>
-            <FormCheckLeft
-              type="radio"
-              id="Korean"
-              name="radioButton"
-              onChange={changeRadio}
-              value={category}
-            />
-            <FormCheckText>한식</FormCheckText>
-          </CategoryLabel>
-          <CategoryLabel>
-            <FormCheckLeft
-              type="radio"
-              id="Midnight"
-              name="radioButton"
-              onChange={changeRadio}
-              value={category}
-            />
-            <FormCheckText>야식</FormCheckText>
-          </CategoryLabel>
-          <CategoryLabel>
-            <FormCheckLeft
-              type="radio"
-              id="Chinese"
-              name="radioButton"
-              onChange={changeRadio}
-              value={category}
-            />
-            <FormCheckText>중식</FormCheckText>
-          </CategoryLabel>
-        </Buttonbox>
-
-        <Label>제목</Label>
-        <InputContainer
-          type="text"
-          placeholder="제목을 적어주세요"
-          onChange={(e) => {
-            setPostTitle(e.target.value);
-          }}
-          value={postTitle}
-        />
-        <Line src={underLine} />
-        <Label>사진</Label>
-
-        <Div3>
-          <ImageFeild>
-            {PostingImage && (
-              <img
-                src={PostingImage.url}
-                alt="프로필 사진 미리보기"
-                style={{
-                  width: "300px",
-                  height: "150px",
-                  objectFit: "cover",
-                  zIndex: "2",
-                  borderRadius: "15px",
-                }}
+    return (
+      <ThemeProvider theme={theme}>
+        <Container enctype="multipart/form-data">
+          <Subtitle>N빵모임 만들기</Subtitle>
+          <Label>카테고리</Label>
+          <Buttonbox>
+            <CategoryLabel>
+              <FormCheckLeft
+                type="radio"
+                id="All"
+                name="radioButton"
+                onChange={changeRadio}
+                value={category}
+                defaultChecked
               />
-            )}
-            {!PostingImage && <span> 미리보기</span>}
-          </ImageFeild>
-          <FileBtn htmlfor="postImage">사진 선택</FileBtn>
-          <InputFile onChange={preview} type="file" id="postImage" />
-        </Div3>
+              <FormCheckText>전체</FormCheckText>
+            </CategoryLabel>
+            <CategoryLabel>
+              <FormCheckLeft
+                type="radio"
+                id="Chicken"
+                name="radioButton"
+                onChange={changeRadio}
+                value={category}
+              />
+              <FormCheckText>치킨</FormCheckText>
+            </CategoryLabel>
+            <CategoryLabel>
+              <FormCheckLeft
+                type="radio"
+                id="Korean"
+                name="radioButton"
+                onChange={changeRadio}
+                value={category}
+              />
+              <FormCheckText>한식</FormCheckText>
+            </CategoryLabel>
+            <CategoryLabel>
+              <FormCheckLeft
+                type="radio"
+                id="Midnight"
+                name="radioButton"
+                onChange={changeRadio}
+                value={category}
+              />
+              <FormCheckText>야식</FormCheckText>
+            </CategoryLabel>
+            <CategoryLabel>
+              <FormCheckLeft
+                type="radio"
+                id="Chinese"
+                name="radioButton"
+                onChange={changeRadio}
+                value={category}
+              />
+              <FormCheckText>중식</FormCheckText>
+            </CategoryLabel>
+          </Buttonbox>
 
-        <Label>배달 받을 장소</Label>
-        <InputContainer
-          type="text"
-          placeholder="배달 받을 구체적인 장소를 적어주세요"
-          onChange={(e) => {
-            setAddres(e.target.value);
-          }}
-          value={addres}
-        />
-        <Line src={underLine} />
-
-        <Label>주문 희망 시간</Label>
-
-        <DateWrap>
-          <SDatePicker
-            selected={orderDate}
-            onChange={(date) => {
-              setOrderDate(date);
-            }}
-            locale={ko}
-            dateFormat="yyyy년 MM월 dd일"
-            minDate={new Date()}
-            value={orderDate}
-          />
-          <Timeinput
-            type="time"
+          <Label>제목</Label>
+          <InputContainer
+            type="text"
+            placeholder="제목을 적어주세요"
             onChange={(e) => {
-              setOrderTime(e.target.value);
+              setPostTitle(e.target.value);
             }}
-            value={orderTime}
+            value={postTitle}
           />
-        </DateWrap>
+          <Line src={underLine} />
+          <Label>사진</Label>
 
-        <Label>N빵 내용</Label>
+          <Div3>
+            <ImageFeild>
+              {PostingImage && (
+                <img
+                  src={PostingImage.url}
+                  alt="프로필 사진 미리보기"
+                  style={{
+                    width: "300px",
+                    height: "150px",
+                    objectFit: "cover",
+                    zIndex: "2",
+                    borderRadius: "15px",
+                  }}
+                />
+              )}
+              {!PostingImage && <span> 미리보기</span>}
+            </ImageFeild>
+            <FileBtn htmlfor="postImage">사진 선택</FileBtn>
+            <InputFile onChange={preview} type="file" id="postImage" />
+          </Div3>
 
-        <InputContainer
-          type="text"
-          placeholder="공구 내용을 구체적으로 적어주세요"
-          onChange={(e) => {
-            setContent(e.target.value);
-          }}
-          value={content}
-        ></InputContainer>
-        <Line src={underLine} />
-        <AddBtn
-          onClick={() => {
-            addPost();
-            // navigate("/");
-          }}
-        >
-          <AddBtnT src={DoneBtn} />
-        </AddBtn>
-      </Container>
-    </ThemeProvider>
-  );
-};
+          <Label>배달 받을 장소</Label>
+          <InputContainer
+            type="text"
+            placeholder="배달 받을 구체적인 장소를 적어주세요"
+            onChange={(e) => {
+              setAddres(e.target.value);
+            }}
+            value={addres}
+          />
+          <Line src={underLine} />
+
+          <Label>주문 희망 시간</Label>
+
+          <DateWrap>
+            <SDatePicker
+              selected={orderDate}
+              onChange={(date) => {
+                setOrderDate(date);
+              }}
+              locale={ko}
+              dateFormat="yyyy년 MM월 dd일"
+              minDate={new Date()}
+              value={orderDate}
+            />
+            <Timeinput
+              type="time"
+              onChange={(e) => {
+                setOrderTime(e.target.value);
+              }}
+              value={orderTime}
+            />
+          </DateWrap>
+
+          <Label>N빵 내용</Label>
+
+          <InputContainer
+            type="text"
+            placeholder="공구 내용을 구체적으로 적어주세요"
+            onChange={(e) => {
+              setContent(e.target.value);
+            }}
+            value={content}
+          ></InputContainer>
+          <Line src={underLine} />
+          <AddBtn
+            onClick={() => {
+              addPost();
+              // navigate("/");
+            }}
+          >
+            <AddBtnT src={DoneBtn} />
+          </AddBtn>
+        </Container>
+      </ThemeProvider>
+    );
+  }
 };
 
 const Container = styled.form`
