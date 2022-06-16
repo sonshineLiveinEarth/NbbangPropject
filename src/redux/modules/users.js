@@ -95,13 +95,13 @@ const loginDB = (userEmail, userPassword) => {
           })
         );
         localStorage.setItem("email", userEmail);
-        localStorageSet("token", cookie);
+        // localStorageSet("token", cookie);
         // console.log(setItem);
         console.log(localStorage);
 
         //    console.log("토큰을 받았어!", userEmail, _cookie)
-        cookies.set("userEmail", userEmail, { path: "/" });
-        cookies.set("token", cookie, `${cookie}`);
+        // cookies.set("userEmail", userEmail, { path: "/" });
+        // cookies.set("token", cookie, `${cookie}`);
       })
 
       .catch((error) => {
@@ -143,7 +143,7 @@ export const logoutDB = () => {
   return function (dispatch, getState, { navigate }) {
     dispatch(logOut());
     localStorage.removeItem("email");
-    localStorage.removeItem("token");
+    localStorage.removeItem("jwtToken");
     navigate.replace("/");
   };
 };
