@@ -24,15 +24,18 @@ function Signup() {
     const [passwordChek, setUserPasswordChek] = useState("");
     const [regionGu, setRegionGu] = useState("");
     const [regiondetail, setRegionDetail] = useState("");
-    const [ProfileImage, setImeageSrc] = useState("");
+    const [userProfileImage, setFiles] = useState("");
+
+
+
+    let ProfImage = document.getElementById("userimage");
+
     // const reader = new FileReader();
     const reader = new FileReader();
 
 
 
-    // <></>
-    const _signup = () => {
-        console.log("보낸다!")
+    const handleSubmit = (e) => {
         if (nickname === '' || email === '' || password === '' || passwordChek === '' || regionGu === '' || regiondetail === '') {
             alert('빈칸을 다 채워주세요.');
             return;
@@ -40,21 +43,70 @@ function Signup() {
             alert('비밀번호와 비밀번호 확인이 서로 다릅니다. 다시 적어주세요.');
             return;
         }
-        dispatch(userActions.SignupDB(nickname, email, password, regionGu, regiondetail, ProfileImage));
-        console.log("보낸다!")
-    };
-    const preveiw = (e) => {
-        reader.readAsDataURL(e.target.files[0])
-        return new Promise((resolve) => {
-            reader.onload = () => {
-                setImeageSrc(reader.result);
-                resolve();
-            };
-            console.log(e.target.files[0])
+        e.preventDefault();
+        let frm = new FormData();
 
+        frm.append("userNickname", nickname)
+        frm.append("userEmail", email)
+        frm.append("userPassword", password)
+        frm.append("confirmPassword", passwordChek)
+        frm.append("regionGu", regionGu)
+        frm.append("regionDetail", regiondetail)
+        // const variables = [{
+        //     userNickname: nickname,
+        //     userEmail: email,
+        //     userPassword: password,
+        //     confirmPassword: passwordChek,
+        //     regionGu: regionGu,
+        //     regionDetail: regiondetail,
+
+        //   }]
+        frm.append("userProfileImage", ProfImage.files[0])
+        console.log(ProfImage.files[0])
+
+        axios({
+            method: "post",
+            url: "http://3.39.226.20/api/signup",
+            data: frm,
+            headers: { "Content-Type": "multipart/form-data", Authorization: localStorage.getItem("token") }
         });
+        console.log(frm);
+        setFiles([]);
+
 
     };
+
+
+    // const preveiw = (e) => {
+    //     e.preventDefault();
+    //     const file = e.target.files[0];
+    //     setFiles([...files, { uploadedFile: file }]);
+    // };
+    // <></>
+    // const _signup = () => {
+    //     console.log("보낸다!")
+    //     if (nickname === '' || email === '' || password === '' || passwordChek === '' || regionGu === '' || regiondetail === '') {
+    //         alert('빈칸을 다 채워주세요.');
+    //         return;
+    //     } else if (password !== passwordChek) {
+    //         alert('비밀번호와 비밀번호 확인이 서로 다릅니다. 다시 적어주세요.');
+    //         return;
+    //     }
+    //     dispatch(userActions.SignupDB(nickname, email, password, regionGu, regiondetail, ProfileImage));
+    //     console.log("보낸다!")
+    // };
+    // const preveiw = (e) => {
+    //     reader.readAsDataURL(e.target.files[0])
+    //     return new Promise((resolve) => {
+    //         reader.onload = () => {
+    //             setImeageSrc(reader.result);
+    //             resolve();
+    //         };
+    //         console.log(e.target.files[0])
+
+    //     });
+
+    // };
     // console.log(users);
 
 
@@ -133,13 +185,17 @@ function Signup() {
                 <div className="ProfileImage">
                     <div>프로필 이미지</div><br />
                     <input
-                        type="file" onChange={preveiw}></input>
+                        id="userimage"
+                        type="file"
+                        name="photo"
+                        accept="image/*,audio/*,video/mp4,video/x-m4v,application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation,.csv"
+                        onChange={setFiles}></input>
 
                 </div>
 
                 <button className="s" text="저장하기" border_radius="30px"
                     onClick={
-                        _signup
+                        handleSubmit
                     }>
                     가입하기
                 </button>

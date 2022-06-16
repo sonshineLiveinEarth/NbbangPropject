@@ -7,6 +7,12 @@ const api = axios.create({
   },
 });
 
+const apiform = axios.create({
+  headers: {
+    "Content-Type": "multipart/form-data"
+  },
+});
+
 api.interceptors.request.use(function (config) {
   const Token = document.cookie.split("=")[1];
   config.headers.common["X-AUTH-TOKEN"] = `${Token}`;
@@ -42,11 +48,12 @@ export const apis = {
   //     passPassword: userPassword,
   //   }
   //   ),
-  signup: (nick, email, pwd, regGu, regDetail, ProfImage) =>
+  signup: (nick, email, pwd, passwordChek, regGu, regDetail, ProfImage) =>
     api.post("/api/signup", {
       userNickname: nick,
       userEmail: email,
       userPassword: pwd,
+      confirmPassword: passwordChek,
       regionGu: regGu,
       regionDetail: regDetail,
       userProfileImage: ProfImage,

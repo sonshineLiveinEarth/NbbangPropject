@@ -5,6 +5,7 @@ import { createPostApi } from "../redux/modules/post";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
+import axios from "axios";
 
 import DoneBtn from "../DoneBtn.png";
 
@@ -31,6 +32,7 @@ const Write = (props) => {
   const [PostingImage, setPostingImage] = useState("");
   const [orderDate, setOrderDate] = useState(new Date());
 
+  let postImage = document.getElementById("postImage");
   const title = React.useRef(null);
 
   // 카테고리 선택
@@ -54,22 +56,22 @@ const Write = (props) => {
   console.log(postYM);
   console.log(todayYM);
 
-  const addPost = () => {
-    // api에 데이터 추가하기!
-    dispatch(
-      createPostApi({
-        postCategory: category,
-        postTitle: postTitle,
-        postContent: content,
-        postAddress: addres,
-        postOrderTime: orderTime,
-        postOrderDate: postYM,
-        postImage: PostingImage?.url,
-        postTime: postTime,
-        postDate: todayYM,
-      })
-    );
-  };
+  // const addPost = () => {
+  //   // api에 데이터 추가하기!
+  //   dispatch(
+  //     createPostApi({
+  //       postCategory: category,
+  //       postTitle: postTitle,
+  //       postContent: content,
+  //       postAddress: addres,
+  //       postOrderTime: orderTime,
+  //       postOrderDate: postYM,
+  //       postImage: PostingImage?.url,
+  //       postTime: postTime,
+  //       postDate: todayYM,
+  //     })
+  //   );
+  // };
 
   //이미지 프리뷰
 
@@ -84,19 +86,59 @@ const Write = (props) => {
     });
   };
 
-  console.log(PostingImage);
+  // console.log(PostingImage);
 
-  const list = {
-    postCategory: category,
-    postTitle: postTitle,
-    postContent: content,
-    postAddress: addres,
-    postOrderTime: orderTime,
-    postOrderDate: postYM,
-    postImage: PostingImage?.url,
-    postTime: postTime,
-    postDate: todayYM,
-  };
+  // const list = {
+  //   postCategory: category,
+  //   postTitle: postTitle,
+  //   postContent: content,
+  //   postAddress: addres,
+  //   postOrderTime: orderTime,
+  //   postOrderDate: postYM,
+  //   postImage: PostingImage?.url,
+  //   postTime: postTime,
+  //   postDate: todayYM,
+  // };
+  const addPost = (e) => {
+    if (postTitle === ''  || addres === '' || content === ''  ) {
+        alert('빈칸을 다 채워주세요.');
+        return;
+   
+    }
+    // e.preventDefault();
+    let frm = new FormData();
+
+    frm.append("postCategory", category)
+    frm.append("postTitle", postTitle)
+    frm.append("postAddress", addres)
+    frm.append("postOrderTime", orderTime)
+    frm.append("postOrderDate ", orderDate)
+    frm.append("postContent", content)
+    frm.append("postDate", postTime)
+    // const variables = [{
+    //     userNickname: nickname,
+    //     userEmail: email,
+    //     userPassword: password,
+    //     confirmPassword: passwordChek,
+    //     regionGu: regionGu,
+    //     regionDetail: regiondetail,
+
+    //   }]
+    frm.append("postImage", postImage.files[0])
+    console.log(postImage.files[0])
+
+    axios({
+        method: "post",
+        url: "http://3.39.226.20/api/write",
+        data: frm,
+        headers: { "Content-Type": "multipart/form-data", Authorization: localStorage.getItem("token") }
+    });
+    console.log(frm);
+    preview([]);
+  }
+
+
+
 
   //컨테이너
   if (!is_login && !userEmail) {
@@ -205,7 +247,7 @@ const Write = (props) => {
               {!PostingImage && <span> 미리보기</span>}
             </ImageFeild>
             <FileBtn htmlfor="postImage">사진 선택</FileBtn>
-            <InputFile onChange={preview} type="file" id="postImage" />
+            <InputFile onChange={preview} type="file" id="postImage"  />
           </Div3>
 
           <Label>배달 받을 장소</Label>
