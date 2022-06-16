@@ -47,7 +47,13 @@ const Header = () => {
               }}
             >
               <LogoutIcon src={LogoutImg} />
-              <LogoutText>나가기</LogoutText>
+              <LogoutText
+                onClick={() => {
+                  dispatch(logoutDB());
+                }}
+              >
+                나가기
+              </LogoutText>
             </LoginWrap>
             <ProfileWrap>
               <ProfileImage />
@@ -58,7 +64,7 @@ const Header = () => {
           <RightWrap>
             <LoginWrap
               onClick={() => {
-                dispatch(logoutDB());
+                navigate("/login");
               }}
             >
               <LogoutIcon src={LogoutImg} />
