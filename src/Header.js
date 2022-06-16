@@ -5,7 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   actionCreators as userActions,
   userInfoDB,
+  logoutDB,
 } from "./redux/modules/users";
+import Cookies from "universal-cookie";
 
 // 이미지파일
 import img from "./Nlogo.png";
@@ -16,9 +18,14 @@ const Header = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.users.list);
   console.log(user);
+  const cookies = new Cookies();
+
   useEffect(() => {
     dispatch(userInfoDB());
   }, [dispatch]);
+
+  const is_login = cookies.get("token");
+  const userEmail = cookies.get("userEmail");
 
   return (
     <>
@@ -32,20 +39,33 @@ const Header = () => {
           />
           <Region>경기도 수원시 행궁동</Region>
         </LogoWrap>
-        <RightWrap>
-          <LoginWrap
-            onClick={() => {
-              navigate("/login");
-            }}
-          >
-            <LogoutIcon src={LogoutImg} />
-            <LogoutText>시작하기</LogoutText>
-          </LoginWrap>
-          <ProfileWrap>
-            <ProfileImage />
-            <Nickname>먹보님</Nickname>
-          </ProfileWrap>
-        </RightWrap>
+        {is_login ? (
+          <RightWrap>
+            <LoginWrap
+              onClick={() => {
+                navigate("/login");
+              }}
+            >
+              <LogoutIcon src={LogoutImg} />
+              <LogoutText>나가기</LogoutText>
+            </LoginWrap>
+            <ProfileWrap>
+              <ProfileImage />
+              <Nickname>먹보님</Nickname>
+            </ProfileWrap>
+          </RightWrap>
+        ) : (
+          <RightWrap>
+            <LoginWrap
+              onClick={() => {
+                dispatch(logoutDB());
+              }}
+            >
+              <LogoutIcon src={LogoutImg} />
+              <LogoutText>시작하기</LogoutText>
+            </LoginWrap>
+          </RightWrap>
+        )}
       </HeaderBack>
       <Background />
     </>

@@ -8,8 +8,9 @@ const api = axios.create({
 });
 
 api.interceptors.request.use(function (config) {
-  const Token = document.cookie.split("=")[1];
-  config.headers.common["X-AUTH-TOKEN"] = `${Token}`;
+  const token = localStorage.getItem("jwtToken");
+
+  config.headers.common["Authorization"] = `Bearer ${token}`;
   return config;
 });
 
@@ -24,7 +25,7 @@ export const apis = {
   addpost: (post) => api.post("/api/write", post),
   // edit: (id, contents) => api.put(`api/articles/${id}`, contents),
 
-  delpost: (id) => api.delete(`api/post/${id}`),
+  delpost: (id) => api.delete(`/api/post/${id}`),
 
   // comment
   loadcomments: (id) => api.get(`/api/detail/${id}`),

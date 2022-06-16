@@ -8,7 +8,7 @@ import { loadPostApi } from "../redux/modules/post";
 import Cookies from "universal-cookie";
 import { useNavigate } from "react-router-dom";
 import { delPostApi } from "../redux/modules/post";
-import { createCommentApi, deletaCommentApi } from "../redux/modules/comment";
+import { createCommentApi, deleteCommentApi } from "../redux/modules/comment";
 
 //이미지
 import commentIcon from "../comment.png";
@@ -32,8 +32,10 @@ const Detail = (props) => {
   const comment_list = useSelector((state) => state.comment.list);
   const card_list = useSelector((state) => state.post.list);
 
-  const is_login = cookies.get("token");
+  const is_login = localStorage.getItem("jwtToken");
   const userEmail = cookies.get("userEmail");
+  console.log(is_login);
+  console.log(userEmail);
 
   const card = useSelector((state) => state.post.list);
 
@@ -105,6 +107,8 @@ const Detail = (props) => {
     }
   };
 
+  console.log(id);
+
   const list = {
     comment: commentText.current.value,
     commentDate: postDay,
@@ -119,14 +123,15 @@ const Detail = (props) => {
           {posting !== undefined && is_login && userEmail && (
             <>
               <div>
-                <EditBtn>수정</EditBtn>
+                {/* <EditBtn>수정</EditBtn> */}
                 <EditBtn
                   onClick={() => {
-                    // const result =
-                    //   window.confirm("정말 이 포스팅을 삭제할까요?");
-                    // if (result) {
-                    dispatch(delPostApi(posting.postId));
-                    // }
+                    const result =
+                      window.confirm("정말 이 포스팅을 삭제할까요?");
+                    if (result) {
+                      dispatch(delPostApi(posting.postId));
+                      navigate("/");
+                    }
                   }}
                 >
                   삭제
@@ -191,6 +196,7 @@ const Detail = (props) => {
             <CommentBtn
               onClick={() => {
                 addComment(id);
+                navigate(0);
               }}
             >
               나도 끼기
@@ -211,7 +217,8 @@ const Detail = (props) => {
                       </div>
                       <DeleteBtn
                         onClick={() => {
-                          dispatch(deletaCommentApi(list.commentId));
+                          dispatch(deleteCommentApi(list.commentId));
+                          navigate(0);
                         }}
                       >
                         삭제

@@ -73,7 +73,7 @@ export const loadPostApi = (id) => async (dispatch) => {
 export const delPostApi = (id) => {
   return async function (dispatch, getState) {
     try {
-      await apis.del(id);
+      await apis.delpost(id);
     } catch (e) {}
   };
 };

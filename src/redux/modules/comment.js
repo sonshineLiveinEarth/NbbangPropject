@@ -2,6 +2,10 @@ import { apis } from "../../shared/api";
 import { localStorageGet, localStorageSet } from "../../shared/localStorage";
 import Cookies from "universal-cookie";
 import jwt_decode from "jwt-decode";
+import { useNavigate } from "react-router-dom";
+
+//navigate
+const navigate = useNavigate;
 
 // // Actions
 const LOAD = "comment/LOAD";
@@ -76,8 +80,30 @@ export const createCommentApi = (comment) => async (dispatch, getState) => {
     console.log(data);
 
     dispatch(addComment(data));
+    navigate(0);
   } catch (e) {}
 };
+
+// export const createCommentApi = (comment) => async (dispatch, getState) => {
+//     const token = localStorage.getItem("token");
+//     console.log("토큰", token);
+//     return async function (dispatch, getState, { history }) {
+//       const user = getState().user.user;
+//       const body = {
+//         ...comment,
+//       };
+//       await apis
+//         .post(`/api/detail/${comment.postId}`, body, {
+//           headers: {
+//             Authorization: `Bearer ${token}`,
+//           },
+//         })
+//         .then(dispatch(addComment(...comment)))
+//         .catch((err) => {
+//           console.log("댓글추가실패", err);
+//         });
+//     };
+//   };
 
 // export const deleteMagazineFB = (magazine_id) => {
 //   return async function (dispatch, getState) {
@@ -97,7 +123,7 @@ export const createCommentApi = (comment) => async (dispatch, getState) => {
 //   };
 // };
 
-export const deletaCommentApi = (coId) => (dispatch) => {
+export const deleteCommentApi = (coId) => (dispatch) => {
   try {
     apis.delComment(coId);
     dispatch(deleteComment(coId));
