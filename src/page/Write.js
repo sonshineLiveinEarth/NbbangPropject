@@ -15,14 +15,13 @@ import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
 
 import underLine from "./UnderLine.png";
-
 const Write = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cookies = new Cookies();
   //cookie
-  const is_login = cookies.get("token");
-  const userEmail = cookies.get("userEmail");
+  const is_login = localStorage.getItem("jwtToken");
+  const userEmail = localStorage.getItem("userEmail");
 
   const [postTitle, setPostTitle] = useState("");
   const [category, setCategory] = useState("All");
@@ -77,12 +76,14 @@ const Write = (props) => {
 
   const reader = new FileReader();
   const preview = (e) => {
-    reader.readAsDataURL(e.target.files[0]);
+    reader.readAsDataURL(postImage.files[0]);
     return new Promise((resolve) => {
       reader.onload = () => {
-        setPostingImage({ name: e.target.files[0], url: reader.result });
+        setPostingImage({ name: postImage.files[0], url: reader.result });
         resolve();
-      };
+      }
+
+      ;
     });
   };
 
@@ -126,13 +127,26 @@ const Write = (props) => {
     //   }]
     frm.append("postImage", postImage.files[0])
     console.log(postImage.files[0])
-
+    const token = localStorage.getItem("jwtToken");
     axios({
         method: "post",
         url: "http://3.39.226.20/api/write",
         data: frm,
-        headers: { "Content-Type": "multipart/form-data", Authorization: localStorage.getItem("token") }
-    });
+        headers: { "Content-Type": "multipart/form-data", "Authorization": `Bearer ${token}` }
+    }).then(
+      alert("게시글 등록 완료!")
+    ).then(
+      navigate("/")
+    )
+      
+  
+    // api.interceptors.request.use(function (config) {
+    //   const token = localStorage.getItem("jwtToken");
+    
+    //   config.headers.common["Authorization"] = `Bearer ${token}`;
+    //   return config;
+    // });
+    
     console.log(frm);
     preview([]);
   }

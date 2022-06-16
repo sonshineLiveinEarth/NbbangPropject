@@ -12,6 +12,7 @@ import Cookies from "universal-cookie";
 // 이미지파일
 import img from "./Nlogo.png";
 import LogoutImg from "./Logout.png";
+import { replace } from "connected-react-router";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -24,9 +25,14 @@ const Header = () => {
     dispatch(userInfoDB());
   }, [dispatch]);
 
-  const is_login = cookies.get("token");
-  const userEmail = cookies.get("userEmail");
-
+  const is_login = localStorage.getItem("jwtToken");
+  const userEmail = localStorage.getItem("userEmail");
+const logout =(e)=>{
+  localStorage.removeItem("jwtToken");
+  localStorage.removeItem("email");
+  localStorage.removeItem("token");
+  navigate("/")
+}
   return (
     <>
       <HeaderBack>
@@ -42,9 +48,10 @@ const Header = () => {
         {is_login ? (
           <RightWrap>
             <LoginWrap
-              onClick={() => {
-                navigate("/login");
-              }}
+            onClick={() => {
+              dispatch(logout());
+            }}
+              
             >
               <LogoutIcon src={LogoutImg} />
               <LogoutText
