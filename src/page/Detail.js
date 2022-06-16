@@ -115,6 +115,7 @@ const Detail = (props) => {
     postId: id,
   };
   console.log(list);
+
   return (
     <>
       <Wrap>
@@ -215,6 +216,7 @@ const Detail = (props) => {
                         <Nickname>{list.userNickname}</Nickname>
                         <CommentDate>{list.commentDate}</CommentDate>
                       </div>
+
                       <DeleteBtn
                         onClick={() => {
                           dispatch(deleteCommentApi(list.commentId));

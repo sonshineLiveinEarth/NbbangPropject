@@ -54,7 +54,13 @@ const logout =(e)=>{
               
             >
               <LogoutIcon src={LogoutImg} />
-              <LogoutText>나가기</LogoutText>
+              <LogoutText
+                onClick={() => {
+                  dispatch(logoutDB());
+                }}
+              >
+                나가기
+              </LogoutText>
             </LoginWrap>
             <ProfileWrap>
               <ProfileImage />
