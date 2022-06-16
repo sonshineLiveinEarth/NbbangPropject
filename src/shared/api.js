@@ -28,8 +28,9 @@ export const apis = {
 
   // comment
   loadcomments: (id) => api.get(`/api/detail/${id}`),
-  createComment: (id, comment) => api.post(`/api/detail/${id}`, { comment }),
-  // delComment: (id, coId) => api.delete(`/api/articles/${id}/comments/${coId}`),
+  createComment: (comment) =>
+    api.post(`/api/detail/${comment.postId}`, { ...comment }),
+  delComment: (id) => api.delete(`/api/comment/${id}`),
   // editComment: (id, coId, content) =>
   // 	api.put(`/api/articles/${id}/comments/${coId}`, { content }),
 

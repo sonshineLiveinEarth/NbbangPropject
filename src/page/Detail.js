@@ -8,7 +8,7 @@ import { loadPostApi } from "../redux/modules/post";
 import Cookies from "universal-cookie";
 import { useNavigate } from "react-router-dom";
 import { delPostApi } from "../redux/modules/post";
-import { createCommentApi } from "../redux/modules/comment";
+import { createCommentApi, deletaCommentApi } from "../redux/modules/comment";
 
 //이미지
 import commentIcon from "../comment.png";
@@ -96,7 +96,7 @@ const Detail = (props) => {
     } else {
       // api에 데이터 추가하기!
       dispatch(
-        createCommentApi(id, {
+        createCommentApi({
           comment: commentText.current.value,
           commentDate: postDay,
           postId: id,
@@ -209,7 +209,13 @@ const Detail = (props) => {
                         <Nickname>{list.userNickname}</Nickname>
                         <CommentDate>{list.commentDate}</CommentDate>
                       </div>
-                      <DeleteBtn>삭제</DeleteBtn>
+                      <DeleteBtn
+                        onClick={() => {
+                          dispatch(deletaCommentApi(list.commentId));
+                        }}
+                      >
+                        삭제
+                      </DeleteBtn>
                     </CommentProfileWrap>
                     <CommentContent>{list.comment}</CommentContent>
                   </CommentContentWrap>
