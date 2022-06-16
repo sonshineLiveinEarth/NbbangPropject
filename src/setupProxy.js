@@ -40,5 +40,12 @@ module.exports = (app) => {
       changeOrigin: true,
     })
   );
+
+  app.use(
+    createProxyMiddleware("/api/post", {
+      target: "http://3.39.226.20",
+      changeOrigin: true,
+    })
+  );
   // 여기 아래에 경로 추가
 };

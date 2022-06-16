@@ -18,10 +18,8 @@ const LOAD = "user/LOAD";
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
 const getUser = createAction(GET_USER, (user) => ({ user }));
 const setUser = createAction(SET_USER, (user) => ({ user }));
-// const userInfo = createAction(GET_USER, (user) => ({ user }));
-export function userInfo(user) {
-  return { type: LOAD, user };
-}
+const userInfo = createAction(GET_USER, (user) => ({ user }));
+
 // initialState
 const initialState = {
   user: null,
@@ -29,7 +27,6 @@ const initialState = {
 };
 
 //cookie
-
 const cookies = new Cookies();
 
 //navigate
@@ -84,7 +81,6 @@ const loginDB = (userEmail, userPassword) => {
       .login(userEmail, userPassword)
 
       .then((res) => {
-        console.log(res);
         console.log(res.data.token);
         const cookie = res.data.token;
         //     setCookie("token", _cookie, 7);
@@ -98,7 +94,6 @@ const loginDB = (userEmail, userPassword) => {
             nickname: DecodedToken.nickname,
           })
         );
-        console.log("야!야!야!");
         localStorage.setItem("email", userEmail);
         localStorageSet("token", cookie);
         // console.log(setItem);
@@ -131,18 +126,6 @@ const loginCheck = () => {
   };
 };
 
-// export const userInfoDB = () => async (dispatch, getState) => {
-//   try {
-//     console.log("얍");
-//     const token = localStorageGet("token");
-//     const userdata = getState(token).user;
-//     console.log(userdata);
-//     dispatch(userInfo(userdata));
-//   } catch (e) {
-//     console.log(`로그인 유저 정보 조회 오류 발생!${e}`);
-//   }
-// };
-
 export const userInfoDB = () => {
   return async function (dispatch) {
     try {
@@ -156,22 +139,7 @@ export const userInfoDB = () => {
   };
 };
 
-// export const userInfoDB = () => {
-//   return function (dispatch, getState) {
-//     apis
-//       .userInfo()
-//       .then((res) => {
-//         console.log("얍");
-//         dispatch(userInfo({ res }));
-//         console.log(res);
-//       })
-//       .catch((err) => {
-//         return err;
-//       });
-//   };
-// };
-
-const logoutDB = () => {
+export const logoutDB = () => {
   return function (dispatch, getState, { navigate }) {
     dispatch(logOut());
     localStorage.removeItem("email");
