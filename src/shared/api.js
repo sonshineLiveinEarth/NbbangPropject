@@ -1,6 +1,5 @@
 import axios from "axios";
-import { localStorageGet } from "./localStorage";
-const token = localStorageGet('token');
+
 const api = axios.create({
   headers: {
     "content-type": "application/json;charset=UTF-8",
@@ -14,9 +13,7 @@ api.interceptors.request.use(function (config) {
   return config;
 });
 
-// axios.get('https://api.github.com/user', { headers: { 'Authorization': `token ${access_token}` } })
-
-// 이미지 Api E따로 만들어서
+// 이미지 Api 따로 만들어서
 // "content-type": "multipart/form-data"
 
 export const apis = {
@@ -24,28 +21,15 @@ export const apis = {
   loadposts: () => api.get("/api/postList"),
   loadpost: (id) => api.get(`/api/detail/${id}`),
 
-  addpost: (post) => api.post("/api/write", post,{
-    headers: {
-      "Authorization": `Bearer ${token}`
-    }
-  }),
-  edit: (id, post) => api.put(`api/edit/${id}`, post,{
-    headers: {
-      "Authorization": `Bearer ${token}`,
-    }
-  }  ),
+  addpost: (post) => api.post("/api/write", post),
+  // edit: (id, contents) => api.put(`api/articles/${id}`, contents),
 
-  delpost: (id) => api.put(`api/edit/${id}`),
+  delpost: (id) => api.delete(`api/post/${id}`),
 
   // comment
   loadcomments: (id) => api.get(`/api/detail/${id}`),
-  // addComment: (id, content) =>
-  // 	api.post(`/api/articles/${id}/comments`, { content }),
-  // delComment: (id, coId) => api.delete(`/api/articles/${id}/comments/${coId}`,{
-  //   headers: {
-  //     "Authorization": `Bearer ${token}`,
-  //   }
-  // }),
+  createComment: (id, comment) => api.post(`/api/detail/${id}`, { comment }),
+  // delComment: (id, coId) => api.delete(`/api/articles/${id}/comments/${coId}`),
   // editComment: (id, coId, content) =>
   // 	api.put(`/api/articles/${id}/comments/${coId}`, { content }),
 
@@ -72,4 +56,6 @@ export const apis = {
   // userInfo: () => api.get(`/myinfo`),
   // userPassword: (pw) => api.post(`/myinfo`, pw),
   // userNewPassword: (pw) => api.put(`/myinfo`, pw),
+
+  userInfo: () => api.get(`/api/userData`),
 };

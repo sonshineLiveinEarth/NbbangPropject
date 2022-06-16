@@ -1,8 +1,11 @@
 import { apis } from "../../shared/api";
+import { localStorageGet, localStorageSet } from "../../shared/localStorage";
+import Cookies from "universal-cookie";
+import jwt_decode from "jwt-decode";
 
 // // Actions
 const LOAD = "comment/LOAD";
-// const CREATE = "magazine/CREATE";
+const CREATE = "comment/CREATE";
 // const DELETE = "magazine/DELETE";
 
 // // Reducer
@@ -15,12 +18,12 @@ export default function reducer(state = initalState, action = {}) {
       return { list: action.comment, is_loaded: true };
     }
 
-    //     case "magazine/CREATE": {
-    //       console.log("이제 값을 만들거야");
+    case "comment/CREATE": {
+      console.log("이제 값을 만들거야");
 
-    //       const new_magazine_list = [...state.list];
-    //       return { ...state, list: new_magazine_list };
-    //     }
+      const new_comment_list = [...state.list];
+      return { ...state, list: new_comment_list };
+    }
 
     //     case "magazine/DELETE": {
     //       const new_magazine_list = state.list.filter((l, idx) => {
@@ -43,10 +46,10 @@ export function loadComment(comment) {
   return { type: LOAD, comment };
 }
 
-// export function createMagazine(magazine) {
-//   console.log("액션을 생성할거야!");
-//   return { type: CREATE, magazine };
-// }
+export function addComment(comment) {
+  console.log("액션을 생성할거야!");
+  return { type: CREATE, comment };
+}
 
 // export function deleteMagazine(magazine_index) {
 //   console.log("지울 인덱스", magazine_index);
@@ -54,21 +57,6 @@ export function loadComment(comment) {
 // }
 
 // /// middlewares(파이어베이스랑 통신하는 부분)
-// export const loadCommentApi = (id) => {
-//   return async function (dispatch) {
-//     try {
-//       console.log(id);
-//       const data = await apis.loadcomments(id);
-//       console.log(data);
-//       dispatch(loadComment(data));
-//       return { is_loaded: true };
-
-//     } catch (e) {
-//       console.log(`포스팅 조회 오류 발생!${e}`);
-//     }
-//   };
-// };
-
 export const loadCommentApi = (id) => async (dispatch) => {
   try {
     const { data } = await apis.loadcomments(id);
@@ -78,13 +66,18 @@ export const loadCommentApi = (id) => async (dispatch) => {
   }
 };
 
-// export const createMagazineFB = (magazine) => {
-//   return async function (dispatch) {
-//     const docRef = await addDoc(collection(db, "magazine"), magazine);
-//     const magazine_data = { id: docRef.id, ...magazine };
-//     dispatch(createMagazine(magazine_data));
-//   };
-// };
+export const createCommentApi = (id, comment) => async (dispatch, getState) => {
+  const userEmail = localStorageGet("useremail");
+  const tokenCheck = document.cookie;
+  try {
+    console.log("댓글 만들 준비");
+    console.log(id, comment);
+    const { data } = await apis.createComment(id, comment);
+    console.log(data);
+
+    dispatch(addComment(data));
+  } catch (e) {}
+};
 
 // export const deleteMagazineFB = (magazine_id) => {
 //   return async function (dispatch, getState) {

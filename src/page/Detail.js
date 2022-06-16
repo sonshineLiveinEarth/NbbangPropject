@@ -7,6 +7,8 @@ import { loadCommentApi } from "../redux/modules/comment";
 import { loadPostApi } from "../redux/modules/post";
 import Cookies from "universal-cookie";
 import { useNavigate } from "react-router-dom";
+import { delPostApi } from "../redux/modules/post";
+import { createCommentApi } from "../redux/modules/comment";
 
 //이미지
 import commentIcon from "../comment.png";
@@ -20,6 +22,7 @@ const Detail = (props) => {
   const navigate = useNavigate();
   const cookies = new Cookies();
 
+  const commentText = React.useRef("");
 
   // console.log(params.id.split("."));
   // const index = params.id.split(".")[1];
@@ -31,78 +34,134 @@ const Detail = (props) => {
 
   const is_login = cookies.get("token");
   const userEmail = cookies.get("userEmail");
-  
+
   const card = useSelector((state) => state.post.list);
 
-  console.log(card.posts);
-  console.log(params.id.split("."));
   const index = params.id.split(".")[1];
   // const postIdnum = Number(params.id.split(".")[0]);
   // const posting = card.posts[index];
-  console.log(posting.postId);
-
 
   React.useEffect(() => {
     dispatch(loadPostApi(postIdnum));
     dispatch(loadCommentApi(postIdnum));
   }, []);
 
-  const posting = comment_list.detail;
-  const comment = comment_list.existingComment;
-  console.log(comment_list.detail);
-  console.log(comment);
+  const posting = comment_list?.detail;
+  const comment = comment_list?.existingComment;
 
-  // const comment_list = comment.data.existingComment
   // 현재시간
-  // const today = new Date();
-  // const stringToday = today.toString().split(" ")[4];
-  // const todayHour = stringToday.split(":")[0];
-  // const todayMin = stringToday.split(":")[1];
-
+  const today = new Date();
+  const stringToday = today.toString().split(" ")[4];
+  const todayHour = stringToday.split(":")[0];
+  const todayMin = stringToday.split(":")[1];
+  console.log(comment_list?.detail);
   // 주문희망시간
-  // const orderHour = Number(card.posts.postOrderTime.split(":")[0]);
-  // const orderMin = Number(card.posts.postOrderTime.split(":")[1]);
-  // console.log(card.posts.postOrderTime);
+  // const orderHour = Number(posting.postOrderTime.split(":")[0]);
+  // const orderMin = Number(posting.postOrderTime.split(":")[1]);
+
   // const leftHour = (orderHour - todayHour) * 60;
   // const leftMin = orderMin - todayMin;
-  // // 주문까지 남은시간
+  // // // 주문까지 남은시간
   // const leftTime = leftHour + leftMin;
 
-  // const TimeLabel = posting.postOrderTime.split(":");
+  const TimeLabel = posting?.postOrderTime.split(":");
 
-  if (!is_login && !userEmail) {
-    return (
-      <Div margin="100px 0px" padding="16px" center>
-        <Div size="32px" bold>
-          앗! 잠깐!
-        </Div>
-        <Div size="16px">로그인 후에만 글을 쓸 수 있어요!</Div>
-        <button
-          onClick={() => {
-            navigate("/login");
-          }}
-        >
-          로그인 하러가기
-        </button>
-      </Div>
-    );
-  } else {
+  console.log(TimeLabel);
+  console.log();
+
+  //포스팅 작성한 시간 커스텀하기
+  const now = new Date();
+  const Day = now.getDate();
+  const month = Number(now.getMonth() + 1);
+  const year = now.getFullYear();
+  const hours = now.getHours();
+  const minutes = now.getMinutes();
+  const postTime = hours + ":" + minutes;
+
+  const yearSub = year.toString().substr(2, 4);
+  // var year00 = yearSub
+  // const DateS = orderDate.toString().split(" ");
+  // const postYM = DateS[3].split("0")[1] + "." + month + "." + DateS[2];
+  // const todayYM = DateS[3].split("0")[1] + "." + month + "." + Day;
+  // console.log(postYM);
+  // console.log(todayYM);
+  console.log(yearSub + "." + month + "." + Day + " " + postTime);
+  const postDay = yearSub + "." + month + "." + Day + " " + postTime;
+  const id = posting !== undefined ? posting.postId : null;
+  //댓글 추가하기!
+
+  const addComment = () => {
+    if (commentText.current.value === "") {
+      window.alert("댓글을 작성해주세요!");
+    } else {
+      // api에 데이터 추가하기!
+      dispatch(
+        createCommentApi(id, {
+          comment: commentText.current.value,
+          commentDate: postDay,
+          postId: id,
+        })
+      );
+    }
+  };
+
+  const list = {
+    comment: commentText.current.value,
+    commentDate: postDay,
+    postId: id,
+  };
+  console.log(list);
   return (
     <>
-      {posting !== undefined ? (
-        <>
-          <Wrap>
-            <Div>
-              <PostDate>{posting.postDate}</PostDate>
-              <EditBtn>수정</EditBtn>
-            </Div>
+      <Wrap>
+        <Div>
+          {posting !== undefined && <PostDate>{posting.postDate}</PostDate>}
+          {posting !== undefined && is_login && userEmail && (
+            <>
+              <div>
+                <EditBtn>수정</EditBtn>
+                <EditBtn
+                  onClick={() => {
+                    // const result =
+                    //   window.confirm("정말 이 포스팅을 삭제할까요?");
+                    // if (result) {
+                    dispatch(delPostApi(posting.postId));
+                    // }
+                  }}
+                >
+                  삭제
+                </EditBtn>
+              </div>
+            </>
+          )}
+        </Div>
+        {posting !== undefined ? (
+          <>
             <PostTitle>{posting.postTitle}</PostTitle>
             <CommentInfo>
               <CommentIcon src={commentIcon} />
-              <CommentNum>10</CommentNum>
+              <CommentNum>{posting.commentAll}</CommentNum>
             </CommentInfo>
             <PostImage postImage={posting.postImage} />
-            <TimeWrap></TimeWrap>
+            <TimeWrap>
+              {/* {leftTime !== undefined && leftTime > 0 ? (
+                  <>
+                    <TimeBox />
+                    <TimeInfo>
+                      주문까지{" "}
+                      <Time>
+                        {leftTime}
+                        <TimeLabel>분</TimeLabel>
+                      </Time>
+                    </TimeInfo>
+                  </>
+                ) : (
+                  <>
+                    <TimeOutBox />
+                    <TimeOut>마감</TimeOut>
+                  </>
+                )} */}
+            </TimeWrap>
             <PostAdress>{posting.postAddress}에서 모여요</PostAdress>
             <div>
               <PostContent>주문 예정일 </PostContent>
@@ -111,59 +170,57 @@ const Detail = (props) => {
             <div>
               <PostContent>주문 예정 시간 </PostContent>
               <PostContentT>
-                {/* {TimeLabel[0]}시 {TimeLabel[1]}분 */}
+                {TimeLabel[0]}시 {TimeLabel[1]}분
               </PostContentT>
             </div>
 
             <PostContent>{posting.postContent}</PostContent>
             <NicknameC>글쓴이 {posting.userNickname}</NicknameC>
             <Line src={underLine} />
-          </Wrap>
-        </>
-      ) : null}
-
+          </>
+        ) : null}
+      </Wrap>
       <WrapC>
-        <CommentInputWrap>
-          <CommentInput placeholder="댓글을 남겨주세요" autoFocus />
-          <CommentBtn>나도 끼기</CommentBtn>
-        </CommentInputWrap>
-        {comment.map((list, index) => {
-          return (
-            <CommentBox key={index}>
-              <ProfileImage profileImage={list.userProfileImage} />
+        {is_login && userEmail && (
+          <CommentInputWrap>
+            <CommentInput
+              ref={commentText}
+              placeholder="댓글을 남겨주세요"
+              autoFocus
+            />
+            <CommentBtn
+              onClick={() => {
+                addComment(id);
+              }}
+            >
+              나도 끼기
+            </CommentBtn>
+          </CommentInputWrap>
+        )}
+        {comment !== undefined
+          ? comment.map((list, index) => {
+              return (
+                <CommentBox key={index}>
+                  <ProfileImage profileImage={list.userProfileImage} />
 
-              <CommentContentWrap>
-                <CommentProfileWrap>
-                  <div>
-                    <Nickname>{list.userNickname}</Nickname>
-                    <CommentDate>{list.commentDate}</CommentDate>
-                  </div>
-                  <DeleteBtn>삭제</DeleteBtn>
-                </CommentProfileWrap>
-                <CommentContent>{list.comment}</CommentContent>
-              </CommentContentWrap>
-            </CommentBox>
-          );
-        })}
-
-        {/* <CommentBox>
-          <ProfileImage />
-
-          <CommentContentWrap>
-            <CommentProfileWrap>
-              <Nickname>먹보예유</Nickname>
-              <CommentDate>22.06.11 19:35</CommentDate>
-            </CommentProfileWrap>
-            <CommentContent>저용 글이 길어지면 이렇게 되지요</CommentContent>
-          </CommentContentWrap>
-        </CommentBox> */}
+                  <CommentContentWrap>
+                    <CommentProfileWrap>
+                      <div>
+                        <Nickname>{list.userNickname}</Nickname>
+                        <CommentDate>{list.commentDate}</CommentDate>
+                      </div>
+                      <DeleteBtn>삭제</DeleteBtn>
+                    </CommentProfileWrap>
+                    <CommentContent>{list.comment}</CommentContent>
+                  </CommentContentWrap>
+                </CommentBox>
+              );
+            })
+          : null}
       </WrapC>
     </>
   );
-}
 };
-
-
 
 const Wrap = styled.div`
   max-width: 650px;
@@ -396,7 +453,6 @@ const Line = styled.img`
   margin: 36px 0px;
 `;
 
-
 const WrapC = styled.div`
   max-width: 650px;
   width: 95%;
@@ -525,6 +581,5 @@ const CommentContent = styled.span`
   text-align: left;
   white-space: pre-line;
 `;
-
 
 export default Detail;

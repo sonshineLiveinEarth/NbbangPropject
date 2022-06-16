@@ -85,7 +85,7 @@ const Card = (props) => {
                     <Nickname>{list.userNickname}</Nickname>
                     <CommentWrap>
                       <CommentIcon src={commentIcon} />
-                      <CommentNum>10</CommentNum>
+                      <CommentNum>{list.commentAll}</CommentNum>
                     </CommentWrap>
                   </PostInfo>
                 </PostInfoWrap>
