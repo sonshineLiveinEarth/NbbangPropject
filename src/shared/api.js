@@ -2,14 +2,9 @@ import axios from "axios";
 
 const api = axios.create({
   headers: {
+    baseURL: "http://3.39.226.20",
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json,",
-  },
-});
-
-const apiform = axios.create({
-  headers: {
-    "Content-Type": "multipart/form-data"
   },
 });
 
