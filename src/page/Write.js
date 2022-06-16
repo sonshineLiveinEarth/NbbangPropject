@@ -15,7 +15,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
 
 import underLine from "./UnderLine.png";
-
 const Write = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -82,7 +81,9 @@ const Write = (props) => {
       reader.onload = () => {
         setPostingImage({ name: postImage.files[0], url: reader.result });
         resolve();
-      };
+      }
+
+      ;
     });
   };
 
@@ -132,7 +133,13 @@ const Write = (props) => {
         url: "http://3.39.226.20/api/write",
         data: frm,
         headers: { "Content-Type": "multipart/form-data", "Authorization": `Bearer ${token}` }
-    });
+    }).then(
+      alert("게시글 등록 완료!")
+    ).then(
+      navigate("/")
+    )
+      
+  
     // api.interceptors.request.use(function (config) {
     //   const token = localStorage.getItem("jwtToken");
     
