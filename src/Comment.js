@@ -9,6 +9,7 @@ const Comment = () => {
   const comment_list = useSelector((state) => state.comment.list);
   const card = comment_list?.data.existingComment;
   console.log(comment_list);
+  
   return (
     <>
       <Wrap>
