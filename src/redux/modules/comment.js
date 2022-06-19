@@ -80,7 +80,6 @@ export const createCommentApi = (comment) => async (dispatch, getState) => {
     console.log(data);
 
     dispatch(addComment(data));
-    navigate(0);
   } catch (e) {}
 };
 

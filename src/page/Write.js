@@ -6,7 +6,6 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import axios from "axios";
-
 import DoneBtn from "../DoneBtn.png";
 
 // 날짜 선택 라이브러리
@@ -15,6 +14,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
 
 import underLine from "./UnderLine.png";
+
 const Write = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -23,16 +23,18 @@ const Write = (props) => {
   const is_login = localStorage.getItem("jwtToken");
   const userEmail = localStorage.getItem("userEmail");
 
-  const [postTitle, setPostTitle] = useState("");
   const [category, setCategory] = useState("All");
-  const [addres, setAddres] = useState("");
   const [content, setContent] = useState("");
+  const [postTitle, setPostTitle] = useState();
+  const [addres, setAddres] = useState();
   const [orderTime, setOrderTime] = useState("");
-  const [PostingImage, setPostingImage] = useState("");
+  const [PostingImage, setPostingImage] = useState();
   const [orderDate, setOrderDate] = useState(new Date());
-
   let postImage = document.getElementById("postImage");
   const title = React.useRef(null);
+
+  const Datee = orderDate.toString().split(" ");
+  console.log(Datee);
 
   // 카테고리 선택
   const changeRadio = (e) => {
@@ -56,7 +58,6 @@ const Write = (props) => {
   console.log(todayYM);
 
   // const addPost = () => {
-  //   // api에 데이터 추가하기!
   //   dispatch(
   //     createPostApi({
   //       postCategory: category,
@@ -64,10 +65,10 @@ const Write = (props) => {
   //       postContent: content,
   //       postAddress: addres,
   //       postOrderTime: orderTime,
-  //       postOrderDate: postYM,
-  //       postImage: PostingImage?.url,
+  // postOrderDate: postOrderDate,
+  //       postImage: PostingImage.url,
   //       postTime: postTime,
-  //       postDate: todayYM,
+  //       postDate: postDate,
   //     })
   //   );
   // };
@@ -77,13 +78,12 @@ const Write = (props) => {
   const reader = new FileReader();
   const preview = (e) => {
     reader.readAsDataURL(postImage.files[0]);
+
     return new Promise((resolve) => {
       reader.onload = () => {
         setPostingImage({ name: postImage.files[0], url: reader.result });
         resolve();
-      }
-
-      ;
+      };
     });
   };
 
@@ -101,21 +101,20 @@ const Write = (props) => {
   //   postDate: todayYM,
   // };
   const addPost = (e) => {
-    if (postTitle === ''  || addres === '' || content === ''  ) {
-        alert('빈칸을 다 채워주세요.');
-        return;
-   
+    if (postTitle === "" || addres === "" || content === "") {
+      alert("빈칸을 다 채워주세요.");
+      return;
     }
     // e.preventDefault();
     let frm = new FormData();
 
-    frm.append("postCategory", category)
-    frm.append("postTitle", postTitle)
-    frm.append("postAddress", addres)
-    frm.append("postOrderTime", orderTime)
-    frm.append("postOrderDate ", orderDate)
-    frm.append("postContent", content)
-    frm.append("postDate", postTime)
+    frm.append("postCategory", category);
+    frm.append("postTitle", postTitle);
+    frm.append("postAddress", addres);
+    frm.append("postOrderTime", orderTime);
+    frm.append("postOrderDate ", orderDate);
+    frm.append("postContent", content);
+    frm.append("postDate", postTime);
     // const variables = [{
     //     userNickname: nickname,
     //     userEmail: email,
@@ -125,34 +124,31 @@ const Write = (props) => {
     //     regionDetail: regiondetail,
 
     //   }]
-    frm.append("postImage", postImage.files[0])
-    console.log(postImage.files[0])
+    frm.append("postImage", postImage.files[0]);
+    console.log(postImage.files[0]);
     const token = localStorage.getItem("jwtToken");
     axios({
-        method: "post",
-        url: "http://3.39.226.20/api/write",
-        data: frm,
-        headers: { "Content-Type": "multipart/form-data", "Authorization": `Bearer ${token}` }
-    }).then(
-      alert("게시글 등록 완료!")
-    ).then(
-      navigate("/")
-    )
-      
-  
+      method: "post",
+      url: "http://3.39.226.20/api/write",
+      data: frm,
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then(alert("게시글 등록 완료!"))
+      .then(navigate("/"));
+
     // api.interceptors.request.use(function (config) {
     //   const token = localStorage.getItem("jwtToken");
-    
+
     //   config.headers.common["Authorization"] = `Bearer ${token}`;
     //   return config;
     // });
-    
+
     console.log(frm);
     preview([]);
-  }
-
-
-
+  };
 
   //컨테이너
   if (!is_login && !userEmail) {
@@ -261,7 +257,7 @@ const Write = (props) => {
               {!PostingImage && <span> 미리보기</span>}
             </ImageFeild>
             <FileBtn htmlfor="postImage">사진 선택</FileBtn>
-            <InputFile onChange={preview} type="file" id="postImage"  />
+            <InputFile onChange={preview} type="file" id="postImage" />
           </Div3>
 
           <Label>배달 받을 장소</Label>

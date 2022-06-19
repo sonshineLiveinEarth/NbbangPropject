@@ -27,12 +27,12 @@ const Header = () => {
 
   const is_login = localStorage.getItem("jwtToken");
   const userEmail = localStorage.getItem("userEmail");
-const logout =(e)=>{
-  localStorage.removeItem("jwtToken");
-  localStorage.removeItem("email");
-  localStorage.removeItem("token");
-  navigate("/")
-}
+  const logout = (e) => {
+    localStorage.removeItem("jwtToken");
+    localStorage.removeItem("email");
+    localStorage.removeItem("token");
+    navigate("/");
+  };
   return (
     <>
       <HeaderBack>
@@ -48,10 +48,9 @@ const logout =(e)=>{
         {is_login ? (
           <RightWrap>
             <LoginWrap
-            onClick={() => {
-              dispatch(logout());
-            }}
-              
+              onClick={() => {
+                dispatch(logout());
+              }}
             >
               <LogoutIcon src={LogoutImg} />
               <LogoutText

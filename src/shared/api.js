@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const api = axios.create({
+  baseURL: "http://3.39.226.20",
   headers: {
-    baseURL: "http://3.39.226.20",
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json,",
   },
@@ -10,12 +10,17 @@ const api = axios.create({
 
 api.interceptors.request.use(function (config) {
   const token = localStorage.getItem("jwtToken");
-
   config.headers.common["Authorization"] = `Bearer ${token}`;
   return config;
 });
 
-// 이미지 Api 따로 만들어서
+// api.interceptors.request.use(function (config) {
+// 	const accessToken = document.cookie.split('=')[1];
+// 	config.headers.common['X-AUTH-TOKEN'] = `${accessToken}`;
+// 	return config;
+// });
+
+// 이미지 Api E따로 만들어서
 // "content-type": "multipart/form-data"
 
 export const apis = {

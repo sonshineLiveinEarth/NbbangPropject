@@ -2,6 +2,7 @@
   "name": "nbbang_project",
   "version": "0.1.0",
   "proxy": "http://3.39.226.20",
+  "homepage": "http://3.39.226.20",
   "private": true,
   "dependencies": {
     "@kfonts/bm-hanna-pro-otf": "^0.1.3",

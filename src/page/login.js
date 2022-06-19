@@ -47,20 +47,20 @@ function Login() {
         <Line src={underLine} />
       </EmailBox>
 
-      <div className="Password">
+      <EmailBox>
         <Label>비밀번호</Label>
         <br />
 
         <InputContainer
           placeholder="비밀번호를 입력해주세요."
-          type="text"
+          type="password"
           onChange={(e) => {
             setUserPassword(e.target.value);
           }}
           value={userPassword}
         />
         <Line src={underLine} />
-      </div>
+      </EmailBox>
       <BtnWrap>
         <LoginBtn
           className="s"
@@ -110,8 +110,7 @@ const SignupBox = styled.div`
 // `;
 
 const EmailBox = styled.div`
-  /* margin-top: 200px; */
-  /* margin-left: 100px; */
+  width: 400px;
 `;
 
 const InputContainer = styled.input`
@@ -128,7 +127,20 @@ const InputContainer = styled.input`
     border: none;
     /* transform: opacity 1s 1; */
     margin-top: 20px;
-    /* margin-left: 100px; */
+  }
+  &[type="password"] {
+    padding: 5px 0;
+    border: none;
+    font-size: ${({ theme }) => theme.fontSizes.md};
+    font-weight: 500;
+    transition: border-color 300ms ease-in-out;
+    max-width: 400px;
+    width: 90%;
+
+    background: transparent;
+    border: none;
+    /* transform: opacity 1s 1; */
+    margin-top: 20px;
   }
   &::placeholder-shown {
     color: #cecece;
@@ -145,10 +157,11 @@ const Label = styled.label`
   font-weight: bold;
   margin-bottom: 30px;
   /* margin-left: 100px; */
+  align-self: flex-start;
 `;
 
 const Line = styled.img`
-  max-width: 500px;
+  max-width: 400px;
   width: 100%;
   height: auto;
   margin: 0px 0px 34px 0px;
@@ -174,6 +187,7 @@ const LoginBtn = styled.button`
   color: white;
   font-size: 14px;
   position: relative;
+  margin-top: 20px;
 `;
 
 const SignupBtn = styled.button`

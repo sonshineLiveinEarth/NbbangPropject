@@ -6,6 +6,7 @@ const LOAD = "post/LOAD";
 const LOAD_ID = "post/LOAD_ID";
 const ADD = "post/ADD";
 const DELETE = "post/DELETE";
+const EDIT = "post/EDIT";
 
 // Action Creator
 export function loadPosts(post) {
@@ -46,7 +47,6 @@ export const loadPostsApi = () => {
   };
 };
 // 포스팅 하나 불러오기
-
 // export const loadPostApi = (id) => {
 //   return async function (dispatch) {
 //     try {

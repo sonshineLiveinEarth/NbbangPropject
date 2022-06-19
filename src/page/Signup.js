@@ -111,7 +111,7 @@ function Signup() {
           <br />
           <InputContainer
             placeholder="비밀번호를 입력해주세요."
-            type="text"
+            type="password"
             onChange={(e) => {
               setUserPassword(e.target.value);
             }}
@@ -121,7 +121,7 @@ function Signup() {
           <br />
           <InputContainer2
             placeholder="비밀번호를 다시 입력해주세요."
-            type="text"
+            type="password"
             onChange={(e) => {
               setUserPasswordChek(e.target.value);
             }}
@@ -210,6 +210,19 @@ const InputContainer = styled.input`
     border: none;
     margin-top: 20px;
   }
+  &[type="password"] {
+    padding: 5px 0;
+    border: none;
+    font-size: ${({ theme }) => theme.fontSizes.md};
+    font-weight: 500;
+    transition: border-color 300ms ease-in-out;
+    max-width: 400px;
+    width: 90%;
+
+    background: transparent;
+    border: none;
+    margin-top: 20px;
+  }
   &::placeholder-shown {
     color: #cecece;
   }
@@ -220,7 +233,7 @@ const InputContainer = styled.input`
 `;
 
 const InputContainer2 = styled.input`
-  &[type="text"] {
+  &[type="password"] {
     padding: 5px 0;
     border: none;
     font-size: ${({ theme }) => theme.fontSizes.md};

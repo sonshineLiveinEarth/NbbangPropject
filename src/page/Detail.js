@@ -187,7 +187,7 @@ const Detail = (props) => {
         ) : null}
       </Wrap>
       <WrapC>
-        {is_login && userEmail && (
+        {is_login && (
           <CommentInputWrap>
             <CommentInput
               ref={commentText}
