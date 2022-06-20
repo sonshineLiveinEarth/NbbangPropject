@@ -4,9 +4,6 @@ import Cookies from "universal-cookie";
 import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 
-//navigate
-const navigate = useNavigate;
-
 // // Actions
 const LOAD = "comment/LOAD";
 const CREATE = "comment/CREATE";
@@ -29,12 +26,6 @@ export default function reducer(state = initalState, action = {}) {
       return { ...state, list: new_comment_list };
     }
 
-    //     case "magazine/DELETE": {
-    //       const new_magazine_list = state.list.filter((l, idx) => {
-    //         return parseInt(action.magazine_index) !== idx;
-    //       });
-    //       return { ...state, list: new_magazine_list };
-    //     }
     default:
       return state;
   }
@@ -82,45 +73,6 @@ export const createCommentApi = (comment) => async (dispatch, getState) => {
     dispatch(addComment(data));
   } catch (e) {}
 };
-
-// export const createCommentApi = (comment) => async (dispatch, getState) => {
-//     const token = localStorage.getItem("token");
-//     console.log("토큰", token);
-//     return async function (dispatch, getState, { history }) {
-//       const user = getState().user.user;
-//       const body = {
-//         ...comment,
-//       };
-//       await apis
-//         .post(`/api/detail/${comment.postId}`, body, {
-//           headers: {
-//             Authorization: `Bearer ${token}`,
-//           },
-//         })
-//         .then(dispatch(addComment(...comment)))
-//         .catch((err) => {
-//           console.log("댓글추가실패", err);
-//         });
-//     };
-//   };
-
-// export const deleteMagazineFB = (magazine_id) => {
-//   return async function (dispatch, getState) {
-//     if (!magazine_id) {
-//       window.alert("아이디가 없네요!");
-//       return;
-//     }
-//     const docRef = doc(db, "magazine", magazine_id);
-//     await deleteDoc(docRef);
-
-//     const _magazine_list = getState().magazine.list;
-//     const magazine_index = _magazine_list.findIndex((m) => {
-//       return m.id === magazine_id;
-//     });
-
-//     dispatch(deleteMagazine(magazine_index));
-//   };
-// };
 
 export const deleteCommentApi = (coId) => (dispatch) => {
   try {
