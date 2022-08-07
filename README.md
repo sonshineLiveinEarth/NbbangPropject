@@ -20,11 +20,14 @@
 </div>
 <br/><br/>
 
-<h2>Role</h2>
+## 🧑‍💻 Deployment
 <p>1️⃣ 팀 리더</p>
 <p>2️⃣ 메인페이지 CRUD</p>
 <p>3️⃣ 상세페이지 CRUD</p>
 <p>4️⃣ 댓글 CRUD</p>
 <p>5️⃣ 주문까지 남은시간 카운팅</p>
+
+## ✍️ Review
+[회고 글](https://velog.io/@yunju/WIL-8i06a83b)
 
 
