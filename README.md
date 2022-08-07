@@ -18,7 +18,7 @@
 <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=redux&logoColor=white"> 
 <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=redux&logoColor=white"> 
 </div>
-<br/><br/>
+<br/>
 
 ## 🧑‍💻 Deployment
 <p>1️⃣ 팀 리더</p>
@@ -26,6 +26,7 @@
 <p>3️⃣ 상세페이지 CRUD</p>
 <p>4️⃣ 댓글 CRUD</p>
 <p>5️⃣ 주문까지 남은시간 카운팅</p>
+<br/>
 
 ## ✍️ Review
 [회고 글](https://velog.io/@yunju/WIL-8i06a83b)
